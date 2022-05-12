@@ -1,0 +1,5 @@
+
+extern zend_class_entry *phalcon_auth_middlewares_authenticatesrequestinterface_ce;
+
+ZEPHIR_INIT_CLASS(Phalcon_Auth_Middlewares_AuthenticatesRequestInterface);
+

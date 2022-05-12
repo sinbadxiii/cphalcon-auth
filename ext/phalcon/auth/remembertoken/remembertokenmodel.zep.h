@@ -1,0 +1,55 @@
+
+extern zend_class_entry *phalcon_auth_remembertoken_remembertokenmodel_ce;
+
+ZEPHIR_INIT_CLASS(Phalcon_Auth_RememberToken_RememberTokenModel);
+
+PHP_METHOD(Phalcon_Auth_RememberToken_RememberTokenModel, initialize);
+PHP_METHOD(Phalcon_Auth_RememberToken_RememberTokenModel, beforeValidationOnCreate);
+PHP_METHOD(Phalcon_Auth_RememberToken_RememberTokenModel, beforeValidationOnSave);
+PHP_METHOD(Phalcon_Auth_RememberToken_RememberTokenModel, beforeValidationOnUpdate);
+PHP_METHOD(Phalcon_Auth_RememberToken_RememberTokenModel, getToken);
+PHP_METHOD(Phalcon_Auth_RememberToken_RememberTokenModel, getUserAgent);
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_phalcon_auth_remembertoken_remembertokenmodel_initialize, 0, 0, 0)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_phalcon_auth_remembertoken_remembertokenmodel_beforevalidationoncreate, 0, 0, 0)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_phalcon_auth_remembertoken_remembertokenmodel_beforevalidationonsave, 0, 0, 0)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_phalcon_auth_remembertoken_remembertokenmodel_beforevalidationonupdate, 0, 0, 0)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_phalcon_auth_remembertoken_remembertokenmodel_gettoken, 0, 0, IS_STRING, 0)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_phalcon_auth_remembertoken_remembertokenmodel_getuseragent, 0, 0, IS_STRING, 0)
+ZEND_END_ARG_INFO()
+
+ZEPHIR_INIT_FUNCS(phalcon_auth_remembertoken_remembertokenmodel_method_entry) {
+#if PHP_VERSION_ID >= 80000
+	PHP_ME(Phalcon_Auth_RememberToken_RememberTokenModel, initialize, arginfo_phalcon_auth_remembertoken_remembertokenmodel_initialize, ZEND_ACC_PUBLIC)
+#else
+	PHP_ME(Phalcon_Auth_RememberToken_RememberTokenModel, initialize, NULL, ZEND_ACC_PUBLIC)
+#endif
+#if PHP_VERSION_ID >= 80000
+	PHP_ME(Phalcon_Auth_RememberToken_RememberTokenModel, beforeValidationOnCreate, arginfo_phalcon_auth_remembertoken_remembertokenmodel_beforevalidationoncreate, ZEND_ACC_PUBLIC)
+#else
+	PHP_ME(Phalcon_Auth_RememberToken_RememberTokenModel, beforeValidationOnCreate, NULL, ZEND_ACC_PUBLIC)
+#endif
+#if PHP_VERSION_ID >= 80000
+	PHP_ME(Phalcon_Auth_RememberToken_RememberTokenModel, beforeValidationOnSave, arginfo_phalcon_auth_remembertoken_remembertokenmodel_beforevalidationonsave, ZEND_ACC_PUBLIC)
+#else
+	PHP_ME(Phalcon_Auth_RememberToken_RememberTokenModel, beforeValidationOnSave, NULL, ZEND_ACC_PUBLIC)
+#endif
+#if PHP_VERSION_ID >= 80000
+	PHP_ME(Phalcon_Auth_RememberToken_RememberTokenModel, beforeValidationOnUpdate, arginfo_phalcon_auth_remembertoken_remembertokenmodel_beforevalidationonupdate, ZEND_ACC_PUBLIC)
+#else
+	PHP_ME(Phalcon_Auth_RememberToken_RememberTokenModel, beforeValidationOnUpdate, NULL, ZEND_ACC_PUBLIC)
+#endif
+	PHP_ME(Phalcon_Auth_RememberToken_RememberTokenModel, getToken, arginfo_phalcon_auth_remembertoken_remembertokenmodel_gettoken, ZEND_ACC_PUBLIC)
+	PHP_ME(Phalcon_Auth_RememberToken_RememberTokenModel, getUserAgent, arginfo_phalcon_auth_remembertoken_remembertokenmodel_getuseragent, ZEND_ACC_PUBLIC)
+	PHP_FE_END
+};

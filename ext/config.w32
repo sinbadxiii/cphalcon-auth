@@ -1,0 +1,23 @@
+ARG_ENABLE("phalcon_auth", "enable phalcon_auth", "no");
+
+if (PHP_PHALCON_AUTH != "no") {
+  EXTENSION("phalcon_auth", "phalcon_auth.c", null, "-I"+configure_module_dirname);
+  ADD_SOURCES(configure_module_dirname + "/kernel", "main.c memory.c exception.c debug.c backtrace.c object.c array.c string.c fcall.c require.c file.c operators.c math.c concat.c variables.c filter.c iterator.c exit.c time.c", "phalcon_auth");
+  /* PCRE is always included on WIN32 */
+  AC_DEFINE("ZEPHIR_USE_PHP_PCRE", 1, "Whether PHP pcre extension is present at compile time");
+  if (PHP_JSON != "no") {
+    ADD_EXTENSION_DEP("phalcon_auth", "json");
+    AC_DEFINE("ZEPHIR_USE_PHP_JSON", 1, "Whether PHP json extension is present at compile time");
+  }
+  
+  ADD_SOURCES(configure_module_dirname + "/phalcon/auth/events", "eventinterface.zep.c eventabstract.zep.c afterlogin.zep.c beforelogin.zep.c logout.zep.c", "phalcon_auth");
+	ADD_SOURCES(configure_module_dirname + "/phalcon/auth/exceptions", "exception.zep.c configfilenotexistexception.zep.c unauthorizedhttpexception.zep.c", "phalcon_auth");
+	ADD_SOURCES(configure_module_dirname + "/phalcon/auth/guards", "basicauthinterface.zep.c guardinterface.zep.c guardstatefulinterface.zep.c sessionguard.zep.c tokenguard.zep.c userremember.zep.c", "phalcon_auth");
+	ADD_SOURCES(configure_module_dirname + "/phalcon/auth/middlewares", "authenticatesrequestinterface.zep.c authenticate.zep.c", "phalcon_auth");
+	ADD_SOURCES(configure_module_dirname + "/phalcon/auth/providers", "providerinterface.zep.c modelprovider.zep.c", "phalcon_auth");
+	ADD_SOURCES(configure_module_dirname + "/phalcon/auth/remembertoken", "remembertokeninterface.zep.c remembertokenmodel.zep.c rememberinginterface.zep.c", "phalcon_auth");
+	ADD_SOURCES(configure_module_dirname + "/phalcon/auth", "authenticatableinterface.zep.c manager.zep.c", "phalcon_auth");
+  ADD_FLAG("CFLAGS_PHALCON_AUTH", "/D ZEPHIR_RELEASE /Oi /Ot /Oy /Ob2 /Gs /GF /Gy /GL");
+  ADD_FLAG("CFLAGS", "/D ZEPHIR_RELEASE /Oi /Ot /Oy /Ob2 /Gs /GF /Gy /GL");
+  ADD_FLAG("LDFLAGS", "/LTCG");
+}

@@ -207,13 +207,11 @@ class SessionGuard implements GuardStatefulInterface, BasicAuthInterface
             if tokenRemember {
                 tokenRemember->delete();
             }
+
+            this->cookies->get(this->getRememberName())->delete();
         }
 
         this->session->remove(this->getName());
-
-        if this->recaller() !== null {
-            this->cookies->get(this->getRememberName())->delete();
-        }
 
         this->event(new Logout(user));
 
