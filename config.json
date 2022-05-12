@@ -1,0 +1,8 @@
+{
+  "namespace": "phalcon",
+  "name": "Phalcon Auth",
+  "description": "Phalcon Auth - Guard-Based Authentication",
+  "author": "Sergey Mukhin",
+  "version": "1.0.0",
+  "extension-name": "phalcon_auth"
+}
