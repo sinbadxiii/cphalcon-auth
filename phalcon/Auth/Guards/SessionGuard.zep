@@ -97,9 +97,9 @@ class SessionGuard implements GuardStatefulInterface, BasicAuthInterface
             recaller->id(), recaller->token(), recaller->userAgent()
         );
 
-        let $this->viaRemember = ! is_null(user);
+        let this->viaRemember = ! is_null(user);
 
-        return $user;
+        return user;
     }
 
     protected function recaller()

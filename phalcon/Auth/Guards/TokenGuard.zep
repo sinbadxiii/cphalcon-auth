@@ -36,7 +36,7 @@ class TokenGuard implements GuardInterface
 
         var token = this->getTokenForRequest();
 
-        if  !empty($token) {
+        if  !empty(token) {
             let user = this->provider->retrieveByCredentials([
                 this->storageKey: token
             ]);
@@ -49,7 +49,7 @@ class TokenGuard implements GuardInterface
 
     public function validate(array credentials = [])
     {
-        if (empty(credentials[$this->inputKey])) {
+        if (empty(credentials[this->inputKey])) {
             return false;
         }
 
@@ -64,7 +64,7 @@ class TokenGuard implements GuardInterface
 
     public function event(<EventInterface> event)
     {
-        return this->eventsManager->fire("auth:" . $event->getType(), this);
+        return this->eventsManager->fire("auth:" . event->getType(), this);
     }
 
     public function getTokenForRequest()
@@ -72,7 +72,7 @@ class TokenGuard implements GuardInterface
         var token = this->request->get(this->inputKey);
 
         if (empty(token)) {
-            let token = $this->bearerToken();
+            let token = this->bearerToken();
         }
 
         return token;
