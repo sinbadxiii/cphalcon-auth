@@ -47,12 +47,12 @@ class ModelProvider implements ProviderInterface
         var model = this->model;
         var retrievedModel = {model}::findFirst(identifier);
 
-        if (!retrievedModel) {
+        if !retrievedModel {
             return;
         }
         var rememberTokenModel = retrievedModel->getRememberToken(token);
 
-        if (!rememberTokenModel) {
+        if !rememberTokenModel {
             return;
         }
 

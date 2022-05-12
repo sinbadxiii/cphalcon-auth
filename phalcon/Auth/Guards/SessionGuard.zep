@@ -11,8 +11,6 @@ use Phalcon\Http\Request;
 use Phalcon\Auth\Exceptions\UnauthorizedHttpException;
 use Phalcon\Di\Di;
 
-use is_null;
-
 class SessionGuard implements GuardStatefulInterface, BasicAuthInterface
 {
     protected name;
@@ -43,7 +41,7 @@ class SessionGuard implements GuardStatefulInterface, BasicAuthInterface
     {
         let this->lastUserAttempted = this->provider->retrieveByCredentials(credentials);
 
-        if (this->hasValidCredentials(this->lastUserAttempted, credentials)) {
+        if this->hasValidCredentials(this->lastUserAttempted, credentials) {
             this->login(this->lastUserAttempted, remember);
 
             return true;
@@ -54,23 +52,23 @@ class SessionGuard implements GuardStatefulInterface, BasicAuthInterface
 
     public function user()
     {
-        if (!is_null(this->user)) {
+        if this->user !== null {
             return this->user;
         }
 
         var id;
         let id = this->session->get(this->getName());
 
-        if (!is_null(id)) {
+        if id !== null {
             let this->user = this->provider->retrieveById(id);
         }
 
         var recaller;
         let recaller = this->recaller();
-        if (is_null(this->user) && !is_null(recaller)) {
+        if this->user !== null && recaller !== null {
             let this->user = this->userFromRecaller(recaller);
 
-            if (this->user) {
+            if this->user {
                 this->updateSession(this->user->getAuthIdentifier());
             }
         }
@@ -80,7 +78,7 @@ class SessionGuard implements GuardStatefulInterface, BasicAuthInterface
 
     protected function hasValidCredentials(var user, array credentials)
     {
-        return !is_null(user) && this->provider->validateCredentials(user, credentials);
+        return user !== null && this->provider->validateCredentials(user, credentials);
     }
 
     public function validate(array credentials = [])
@@ -97,7 +95,7 @@ class SessionGuard implements GuardStatefulInterface, BasicAuthInterface
             recaller->id(), recaller->token(), recaller->userAgent()
         );
 
-        let this->viaRemember = ! is_null(user);
+        let this->viaRemember = user !== null;
 
         return user;
     }
@@ -107,14 +105,14 @@ class SessionGuard implements GuardStatefulInterface, BasicAuthInterface
         var recaller;
         let recaller = this->getRememberData();
 
-        if (recaller) {
+        if recaller {
             return new UserRemember(recaller);
         }
     }
 
     protected function getRememberData()
     {
-        if (this->cookies->has(this->getRememberName())) {
+        if this->cookies->has(this->getRememberName()) {
             return this->cookies->get(this->getRememberName())->getValue();
         }
     }
@@ -126,7 +124,7 @@ class SessionGuard implements GuardStatefulInterface, BasicAuthInterface
 
     public function getRememberName() -> string
     {
-        return sprintf("auth_%s_%s", this->name, sha1(get_class(this)));
+        return sprintf("remember_%s_%s", this->name, sha1(get_class(this)));
     }
 
     public function login(<AuthenticatableInterface> user, bool remember = false)
@@ -135,7 +133,7 @@ class SessionGuard implements GuardStatefulInterface, BasicAuthInterface
 
         this->updateSession(user->getAuthIdentifier());
 
-        if (remember) {
+        if remember {
             this->rememberUser(user);
         }
 
@@ -148,7 +146,7 @@ class SessionGuard implements GuardStatefulInterface, BasicAuthInterface
     {
         var user;
         let user = this->provider->retrieveById(id);
-        if ( ! is_null(user)) {
+        if user !== null {
             this->login(user, remember);
 
             return user;
@@ -161,7 +159,7 @@ class SessionGuard implements GuardStatefulInterface, BasicAuthInterface
     {
         this->event(new BeforeLogin());
 
-        if (this->validate(credentials)) {
+        if this->validate(credentials) {
             this->setUser(this->lastUserAttempted);
 
             this->event(new AfterLogin());
@@ -176,7 +174,7 @@ class SessionGuard implements GuardStatefulInterface, BasicAuthInterface
     {
         var rememberToken = this->createRememberToken(user);
 
-        if (!is_null(rememberToken)) {
+        if rememberToken !== null {
             this->cookies->set(this->getRememberName(),
                 json_encode([
                       "id"         : user->getAuthIdentifier(),
@@ -202,7 +200,7 @@ class SessionGuard implements GuardStatefulInterface, BasicAuthInterface
     {
         var user = this->user();
         var recaller = this->recaller();
-        if (!is_null(recaller)) {
+        if recaller !== null {
             var token = recaller->token();
             var tokenRemember = user->getRememberToken(token);
 
@@ -213,7 +211,7 @@ class SessionGuard implements GuardStatefulInterface, BasicAuthInterface
 
         this->session->remove(this->getName());
 
-        if (! is_null(this->recaller())) {
+        if this->recaller() !== null {
             this->cookies->get(this->getRememberName())->delete();
         }
 
@@ -256,11 +254,11 @@ class SessionGuard implements GuardStatefulInterface, BasicAuthInterface
 
     public function basic(string field = "email", array extraConditions = [])
     {
-        if (this->check()) {
+        if this->check() {
             return true;
         }
 
-        if (this->attemptBasic(this->getRequest(), field, extraConditions)) {
+        if this->attemptBasic(this->getRequest(), field, extraConditions) {
             return true;
         }
 
@@ -269,7 +267,7 @@ class SessionGuard implements GuardStatefulInterface, BasicAuthInterface
 
     protected function attemptBasic(<Request> request, string field, array extraConditions = [])
     {
-        if (! request->getBasicAuth()) {
+        if ! request->getBasicAuth() {
             return false;
         }
 
@@ -296,7 +294,7 @@ class SessionGuard implements GuardStatefulInterface, BasicAuthInterface
         var credentials;
         let credentials = this->basicCredentials(this->getRequest(), field);
 
-        if (this->once(array_merge(credentials, extraConditions))) {
+        if this->once(array_merge(credentials, extraConditions)) {
             return this->getUser();
         }
 
@@ -315,7 +313,7 @@ class SessionGuard implements GuardStatefulInterface, BasicAuthInterface
 
     public function id()
     {
-        if (this->user()) {
+        if this->user() {
             return this->user()->getAuthIdentifier();
         }
     }
@@ -329,12 +327,12 @@ class SessionGuard implements GuardStatefulInterface, BasicAuthInterface
 
     public function check()
     {
-        return !is_null(this->user());
+        return this->user() !== null;
     }
 
     public function hasUser()
     {
-        return !is_null(this->user);
+        return this->user !== null;
     }
 
     public function guest()
@@ -344,10 +342,9 @@ class SessionGuard implements GuardStatefulInterface, BasicAuthInterface
 
     public function authenticate()
     {
-        var user;
-        let user = this->user();
+        var user = this->user();
 
-        if (!is_null(user)) {
+        if user !== null {
             return user;
         }
     }

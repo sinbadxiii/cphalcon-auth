@@ -19,7 +19,7 @@ class Authenticate extends Injectable implements AuthenticatesRequestInterface
 
     protected function authenticate()
     {
-        if (Di::getDefault()->getShared("auth")->authenticate() || this->isGuest()) {
+        if Di::getDefault()->getShared("auth")->authenticate() || this->isGuest() {
             return true;
         }
 

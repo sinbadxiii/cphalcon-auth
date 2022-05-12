@@ -26,17 +26,17 @@ class RememberTokenModel extends Model implements  RememberTokenInterface
     {
         let this->created_at = date(DATE_ATOM);
         let  this->updated_at = date(DATE_ATOM);
-        if (!this->expired_at) {
+        if !this->expired_at {
             let this->expired_at = date(DATE_ATOM);
         }
     }
 
     public function beforeValidationOnSave()
     {
-        if (!this->created_at) {
+        if !this->created_at {
             let this->created_at = date(DATE_ATOM);
         }
-        if (!this->expired_at) {
+        if !this->expired_at {
             let this->expired_at = date(DATE_ATOM);
         }
         let this->updated_at = date(DATE_ATOM);

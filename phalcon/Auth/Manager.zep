@@ -11,8 +11,6 @@ use Phalcon\Auth\Guards\TokenGuard;
 use Phalcon\Auth\Providers\ModelProvider;
 use Phalcon\Auth\Exceptions\ConfigFileNotExistException;
 
-use is_null;
-
 class Manager
 {
     protected config;
@@ -23,15 +21,15 @@ class Manager
 
     public function __construct(<ConfigInterface> config = null, security = null)
     {
-        if is_null(config) {
+        if config === null {
             let this->config = Di::getDefault()->getShared("config")->auth;
 
-            if (is_null(this->config)) {
+            if this->config === null {
                 throw new ConfigFileNotExistException();
             }
         }
 
-        if is_null(security) {
+        if security === null {
             let this->security = Di::getDefault()->getShared("security");
         }
     }
@@ -45,7 +43,7 @@ class Manager
     {
         let name = name ?: this->getDefaultDriver();
 
-        if is_null(this->guards[name]) {
+        if this->guards[name] === null {
             let this->guards[name] = this->resolve(name);
         }
 
@@ -58,11 +56,11 @@ class Manager
 
         let configGuard = this->getConfigGuard(name);
 
-        if (is_null(configGuard)) {
+        if configGuard === null {
             throw new InvalidArgumentException(sprintf("Auth guard [%s] is not defined.", name));
         }
 
-//        if (isset(this->customGuards[configGuard["driver"]])) {
+//        if isset(this->customGuards[configGuard["driver"]]) {
 //            return this->callCustomGuard(name, configGuard);
 //        }
 
@@ -71,15 +69,15 @@ class Manager
 
         var guard;
 
-        if (configGuard->driver == "session") {
+        if configGuard->driver == "session" {
             let guard = new SessionGuard(name, provider);
         }
 
-        if (configGuard->driver == "token") {
+        if configGuard->driver == "token" {
             let guard = new TokenGuard(name, provider);
         }
 
-        if (configGuard->driver !== "session" && configGuard->driver !== "token") {
+        if configGuard->driver !== "session" && configGuard->driver !== "token" {
              throw new InvalidArgumentException(
                         sprintf(
                             "Auth driver %s for guard %s is not defined.",

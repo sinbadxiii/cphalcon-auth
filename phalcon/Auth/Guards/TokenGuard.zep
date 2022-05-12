@@ -5,8 +5,6 @@ use Phalcon\Support\Helper\Str\StartsWith;
 use Phalcon\Auth\AuthenticatableInterface;
 use Phalcon\Di\Di;
 
-use is_null;
-
 class TokenGuard implements GuardInterface
 {
     protected name;
@@ -29,7 +27,7 @@ class TokenGuard implements GuardInterface
 
     public function user()
     {
-        if !is_null(this->user) {
+        if this->user !== null {
             return this->user;
         }
         var user = null;
@@ -49,13 +47,13 @@ class TokenGuard implements GuardInterface
 
     public function validate(array credentials = [])
     {
-        if (empty(credentials[this->inputKey])) {
+        if empty credentials[this->inputKey] {
             return false;
         }
 
         let credentials = [this->storageKey: credentials[this->inputKey]];
 
-        if (this->provider->retrieveByCredentials(credentials)) {
+        if this->provider->retrieveByCredentials(credentials) {
             return true;
         }
 
@@ -71,7 +69,7 @@ class TokenGuard implements GuardInterface
     {
         var token = this->request->get(this->inputKey);
 
-        if (empty(token)) {
+        if empty token {
             let token = this->bearerToken();
         }
 
@@ -84,47 +82,47 @@ class TokenGuard implements GuardInterface
 
         var helper;
         let helper = new StartsWith();
-        if ({helper}(header, "Bearer ")) {
+        if {helper}(header, "Bearer ") {
             return mb_substr(header, 7, null, "UTF-8");
         }
     }
 
-     public function id()
-        {
-            if (this->user()) {
-                return this->user()->getAuthIdentifier();
-            }
+    public function id()
+    {
+        if this->user() {
+            return this->user()->getAuthIdentifier();
         }
+    }
 
-        public function setUser(<AuthenticatableInterface> user)
-        {
-            let this->user = user;
+    public function setUser(<AuthenticatableInterface> user)
+    {
+        let this->user = user;
 
-            return this;
+        return this;
+    }
+
+    public function check()
+    {
+        return this->user() !== null;
+    }
+
+    public function hasUser()
+    {
+        return this->user !== null;
+    }
+
+    public function guest()
+    {
+        return ! this->check();
+    }
+
+    public function authenticate()
+    {
+        var user;
+        let user = this->user();
+
+        if user !== null {
+            return user;
         }
-
-        public function check()
-        {
-            return !is_null(this->user());
-        }
-
-        public function hasUser()
-        {
-            return !is_null(this->user);
-        }
-
-        public function guest()
-        {
-            return ! this->check();
-        }
-
-        public function authenticate()
-        {
-            var user;
-            let user = this->user();
-
-            if (!is_null(user)) {
-                return user;
-            }
-        }
+    }
 }
