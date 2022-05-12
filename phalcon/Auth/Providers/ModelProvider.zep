@@ -1,9 +1,9 @@
 namespace Phalcon\Auth\Providers;
 
-use Phalcon\Auth\AuthenticatableInterface;
-use Phalcon\Auth\RememberToken\RememberTokenModel;
 use Phalcon\Di\Di;
 use Phalcon\Encryption\Security\Random;
+use Phalcon\Auth\AuthenticatableInterface;
+use Phalcon\Auth\RememberToken\RememberTokenModel;
 
 class ModelProvider implements ProviderInterface
 {
@@ -72,7 +72,7 @@ class ModelProvider implements ProviderInterface
         let rememberToken->ip = Di::getDefault()->get("request")->getClientAddress();
 
         user->setRememberToken(rememberToken);
-        user->save();
+        user->update();
 
         return rememberToken;
     }
