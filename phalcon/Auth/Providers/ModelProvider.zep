@@ -20,8 +20,8 @@ class ModelProvider implements ProviderInterface
     public function retrieveByCredentials(array credentials)
     {
         var builder = Di::getDefault()->get("modelsManager")
-                                ->createBuilder()
-                                ->from([this->model]);
+            ->createBuilder()
+            ->from([this->model]);
 
         var key, value;
 
@@ -65,12 +65,9 @@ class ModelProvider implements ProviderInterface
 
     public function createRememberToken(<AuthenticatableInterface> user)
     {
-        var random;
-        let random = new Random();
-
         var rememberToken;
         let rememberToken = new RememberTokenModel();
-        let rememberToken->token = random->base64(60);
+        let rememberToken->token = this->hasher->getRandom()->base64(60);
         let rememberToken->user_agent = Di::getDefault()->get("request")->getUserAgent();
         let rememberToken->ip = Di::getDefault()->get("request")->getClientAddress();
 

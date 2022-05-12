@@ -11,6 +11,8 @@ use Phalcon\Http\Request;
 use Phalcon\Auth\Exceptions\UnauthorizedHttpException;
 use Phalcon\Di\Di;
 
+use is_null;
+
 class SessionGuard implements GuardStatefulInterface, BasicAuthInterface
 {
     protected name;
@@ -64,7 +66,7 @@ class SessionGuard implements GuardStatefulInterface, BasicAuthInterface
         }
 
         var recaller;
-        let recaller = $this->recaller();
+        let recaller = this->recaller();
         if (is_null(this->user) && !is_null(recaller)) {
             let this->user = this->userFromRecaller(recaller);
 
@@ -198,13 +200,15 @@ class SessionGuard implements GuardStatefulInterface, BasicAuthInterface
 
     public function logout()
     {
-        var user;
-        let user = this->user();
-        var tokenRemember;
-        let tokenRemember = this->user->getRememberToken();
+        var user = this->user();
+        var recaller = this->recaller();
+        if (!is_null(recaller)) {
+            var token = recaller->token();
+            var tokenRemember = user->getRememberToken(token);
 
-        if (this->user && (tokenRemember)) {
-            tokenRemember->delete();
+            if tokenRemember {
+                tokenRemember->delete();
+            }
         }
 
         this->session->remove(this->getName());

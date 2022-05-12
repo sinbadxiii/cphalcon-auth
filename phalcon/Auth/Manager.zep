@@ -9,6 +9,7 @@ use Phalcon\Config\ConfigInterface;
 use Phalcon\Auth\Guards\SessionGuard;
 use Phalcon\Auth\Guards\TokenGuard;
 use Phalcon\Auth\Providers\ModelProvider;
+use Phalcon\Auth\Exceptions\ConfigFileNotExistException;
 
 use is_null;
 
@@ -24,6 +25,10 @@ class Manager
     {
         if is_null(config) {
             let this->config = Di::getDefault()->getShared("config")->auth;
+
+            if (is_null(this->config)) {
+                throw new ConfigFileNotExistException();
+            }
         }
 
         if is_null(security) {
@@ -54,7 +59,7 @@ class Manager
         let configGuard = this->getConfigGuard(name);
 
         if (is_null(configGuard)) {
-            throw new InvalidArgumentException("Auth guard [{name}] is not defined.");
+            throw new InvalidArgumentException(sprintf("Auth guard [%s] is not defined.", name));
         }
 
 //        if (isset(this->customGuards[configGuard["driver"]])) {
@@ -76,7 +81,10 @@ class Manager
 
         if (configGuard->driver !== "session" && configGuard->driver !== "token") {
              throw new InvalidArgumentException(
-                        "Auth driver" . configGuard->driver . " for guard " . name . " is not defined."
+                        sprintf(
+                            "Auth driver %s for guard %s is not defined.",
+                            configGuard->driver, name
+                        )
               );
         }
 

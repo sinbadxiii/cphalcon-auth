@@ -1,6 +1,5 @@
 namespace Phalcon\Auth\Guards;
 
-
 use Phalcon\Http\Request;
 use Phalcon\Auth\Contracts\BasicAuth;
 use Phalcon\Auth\Guards\GuardStatefulInterface;
@@ -9,6 +8,8 @@ use Phalcon\Auth\Events\BeforeLogin;
 use Phalcon\Auth\Events\EventInterface;
 use Phalcon\Auth\Events\Logout;
 use Phalcon\Auth\AuthenticatableInterface;
+
+use is_null;
 
 //class SessionGuard implements GuardStateful, BasicAuth
 class TokenGuard
