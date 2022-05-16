@@ -25,6 +25,8 @@ ZEPHIR_INIT_CLASS(Phalcon_Auth_Middlewares_Authenticate)
 	zend_declare_property_null(phalcon_auth_middlewares_authenticate_ce, SL("dispatcher"), ZEND_ACC_PROTECTED);
 	zephir_declare_class_constant_string(phalcon_auth_middlewares_authenticate_ce, SL("PROPERTY_AUTH_ACCESS"), "authAccess");
 
+	zephir_declare_class_constant_bool(phalcon_auth_middlewares_authenticate_ce, SL("AUTH_ACCESS_BY_DEFAULT"), 1);
+
 	zend_class_implements(phalcon_auth_middlewares_authenticate_ce, 1, phalcon_auth_middlewares_authenticatesrequestinterface_ce);
 	return SUCCESS;
 }
@@ -145,22 +147,23 @@ PHP_METHOD(Phalcon_Auth_Middlewares_Authenticate, setGuest)
 
 PHP_METHOD(Phalcon_Auth_Middlewares_Authenticate, isGuest)
 {
-	zend_bool _5, _8;
-	zend_class_entry *_3, *_10;
-	zval controller, _0, _1, _2, _4, _6, _7, _9, _11;
+	zend_bool _6, _11;
+	zend_class_entry *_5, *_9;
+	zval controller, _0, authAccess, _1, _2, _3, _4, _7, _8, _10;
 	zephir_method_globals *ZEPHIR_METHOD_GLOBALS_PTR = NULL;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&controller);
 	ZVAL_UNDEF(&_0);
+	ZVAL_UNDEF(&authAccess);
 	ZVAL_UNDEF(&_1);
 	ZVAL_UNDEF(&_2);
+	ZVAL_UNDEF(&_3);
 	ZVAL_UNDEF(&_4);
-	ZVAL_UNDEF(&_6);
 	ZVAL_UNDEF(&_7);
-	ZVAL_UNDEF(&_9);
-	ZVAL_UNDEF(&_11);
+	ZVAL_UNDEF(&_8);
+	ZVAL_UNDEF(&_10);
 
 
 	ZEPHIR_MM_GROW();
@@ -169,44 +172,52 @@ PHP_METHOD(Phalcon_Auth_Middlewares_Authenticate, isGuest)
 	ZEPHIR_CALL_METHOD(&controller, &_0, "getcontrollerclass", NULL, 0);
 	zephir_check_call_status();
 	ZEPHIR_INIT_VAR(&_1);
-	zephir_fetch_safe_class(&_2, &controller);
-	_3 = zephir_fetch_class_str_ex(Z_STRVAL_P(&_2), Z_STRLEN_P(&_2), ZEND_FETCH_CLASS_AUTO);
-	if(!_3) {
-		RETURN_MM_NULL();
-	}
-	object_init_ex(&_1, _3);
-	if (zephir_has_constructor(&_1)) {
-		ZEPHIR_CALL_METHOD(NULL, &_1, "__construct", NULL, 0);
-		zephir_check_call_status();
-	}
-
-	ZEPHIR_CALL_METHOD(&_4, &_1, "authaccess", NULL, 0);
+	ZEPHIR_INIT_VAR(&_2);
+	ZVAL_STRING(&_2, "authAccess");
+	ZEPHIR_CALL_FUNCTION(&_3, "property_exists", NULL, 18, &controller, &_2);
 	zephir_check_call_status();
-	_5 = !zephir_is_true(&_4);
-	if (!(_5)) {
-		ZEPHIR_INIT_VAR(&_6);
-		ZVAL_STRING(&_6, "authAccess");
-		ZEPHIR_CALL_FUNCTION(&_7, "property_exists", NULL, 18, &controller, &_6);
-		zephir_check_call_status();
-		_8 = zephir_is_true(&_7);
-		if (_8) {
-			ZEPHIR_INIT_NVAR(&_6);
-			zephir_fetch_safe_class(&_9, &controller);
-			_10 = zephir_fetch_class_str_ex(Z_STRVAL_P(&_9), Z_STRLEN_P(&_9), ZEND_FETCH_CLASS_AUTO);
-			if(!_10) {
-				RETURN_MM_NULL();
-			}
-			object_init_ex(&_6, _10);
-			if (zephir_has_constructor(&_6)) {
-				ZEPHIR_CALL_METHOD(NULL, &_6, "__construct", NULL, 0);
-				zephir_check_call_status();
-			}
-
-			zephir_read_property(&_11, &_6, ZEND_STRL("authAccess"), PH_NOISY_CC | PH_READONLY);
-			_8 = ZEPHIR_IS_FALSE_IDENTICAL(&_11);
+	if (zephir_is_true(&_3)) {
+		ZEPHIR_INIT_NVAR(&_2);
+		zephir_fetch_safe_class(&_4, &controller);
+		_5 = zephir_fetch_class_str_ex(Z_STRVAL_P(&_4), Z_STRLEN_P(&_4), ZEND_FETCH_CLASS_AUTO);
+		if(!_5) {
+			RETURN_MM_NULL();
 		}
-		_5 = _8;
+		object_init_ex(&_2, _5);
+		if (zephir_has_constructor(&_2)) {
+			ZEPHIR_CALL_METHOD(NULL, &_2, "__construct", NULL, 0);
+			zephir_check_call_status();
+		}
+
+		ZEPHIR_OBS_NVAR(&_1);
+		zephir_read_property(&_1, &_2, ZEND_STRL("authAccess"), PH_NOISY_CC);
+	} else {
+		ZEPHIR_INIT_NVAR(&_1);
+		ZVAL_BOOL(&_1, 1);
 	}
-	RETURN_MM_BOOL(_5);
+	ZEPHIR_CPY_WRT(&authAccess, &_1);
+	_6 = (zephir_method_exists_ex(&controller, ZEND_STRL("authaccess")) == SUCCESS);
+	if (_6) {
+		ZEPHIR_INIT_VAR(&_7);
+		zephir_fetch_safe_class(&_8, &controller);
+		_9 = zephir_fetch_class_str_ex(Z_STRVAL_P(&_8), Z_STRLEN_P(&_8), ZEND_FETCH_CLASS_AUTO);
+		if(!_9) {
+			RETURN_MM_NULL();
+		}
+		object_init_ex(&_7, _9);
+		if (zephir_has_constructor(&_7)) {
+			ZEPHIR_CALL_METHOD(NULL, &_7, "__construct", NULL, 0);
+			zephir_check_call_status();
+		}
+
+		ZEPHIR_CALL_METHOD(&_10, &_7, "authaccess", NULL, 0);
+		zephir_check_call_status();
+		_6 = !zephir_is_true(&_10);
+	}
+	_11 = _6;
+	if (!(_11)) {
+		_11 = ZEPHIR_IS_FALSE_IDENTICAL(&authAccess);
+	}
+	RETURN_MM_BOOL(_11);
 }
 

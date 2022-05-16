@@ -6,7 +6,8 @@ use Phalcon\Di\Di;
 
 class Authenticate extends Injectable implements AuthenticatesRequestInterface
 {
-    const PROPERTY_AUTH_ACCESS = "authAccess";
+    const PROPERTY_AUTH_ACCESS   = "authAccess";
+    const AUTH_ACCESS_BY_DEFAULT = true;
 
     protected dispatcher;
 
@@ -45,8 +46,11 @@ class Authenticate extends Injectable implements AuthenticatesRequestInterface
     {
         var controller = this->dispatcher->getControllerClass();
 
-        return !(new {controller})->authAccess() ||
-            (property_exists(controller, self::PROPERTY_AUTH_ACCESS) &&
-                (new {controller})->authAccess === false);
+        var authAccess;
+        let authAccess = property_exists(controller, self::PROPERTY_AUTH_ACCESS) ?
+            (new {controller})->authAccess : self::AUTH_ACCESS_BY_DEFAULT;
+
+        return (method_exists(controller, "authAccess") &&
+            !(new {controller})->authAccess()) || authAccess === false;
     }
 }
