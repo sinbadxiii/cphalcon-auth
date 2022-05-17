@@ -9,6 +9,8 @@ PHP_METHOD(Phalcon_Auth_Manager, guard);
 PHP_METHOD(Phalcon_Auth_Manager, resolve);
 PHP_METHOD(Phalcon_Auth_Manager, createProvider);
 PHP_METHOD(Phalcon_Auth_Manager, getDefaultDriver);
+PHP_METHOD(Phalcon_Auth_Manager, extend);
+PHP_METHOD(Phalcon_Auth_Manager, callCustomGuard);
 PHP_METHOD(Phalcon_Auth_Manager, __call);
 zend_object *zephir_init_properties_Phalcon_Auth_Manager(zend_class_entry *class_type);
 
@@ -36,6 +38,16 @@ ZEND_END_ARG_INFO()
 ZEND_BEGIN_ARG_INFO_EX(arginfo_phalcon_auth_manager_getdefaultdriver, 0, 0, 0)
 ZEND_END_ARG_INFO()
 
+ZEND_BEGIN_ARG_INFO_EX(arginfo_phalcon_auth_manager_extend, 0, 0, 2)
+	ZEND_ARG_INFO(0, driver)
+	ZEND_ARG_INFO(0, callback)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_phalcon_auth_manager_callcustomguard, 0, 0, 2)
+	ZEND_ARG_TYPE_INFO(0, name, IS_STRING, 0)
+	ZEND_ARG_OBJ_INFO(0, config, Phalcon\\Config\\ConfigInterface, 0)
+ZEND_END_ARG_INFO()
+
 ZEND_BEGIN_ARG_INFO_EX(arginfo_phalcon_auth_manager___call, 0, 0, 2)
 	ZEND_ARG_INFO(0, method)
 	ZEND_ARG_INFO(0, params)
@@ -55,6 +67,8 @@ ZEPHIR_INIT_FUNCS(phalcon_auth_manager_method_entry) {
 #else
 	PHP_ME(Phalcon_Auth_Manager, getDefaultDriver, NULL, ZEND_ACC_PUBLIC)
 #endif
+	PHP_ME(Phalcon_Auth_Manager, extend, arginfo_phalcon_auth_manager_extend, ZEND_ACC_PUBLIC)
+	PHP_ME(Phalcon_Auth_Manager, callCustomGuard, arginfo_phalcon_auth_manager_callcustomguard, ZEND_ACC_PROTECTED)
 	PHP_ME(Phalcon_Auth_Manager, __call, arginfo_phalcon_auth_manager___call, ZEND_ACC_PUBLIC)
 	PHP_FE_END
 };

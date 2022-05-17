@@ -3,7 +3,6 @@ namespace Phalcon\Auth;
 
 use Closure;
 use InvalidArgumentException;
-use Phalcon\Config;
 use Phalcon\Di\Di;
 use Phalcon\Config\ConfigInterface;
 use Phalcon\Auth\Guards\SessionGuard;
@@ -15,8 +14,7 @@ class Manager
 {
     protected config;
     protected security;
-
-//    protected customGuards = [];
+    protected customGuards = [];
     protected guards = [];
 
     public function __construct(<ConfigInterface> config = null, security = null)
@@ -60,45 +58,52 @@ class Manager
             throw new InvalidArgumentException(sprintf("Auth guard [%s] is not defined.", name));
         }
 
-//        if isset(this->customGuards[configGuard["driver"]]) {
-//            return this->callCustomGuard(name, configGuard);
-//        }
+        if isset(this->customGuards[configGuard["driver"]]) {
+            return this->callCustomGuard(name, configGuard);
+        }
 
         var provider;
         let provider = this->createProvider(configGuard);
 
         var guard;
 
-        if configGuard->driver == "session" {
-            let guard = new SessionGuard(name, provider);
+        var guardName = sprintf(
+            "\\Phalcon\\Auth\\Guards\\%sGuard",
+            ucfirst(configGuard->driver)
+        );
+
+        if (!class_exists(guardName)) {
+            throw new InvalidArgumentException(
+                sprintf(
+                    "Auth driver %s for guard %s is not defined.",
+                    configGuard->driver, name
+                )
+            );
         }
 
-        if configGuard->driver == "token" {
-            let guard = new TokenGuard(name, provider);
-        }
-
-        if configGuard->driver !== "session" && configGuard->driver !== "token" {
-             throw new InvalidArgumentException(
-                        sprintf(
-                            "Auth driver %s for guard %s is not defined.",
-                            configGuard->driver, name
-                        )
-              );
-        }
+        let guard = new {guardName}(name, provider);
 
         return guard;
     }
 
     public function createProvider(configGuard = null)
     {
-        var driver;
         var provider = configGuard->provider;
 
-        if this->config->providers->{provider}->driver == "model" {
-            let driver = new ModelProvider(this->security, this->config->providers->{provider});
+         var driver = sprintf("\\Phalcon\\Auth\\Providers\\%sProvider",
+            ucfirst(this->config->providers->{provider}->driver)
+        );
+
+         if (!class_exists(driver)) {
+            throw new InvalidArgumentException(
+                sprintf(
+                    "Provider %s is not defined.",
+                    provider
+                )
+            );
         }
 
-        return driver;
+        return new {driver}(this->security, this->config->providers->{provider});
     }
 
     public function getDefaultDriver()
@@ -106,19 +111,19 @@ class Manager
         return this->config->defaults->guard;
     }
 
-//    public function extend(driver, <Closure> callback)
-//    {
-//        let this->customGuards[driver] = callback;
-//
-//        return this;
-//    }
+    public function extend(driver, var callback)
+    {
+        let this->customGuards[driver] = callback;
 
-//    protected function callCustomGuard(string name, <Config> config)
-//    {
-//        var customGuard;
-//        let customGuard = this->customGuards[config["driver"]];
-//        return customGuard(name, config);
-//    }
+        return this;
+    }
+
+    protected function callCustomGuard(string name, <ConfigInterface> config)
+    {
+        var customGuard = this->customGuards[config["driver"]];
+
+        return {customGuard}(name, config);
+    }
 
     public function __call(method, params)
     {

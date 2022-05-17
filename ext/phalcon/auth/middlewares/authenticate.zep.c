@@ -174,7 +174,7 @@ PHP_METHOD(Phalcon_Auth_Middlewares_Authenticate, isGuest)
 	ZEPHIR_INIT_VAR(&_1);
 	ZEPHIR_INIT_VAR(&_2);
 	ZVAL_STRING(&_2, "authAccess");
-	ZEPHIR_CALL_FUNCTION(&_3, "property_exists", NULL, 18, &controller, &_2);
+	ZEPHIR_CALL_FUNCTION(&_3, "property_exists", NULL, 15, &controller, &_2);
 	zephir_check_call_status();
 	if (zephir_is_true(&_3)) {
 		ZEPHIR_INIT_NVAR(&_2);

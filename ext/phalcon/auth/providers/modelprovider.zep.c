@@ -318,7 +318,7 @@ PHP_METHOD(Phalcon_Auth_Providers_ModelProvider, createRememberToken)
 
 	ZEPHIR_INIT_VAR(&rememberToken);
 	object_init_ex(&rememberToken, phalcon_auth_remembertoken_remembertokenmodel_ce);
-	ZEPHIR_CALL_METHOD(NULL, &rememberToken, "__construct", NULL, 19);
+	ZEPHIR_CALL_METHOD(NULL, &rememberToken, "__construct", NULL, 16);
 	zephir_check_call_status();
 	zephir_read_property(&_0, this_ptr, ZEND_STRL("hasher"), PH_NOISY_CC | PH_READONLY);
 	ZEPHIR_CALL_METHOD(&_1, &_0, "getrandom", NULL, 0);
