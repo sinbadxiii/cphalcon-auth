@@ -4,6 +4,7 @@ extern zend_class_entry *phalcon_auth_middlewares_authenticate_ce;
 ZEPHIR_INIT_CLASS(Phalcon_Auth_Middlewares_Authenticate);
 
 PHP_METHOD(Phalcon_Auth_Middlewares_Authenticate, beforeDispatch);
+PHP_METHOD(Phalcon_Auth_Middlewares_Authenticate, call);
 PHP_METHOD(Phalcon_Auth_Middlewares_Authenticate, authenticate);
 PHP_METHOD(Phalcon_Auth_Middlewares_Authenticate, unauthenticated);
 PHP_METHOD(Phalcon_Auth_Middlewares_Authenticate, redirectTo);
@@ -14,6 +15,10 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_phalcon_auth_middlewares_authenticate_beforedispa
 	ZEND_ARG_INFO(0, event)
 	ZEND_ARG_INFO(0, dispatcher)
 	ZEND_ARG_INFO(0, exception)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_phalcon_auth_middlewares_authenticate_call, 0, 0, 1)
+	ZEND_ARG_OBJ_INFO(0, application, Phalcon\\Mvc\\Micro, 0)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_phalcon_auth_middlewares_authenticate_authenticate, 0, 0, 0)
@@ -34,6 +39,7 @@ ZEND_END_ARG_INFO()
 
 ZEPHIR_INIT_FUNCS(phalcon_auth_middlewares_authenticate_method_entry) {
 	PHP_ME(Phalcon_Auth_Middlewares_Authenticate, beforeDispatch, arginfo_phalcon_auth_middlewares_authenticate_beforedispatch, ZEND_ACC_PUBLIC)
+	PHP_ME(Phalcon_Auth_Middlewares_Authenticate, call, arginfo_phalcon_auth_middlewares_authenticate_call, ZEND_ACC_PUBLIC)
 #if PHP_VERSION_ID >= 80000
 	PHP_ME(Phalcon_Auth_Middlewares_Authenticate, authenticate, arginfo_phalcon_auth_middlewares_authenticate_authenticate, ZEND_ACC_PROTECTED)
 #else

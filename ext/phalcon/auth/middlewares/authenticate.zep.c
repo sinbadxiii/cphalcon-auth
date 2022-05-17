@@ -16,6 +16,7 @@
 #include "kernel/fcall.h"
 #include "kernel/memory.h"
 #include "kernel/operators.h"
+#include "kernel/array.h"
 
 
 ZEPHIR_INIT_CLASS(Phalcon_Auth_Middlewares_Authenticate)
@@ -23,11 +24,13 @@ ZEPHIR_INIT_CLASS(Phalcon_Auth_Middlewares_Authenticate)
 	ZEPHIR_REGISTER_CLASS_EX(Phalcon\\Auth\\Middlewares, Authenticate, phalcon, auth_middlewares_authenticate, zephir_get_internal_ce(SL("phalcon\\di\\injectable")), phalcon_auth_middlewares_authenticate_method_entry, 0);
 
 	zend_declare_property_null(phalcon_auth_middlewares_authenticate_ce, SL("dispatcher"), ZEND_ACC_PROTECTED);
+	zend_declare_property_null(phalcon_auth_middlewares_authenticate_ce, SL("app"), ZEND_ACC_PROTECTED);
 	zephir_declare_class_constant_string(phalcon_auth_middlewares_authenticate_ce, SL("PROPERTY_AUTH_ACCESS"), "authAccess");
 
 	zephir_declare_class_constant_bool(phalcon_auth_middlewares_authenticate_ce, SL("AUTH_ACCESS_BY_DEFAULT"), 1);
 
 	zend_class_implements(phalcon_auth_middlewares_authenticate_ce, 1, phalcon_auth_middlewares_authenticatesrequestinterface_ce);
+	zend_class_implements(phalcon_auth_middlewares_authenticate_ce, 1, zephir_get_internal_ce(SL("phalcon\\mvc\\micro\\middlewareinterface")));
 	return SUCCESS;
 }
 
@@ -56,6 +59,32 @@ PHP_METHOD(Phalcon_Auth_Middlewares_Authenticate, beforeDispatch)
 
 
 	zephir_update_property_zval(this_ptr, ZEND_STRL("dispatcher"), dispatcher);
+	ZEPHIR_CALL_METHOD(NULL, this_ptr, "authenticate", NULL, 0);
+	zephir_check_call_status();
+	ZEPHIR_MM_RESTORE();
+}
+
+PHP_METHOD(Phalcon_Auth_Middlewares_Authenticate, call)
+{
+	zephir_method_globals *ZEPHIR_METHOD_GLOBALS_PTR = NULL;
+	zend_long ZEPHIR_LAST_CALL_STATUS;
+	zval *application, application_sub;
+	zval *this_ptr = getThis();
+
+	ZVAL_UNDEF(&application_sub);
+#if PHP_VERSION_ID >= 80000
+	bool is_null_true = 1;
+	ZEND_PARSE_PARAMETERS_START(1, 1)
+		Z_PARAM_OBJECT_OF_CLASS(application, zephir_get_internal_ce(SL("phalcon\\mvc\\micro")))
+	ZEND_PARSE_PARAMETERS_END();
+#endif
+
+
+	ZEPHIR_MM_GROW();
+	zephir_fetch_params(1, 1, 0, &application);
+
+
+	zephir_update_property_zval(this_ptr, ZEND_STRL("app"), application);
 	ZEPHIR_CALL_METHOD(NULL, this_ptr, "authenticate", NULL, 0);
 	zephir_check_call_status();
 	ZEPHIR_MM_RESTORE();
@@ -147,9 +176,9 @@ PHP_METHOD(Phalcon_Auth_Middlewares_Authenticate, setGuest)
 
 PHP_METHOD(Phalcon_Auth_Middlewares_Authenticate, isGuest)
 {
-	zend_bool _6, _11;
-	zend_class_entry *_5, *_9;
-	zval controller, _0, authAccess, _1, _2, _3, _4, _7, _8, _10;
+	zend_bool _10, _15;
+	zend_class_entry *_9, *_13;
+	zval controller, _0, authAccess, _5, _6, _7, _8, _11, _12, _14, _1$$3, _2$$3, _3$$3, _4$$4;
 	zephir_method_globals *ZEPHIR_METHOD_GLOBALS_PTR = NULL;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
 	zval *this_ptr = getThis();
@@ -157,67 +186,82 @@ PHP_METHOD(Phalcon_Auth_Middlewares_Authenticate, isGuest)
 	ZVAL_UNDEF(&controller);
 	ZVAL_UNDEF(&_0);
 	ZVAL_UNDEF(&authAccess);
-	ZVAL_UNDEF(&_1);
-	ZVAL_UNDEF(&_2);
-	ZVAL_UNDEF(&_3);
-	ZVAL_UNDEF(&_4);
+	ZVAL_UNDEF(&_5);
+	ZVAL_UNDEF(&_6);
 	ZVAL_UNDEF(&_7);
 	ZVAL_UNDEF(&_8);
-	ZVAL_UNDEF(&_10);
+	ZVAL_UNDEF(&_11);
+	ZVAL_UNDEF(&_12);
+	ZVAL_UNDEF(&_14);
+	ZVAL_UNDEF(&_1$$3);
+	ZVAL_UNDEF(&_2$$3);
+	ZVAL_UNDEF(&_3$$3);
+	ZVAL_UNDEF(&_4$$4);
 
 
 	ZEPHIR_MM_GROW();
 
-	zephir_read_property(&_0, this_ptr, ZEND_STRL("dispatcher"), PH_NOISY_CC | PH_READONLY);
-	ZEPHIR_CALL_METHOD(&controller, &_0, "getcontrollerclass", NULL, 0);
-	zephir_check_call_status();
-	ZEPHIR_INIT_VAR(&_1);
-	ZEPHIR_INIT_VAR(&_2);
-	ZVAL_STRING(&_2, "authAccess");
-	ZEPHIR_CALL_FUNCTION(&_3, "property_exists", NULL, 15, &controller, &_2);
-	zephir_check_call_status();
-	if (zephir_is_true(&_3)) {
-		ZEPHIR_INIT_NVAR(&_2);
-		zephir_fetch_safe_class(&_4, &controller);
-		_5 = zephir_fetch_class_str_ex(Z_STRVAL_P(&_4), Z_STRLEN_P(&_4), ZEND_FETCH_CLASS_AUTO);
-		if(!_5) {
-			RETURN_MM_NULL();
-		}
-		object_init_ex(&_2, _5);
-		if (zephir_has_constructor(&_2)) {
-			ZEPHIR_CALL_METHOD(NULL, &_2, "__construct", NULL, 0);
-			zephir_check_call_status();
-		}
-
-		ZEPHIR_OBS_NVAR(&_1);
-		zephir_read_property(&_1, &_2, ZEND_STRL("authAccess"), PH_NOISY_CC);
+	ZEPHIR_OBS_VAR(&_0);
+	zephir_read_property(&_0, this_ptr, ZEND_STRL("app"), PH_NOISY_CC);
+	if (zephir_is_instance_of(&_0, SL("Phalcon\\Mvc\\Micro"))) {
+		zephir_read_property(&_1$$3, this_ptr, ZEND_STRL("app"), PH_NOISY_CC | PH_READONLY);
+		ZEPHIR_CALL_METHOD(&_2$$3, &_1$$3, "getactivehandler", NULL, 0);
+		zephir_check_call_status();
+		zephir_array_fetch_long(&_3$$3, &_2$$3, 0, PH_NOISY | PH_READONLY, "phalcon/Auth/Middlewares/Authenticate.zep", 60);
+		ZEPHIR_CALL_METHOD(&controller, &_3$$3, "getdefinition", NULL, 0);
+		zephir_check_call_status();
 	} else {
-		ZEPHIR_INIT_NVAR(&_1);
-		ZVAL_BOOL(&_1, 1);
+		zephir_read_property(&_4$$4, this_ptr, ZEND_STRL("dispatcher"), PH_NOISY_CC | PH_READONLY);
+		ZEPHIR_CALL_METHOD(&controller, &_4$$4, "getcontrollerclass", NULL, 0);
+		zephir_check_call_status();
 	}
-	ZEPHIR_CPY_WRT(&authAccess, &_1);
-	_6 = (zephir_method_exists_ex(&controller, ZEND_STRL("authaccess")) == SUCCESS);
-	if (_6) {
-		ZEPHIR_INIT_VAR(&_7);
+	ZEPHIR_INIT_VAR(&_5);
+	ZEPHIR_INIT_VAR(&_6);
+	ZVAL_STRING(&_6, "authAccess");
+	ZEPHIR_CALL_FUNCTION(&_7, "property_exists", NULL, 15, &controller, &_6);
+	zephir_check_call_status();
+	if (zephir_is_true(&_7)) {
+		ZEPHIR_INIT_NVAR(&_6);
 		zephir_fetch_safe_class(&_8, &controller);
 		_9 = zephir_fetch_class_str_ex(Z_STRVAL_P(&_8), Z_STRLEN_P(&_8), ZEND_FETCH_CLASS_AUTO);
 		if(!_9) {
 			RETURN_MM_NULL();
 		}
-		object_init_ex(&_7, _9);
-		if (zephir_has_constructor(&_7)) {
-			ZEPHIR_CALL_METHOD(NULL, &_7, "__construct", NULL, 0);
+		object_init_ex(&_6, _9);
+		if (zephir_has_constructor(&_6)) {
+			ZEPHIR_CALL_METHOD(NULL, &_6, "__construct", NULL, 0);
 			zephir_check_call_status();
 		}
 
-		ZEPHIR_CALL_METHOD(&_10, &_7, "authaccess", NULL, 0);
+		ZEPHIR_OBS_NVAR(&_5);
+		zephir_read_property(&_5, &_6, ZEND_STRL("authAccess"), PH_NOISY_CC);
+	} else {
+		ZEPHIR_INIT_NVAR(&_5);
+		ZVAL_BOOL(&_5, 1);
+	}
+	ZEPHIR_CPY_WRT(&authAccess, &_5);
+	_10 = (zephir_method_exists_ex(&controller, ZEND_STRL("authaccess")) == SUCCESS);
+	if (_10) {
+		ZEPHIR_INIT_VAR(&_11);
+		zephir_fetch_safe_class(&_12, &controller);
+		_13 = zephir_fetch_class_str_ex(Z_STRVAL_P(&_12), Z_STRLEN_P(&_12), ZEND_FETCH_CLASS_AUTO);
+		if(!_13) {
+			RETURN_MM_NULL();
+		}
+		object_init_ex(&_11, _13);
+		if (zephir_has_constructor(&_11)) {
+			ZEPHIR_CALL_METHOD(NULL, &_11, "__construct", NULL, 0);
+			zephir_check_call_status();
+		}
+
+		ZEPHIR_CALL_METHOD(&_14, &_11, "authaccess", NULL, 0);
 		zephir_check_call_status();
-		_6 = !zephir_is_true(&_10);
+		_10 = !zephir_is_true(&_14);
 	}
-	_11 = _6;
-	if (!(_11)) {
-		_11 = ZEPHIR_IS_FALSE_IDENTICAL(&authAccess);
+	_15 = _10;
+	if (!(_15)) {
+		_15 = ZEPHIR_IS_FALSE_IDENTICAL(&authAccess);
 	}
-	RETURN_MM_BOOL(_11);
+	RETURN_MM_BOOL(_15);
 }
 

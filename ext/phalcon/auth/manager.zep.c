@@ -12,8 +12,8 @@
 #include <Zend/zend_interfaces.h>
 
 #include "kernel/main.h"
-#include "kernel/operators.h"
 #include "kernel/memory.h"
+#include "kernel/operators.h"
 #include "kernel/fcall.h"
 #include "kernel/object.h"
 #include "kernel/exception.h"
@@ -37,24 +37,24 @@ ZEPHIR_INIT_CLASS(Phalcon_Auth_Manager)
 
 PHP_METHOD(Phalcon_Auth_Manager, __construct)
 {
-	zend_class_entry *_1$$3, *_8$$5;
+	zend_class_entry *_2, *_8$$4;
 	zephir_method_globals *ZEPHIR_METHOD_GLOBALS_PTR = NULL;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *config = NULL, config_sub, *security = NULL, security_sub, __$null, _0$$3, _2$$3, _3$$3, _4$$3, _5$$3, _6$$4, _7$$5, _9$$5, _10$$5;
+	zval *config = NULL, config_sub, *security = NULL, security_sub, __$null, _0, _1, _3, _4, _5, _6$$3, _7$$4, _9$$4, _10$$4;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&config_sub);
 	ZVAL_UNDEF(&security_sub);
 	ZVAL_NULL(&__$null);
-	ZVAL_UNDEF(&_0$$3);
-	ZVAL_UNDEF(&_2$$3);
-	ZVAL_UNDEF(&_3$$3);
-	ZVAL_UNDEF(&_4$$3);
-	ZVAL_UNDEF(&_5$$3);
-	ZVAL_UNDEF(&_6$$4);
-	ZVAL_UNDEF(&_7$$5);
-	ZVAL_UNDEF(&_9$$5);
-	ZVAL_UNDEF(&_10$$5);
+	ZVAL_UNDEF(&_0);
+	ZVAL_UNDEF(&_1);
+	ZVAL_UNDEF(&_3);
+	ZVAL_UNDEF(&_4);
+	ZVAL_UNDEF(&_5);
+	ZVAL_UNDEF(&_6$$3);
+	ZVAL_UNDEF(&_7$$4);
+	ZVAL_UNDEF(&_9$$4);
+	ZVAL_UNDEF(&_10$$4);
 #if PHP_VERSION_ID >= 80000
 	bool is_null_true = 1;
 	ZEND_PARSE_PARAMETERS_START(0, 2)
@@ -77,36 +77,40 @@ PHP_METHOD(Phalcon_Auth_Manager, __construct)
 	}
 
 
-	if (Z_TYPE_P(config) == IS_NULL) {
-		_1$$3 = zephir_fetch_class_str_ex(SL("Phalcon\\Di\\Di"), ZEND_FETCH_CLASS_AUTO);
-		ZEPHIR_CALL_CE_STATIC(&_0$$3, _1$$3, "getdefault", NULL, 0);
+	ZEPHIR_INIT_VAR(&_0);
+	if (zephir_is_true(config)) {
+		ZEPHIR_CPY_WRT(&_0, config);
+	} else {
+		_2 = zephir_fetch_class_str_ex(SL("Phalcon\\Di\\Di"), ZEND_FETCH_CLASS_AUTO);
+		ZEPHIR_CALL_CE_STATIC(&_1, _2, "getdefault", NULL, 0);
 		zephir_check_call_status();
-		ZEPHIR_INIT_VAR(&_3$$3);
-		ZVAL_STRING(&_3$$3, "config");
-		ZEPHIR_CALL_METHOD(&_2$$3, &_0$$3, "getshared", NULL, 0, &_3$$3);
+		ZEPHIR_INIT_VAR(&_4);
+		ZVAL_STRING(&_4, "config");
+		ZEPHIR_CALL_METHOD(&_3, &_1, "getshared", NULL, 0, &_4);
 		zephir_check_call_status();
-		zephir_read_property(&_4$$3, &_2$$3, ZEND_STRL("auth"), PH_NOISY_CC | PH_READONLY);
-		zephir_update_property_zval(this_ptr, ZEND_STRL("config"), &_4$$3);
-		zephir_read_property(&_5$$3, this_ptr, ZEND_STRL("config"), PH_NOISY_CC | PH_READONLY);
-		if (Z_TYPE_P(&_5$$3) == IS_NULL) {
-			ZEPHIR_INIT_VAR(&_6$$4);
-			object_init_ex(&_6$$4, phalcon_auth_exceptions_configfilenotexistexception_ce);
-			ZEPHIR_CALL_METHOD(NULL, &_6$$4, "__construct", NULL, 13);
-			zephir_check_call_status();
-			zephir_throw_exception_debug(&_6$$4, "phalcon/Auth/Manager.zep", 26);
-			ZEPHIR_MM_RESTORE();
-			return;
-		}
+		ZEPHIR_OBS_NVAR(&_0);
+		zephir_read_property(&_0, &_3, ZEND_STRL("auth"), PH_NOISY_CC);
+	}
+	zephir_update_property_zval(this_ptr, ZEND_STRL("config"), &_0);
+	zephir_read_property(&_5, this_ptr, ZEND_STRL("config"), PH_NOISY_CC | PH_READONLY);
+	if (Z_TYPE_P(&_5) == IS_NULL) {
+		ZEPHIR_INIT_VAR(&_6$$3);
+		object_init_ex(&_6$$3, phalcon_auth_exceptions_configfilenotexistexception_ce);
+		ZEPHIR_CALL_METHOD(NULL, &_6$$3, "__construct", NULL, 13);
+		zephir_check_call_status();
+		zephir_throw_exception_debug(&_6$$3, "phalcon/Auth/Manager.zep", 25);
+		ZEPHIR_MM_RESTORE();
+		return;
 	}
 	if (Z_TYPE_P(security) == IS_NULL) {
-		_8$$5 = zephir_fetch_class_str_ex(SL("Phalcon\\Di\\Di"), ZEND_FETCH_CLASS_AUTO);
-		ZEPHIR_CALL_CE_STATIC(&_7$$5, _8$$5, "getdefault", NULL, 0);
+		_8$$4 = zephir_fetch_class_str_ex(SL("Phalcon\\Di\\Di"), ZEND_FETCH_CLASS_AUTO);
+		ZEPHIR_CALL_CE_STATIC(&_7$$4, _8$$4, "getdefault", NULL, 0);
 		zephir_check_call_status();
-		ZEPHIR_INIT_VAR(&_10$$5);
-		ZVAL_STRING(&_10$$5, "security");
-		ZEPHIR_CALL_METHOD(&_9$$5, &_7$$5, "getshared", NULL, 0, &_10$$5);
+		ZEPHIR_INIT_VAR(&_10$$4);
+		ZVAL_STRING(&_10$$4, "security");
+		ZEPHIR_CALL_METHOD(&_9$$4, &_7$$4, "getshared", NULL, 0, &_10$$4);
 		zephir_check_call_status();
-		zephir_update_property_zval(this_ptr, ZEND_STRL("security"), &_9$$5);
+		zephir_update_property_zval(this_ptr, ZEND_STRL("security"), &_9$$4);
 	}
 	ZEPHIR_MM_RESTORE();
 }
@@ -185,14 +189,14 @@ PHP_METHOD(Phalcon_Auth_Manager, guard)
 	}
 	zephir_get_strval(&name, &_0);
 	zephir_read_property(&_1, this_ptr, ZEND_STRL("guards"), PH_NOISY_CC | PH_READONLY);
-	zephir_array_fetch(&_2, &_1, &name, PH_NOISY | PH_READONLY, "phalcon/Auth/Manager.zep", 44);
+	zephir_array_fetch(&_2, &_1, &name, PH_NOISY | PH_READONLY, "phalcon/Auth/Manager.zep", 43);
 	if (Z_TYPE_P(&_2) == IS_NULL) {
 		ZEPHIR_CALL_METHOD(&_3$$5, this_ptr, "resolve", NULL, 0, &name);
 		zephir_check_call_status();
 		zephir_update_property_array(this_ptr, SL("guards"), &name, &_3$$5);
 	}
 	zephir_read_property(&_4, this_ptr, ZEND_STRL("guards"), PH_NOISY_CC | PH_READONLY);
-	zephir_array_fetch(&_5, &_4, &name, PH_NOISY | PH_READONLY, "phalcon/Auth/Manager.zep", 48);
+	zephir_array_fetch(&_5, &_4, &name, PH_NOISY | PH_READONLY, "phalcon/Auth/Manager.zep", 47);
 	RETURN_CTOR(&_5);
 }
 
@@ -248,12 +252,12 @@ PHP_METHOD(Phalcon_Auth_Manager, resolve)
 		zephir_check_call_status();
 		ZEPHIR_CALL_METHOD(NULL, &_0$$3, "__construct", NULL, 14, &_2$$3);
 		zephir_check_call_status();
-		zephir_throw_exception_debug(&_0$$3, "phalcon/Auth/Manager.zep", 58);
+		zephir_throw_exception_debug(&_0$$3, "phalcon/Auth/Manager.zep", 57);
 		ZEPHIR_MM_RESTORE();
 		return;
 	}
 	zephir_read_property(&_4, this_ptr, ZEND_STRL("customGuards"), PH_NOISY_CC | PH_READONLY);
-	zephir_array_fetch_string(&_5, &configGuard, SL("driver"), PH_READONLY, "phalcon/Auth/Manager.zep", 61);
+	zephir_array_fetch_string(&_5, &configGuard, SL("driver"), PH_READONLY, "phalcon/Auth/Manager.zep", 60);
 	if (zephir_array_isset(&_4, &_5)) {
 		ZEPHIR_RETURN_CALL_METHOD(this_ptr, "callcustomguard", NULL, 0, &name, &configGuard);
 		zephir_check_call_status();
@@ -278,7 +282,7 @@ PHP_METHOD(Phalcon_Auth_Manager, resolve)
 		zephir_check_call_status();
 		ZEPHIR_CALL_METHOD(NULL, &_9$$5, "__construct", NULL, 14, &_12$$5);
 		zephir_check_call_status();
-		zephir_throw_exception_debug(&_9$$5, "phalcon/Auth/Manager.zep", 81);
+		zephir_throw_exception_debug(&_9$$5, "phalcon/Auth/Manager.zep", 80);
 		ZEPHIR_MM_RESTORE();
 		return;
 	}
@@ -363,7 +367,7 @@ PHP_METHOD(Phalcon_Auth_Manager, createProvider)
 		zephir_check_call_status();
 		ZEPHIR_CALL_METHOD(NULL, &_6$$3, "__construct", NULL, 14, &_8$$3);
 		zephir_check_call_status();
-		zephir_throw_exception_debug(&_6$$3, "phalcon/Auth/Manager.zep", 103);
+		zephir_throw_exception_debug(&_6$$3, "phalcon/Auth/Manager.zep", 102);
 		ZEPHIR_MM_RESTORE();
 		return;
 	}
@@ -460,8 +464,8 @@ PHP_METHOD(Phalcon_Auth_Manager, callCustomGuard)
 	zephir_read_property(&_0, this_ptr, ZEND_STRL("customGuards"), PH_NOISY_CC | PH_READONLY);
 	ZEPHIR_OBS_VAR(&customGuard);
 	ZEPHIR_OBS_VAR(&_1);
-	zephir_array_fetch_string(&_1, config, SL("driver"), PH_NOISY, "phalcon/Auth/Manager.zep", 123);
-	zephir_array_fetch(&customGuard, &_0, &_1, PH_NOISY, "phalcon/Auth/Manager.zep", 123);
+	zephir_array_fetch_string(&_1, config, SL("driver"), PH_NOISY, "phalcon/Auth/Manager.zep", 122);
+	zephir_array_fetch(&customGuard, &_0, &_1, PH_NOISY, "phalcon/Auth/Manager.zep", 122);
 	ZEPHIR_RETURN_CALL_ZVAL_FUNCTION(&customGuard, NULL, 0, &name, config);
 	zephir_check_call_status();
 	RETURN_MM();

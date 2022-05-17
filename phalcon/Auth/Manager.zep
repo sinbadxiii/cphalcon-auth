@@ -19,13 +19,12 @@ class Manager
 
     public function __construct(<ConfigInterface> config = null, security = null)
     {
-        if config === null {
-            let this->config = Di::getDefault()->getShared("config")->auth;
+        let this->config = config ? config : Di::getDefault()->getShared("config")->auth;
 
-            if this->config === null {
-                throw new ConfigFileNotExistException();
-            }
+        if this->config === null {
+            throw new ConfigFileNotExistException();
         }
+
 
         if security === null {
             let this->security = Di::getDefault()->getShared("security");
