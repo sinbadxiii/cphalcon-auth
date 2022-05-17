@@ -34,7 +34,7 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_phalcon_auth_middlewares_authenticate_setguest, 0
 	ZEND_ARG_INFO(0, guest)
 ZEND_END_ARG_INFO()
 
-ZEND_BEGIN_ARG_INFO_EX(arginfo_phalcon_auth_middlewares_authenticate_isguest, 0, 0, 0)
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_phalcon_auth_middlewares_authenticate_isguest, 0, 0, _IS_BOOL, 0)
 ZEND_END_ARG_INFO()
 
 ZEPHIR_INIT_FUNCS(phalcon_auth_middlewares_authenticate_method_entry) {
@@ -56,10 +56,6 @@ ZEPHIR_INIT_FUNCS(phalcon_auth_middlewares_authenticate_method_entry) {
 	PHP_ME(Phalcon_Auth_Middlewares_Authenticate, redirectTo, NULL, ZEND_ACC_PROTECTED)
 #endif
 	PHP_ME(Phalcon_Auth_Middlewares_Authenticate, setGuest, arginfo_phalcon_auth_middlewares_authenticate_setguest, ZEND_ACC_PROTECTED)
-#if PHP_VERSION_ID >= 80000
 	PHP_ME(Phalcon_Auth_Middlewares_Authenticate, isGuest, arginfo_phalcon_auth_middlewares_authenticate_isguest, ZEND_ACC_PROTECTED)
-#else
-	PHP_ME(Phalcon_Auth_Middlewares_Authenticate, isGuest, NULL, ZEND_ACC_PROTECTED)
-#endif
 	PHP_FE_END
 };

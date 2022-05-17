@@ -5,6 +5,7 @@ use Phalcon\Mvc\Dispatcher;
 use Phalcon\Di\Di;
 use Phalcon\Mvc\Micro\MiddlewareInterface;
 use Phalcon\Mvc\Micro;
+use InvalidArgumentException;
 
 class Authenticate extends Injectable implements AuthenticatesRequestInterface, MiddlewareInterface
 {
@@ -52,17 +53,32 @@ class Authenticate extends Injectable implements AuthenticatesRequestInterface, 
         let this->guest = guest;
     }
 
-    protected function isGuest()
+    protected function isGuest() -> bool
     {
-        var controller;
+        var controller, authAccess;
 
         if this->app instanceof Micro {
-            let controller = this->app->getActiveHandler()[0]->getDefinition();
+            var handler = this->app->getActiveHandler();
+
+            if (typeof handler !== "array" && !isset handler[0] ) {
+                throw new InvalidArgumentException(sprintf("Handler is not defined."));
+            }
+
+            switch typeof handler[0] {
+                case "string":
+                    let controller = handler[0];
+                    break;
+                case "object":
+                    let controller = handler[0]->getDefinition();
+                    break;
+                default:
+                    throw new InvalidArgumentException(sprintf("Unknow type Handler."));
+            }
+
         } else {
             let controller =  this->dispatcher->getControllerClass();
         }
 
-        var authAccess;
         let authAccess = property_exists(controller, self::PROPERTY_AUTH_ACCESS) ?
             (new {controller})->authAccess : self::AUTH_ACCESS_BY_DEFAULT;
 
