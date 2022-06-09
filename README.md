@@ -139,7 +139,7 @@ If the auth configuration is set to `defaults => guard => 'api'` and `driver => 
 ...
 ```
 
-By default, the name of the parameter in the request and the field in the database is equal to `autn_token`, 
+By default, the name of the parameter in the request and the field in the database is equal to `auth_token`, 
 
 for example GET request:
 
@@ -152,9 +152,7 @@ or POST:
 
 ```
 //POST
-
-params request 
-
+//params POST request 
 [
     "auth_token": "fGa$gdGPSfEgT41r3F4fg#^33"
 ]
@@ -175,3 +173,85 @@ https://yourapidomain/api/v2/users
 
 Import files to create tables in the database `db/users.sql`, `db/users_remember_tokens.sql` and `db/create_auth_token_users.sql` if the auth_token field is needed
 
+### 3. Register a service provider 
+
+By default `Phalcon\Auth\Manager` will use auth config from `$this->config->auth`.
+```php 
+$di->setShared('auth', function () {
+    return new Phalcon\Auth\Manager();
+});
+```
+
+Or explicitly pass your auth config:
+
+```php 
+$di->setShared('auth', function () {
+    $authConfig = $this->getConfig()->get("auth");
+    
+    return new \Phalcon\Auth\Manager($authConfig);
+});
+```
+
+### 5. Middleware
+
+Create middleware extends from `Phalcon\Auth\Middlewares\Authenticate`
+
+example:
+
+```php
+declare(strict_types=1);
+
+namespace App\Security;
+
+use Phalcon\Auth\Middlewares\Authenticate as AuthMiddleware;
+
+/**
+ * Class Authenticate
+ * @package App\Security
+ */
+class Authenticate extends AuthMiddleware
+{
+    /**
+     * @return \Phalcon\Http\ResponseInterface|void
+     */
+    protected function redirectTo()
+    {
+        if (isset($this->response)) {
+            $this->response->redirect("/login")->send();
+        }
+    }
+}
+```
+
+and attach it in your service dispatcher:
+
+```php
+$di->setShared("dispatcher", function () use ($di) {
+    $dispatcher = new Dispatcher();
+
+    $eventsManager = $di->getShared('eventsManager');
+    $eventsManager->attach('dispatch', new Authenticate());
+    $dispatcher->setEventsManager($eventsManager);
+
+    return $dispatcher;
+});
+```
+
+When the middleware detects an unauthenticated user, it executes the `redirectTo()` method, by default the redirect goes to the url you need (the same login form, for example), you can change this behavior, for example, return a json response if an ajax request is used for authentication:
+
+```php
+
+protected function redirectTo()
+{
+    $this->response->setJsonContent(
+                    [
+                        'success' => false,
+                        'message' => 'Authentication failure'
+                    ], JSON_UNESCAPED_UNICODE
+                );
+
+    if (!$this->response->isSent()) {
+        $this->response->send();
+    } 
+}
+```
