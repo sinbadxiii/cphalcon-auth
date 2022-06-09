@@ -49,7 +49,7 @@ class Manager
 
     protected function resolve(string name)
     {
-        var configGuard;
+        var guard, configGuard;
 
         let configGuard = this->getConfigGuard(name);
 
@@ -61,11 +61,7 @@ class Manager
             return this->callCustomGuard(name, configGuard);
         }
 
-        var provider;
-        let provider = this->createProvider(configGuard);
-
-        var guard;
-
+        var provider = this->createProvider(configGuard);
         var guardName = sprintf(
             "\\Phalcon\\Auth\\Guards\\%sGuard",
             ucfirst(configGuard->driver)
@@ -88,8 +84,7 @@ class Manager
     public function createProvider(configGuard = null)
     {
         var provider = configGuard->provider;
-
-         var driver = sprintf("\\Phalcon\\Auth\\Providers\\%sProvider",
+        var driver = sprintf("\\Phalcon\\Auth\\Providers\\%sProvider",
             ucfirst(this->config->providers->{provider}->driver)
         );
 

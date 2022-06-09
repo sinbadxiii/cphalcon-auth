@@ -202,32 +202,31 @@ PHP_METHOD(Phalcon_Auth_Manager, guard)
 
 PHP_METHOD(Phalcon_Auth_Manager, resolve)
 {
-	zend_class_entry *_14;
+	zend_class_entry *_13;
 	zephir_method_globals *ZEPHIR_METHOD_GLOBALS_PTR = NULL;
-	zephir_fcall_cache_entry *_3 = NULL;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *name_param = NULL, configGuard, _4, _5, provider, guard, guardName, _6, _7, _8, _13, _0$$3, _1$$3, _2$$3, _9$$5, _10$$5, _11$$5, _12$$5;
+	zval *name_param = NULL, guard, configGuard, _3, _4, provider, guardName, _5, _6, _7, _12, _0$$3, _1$$3, _2$$3, _8$$5, _9$$5, _10$$5, _11$$5;
 	zval name;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&name);
-	ZVAL_UNDEF(&configGuard);
-	ZVAL_UNDEF(&_4);
-	ZVAL_UNDEF(&_5);
-	ZVAL_UNDEF(&provider);
 	ZVAL_UNDEF(&guard);
+	ZVAL_UNDEF(&configGuard);
+	ZVAL_UNDEF(&_3);
+	ZVAL_UNDEF(&_4);
+	ZVAL_UNDEF(&provider);
 	ZVAL_UNDEF(&guardName);
+	ZVAL_UNDEF(&_5);
 	ZVAL_UNDEF(&_6);
 	ZVAL_UNDEF(&_7);
-	ZVAL_UNDEF(&_8);
-	ZVAL_UNDEF(&_13);
+	ZVAL_UNDEF(&_12);
 	ZVAL_UNDEF(&_0$$3);
 	ZVAL_UNDEF(&_1$$3);
 	ZVAL_UNDEF(&_2$$3);
+	ZVAL_UNDEF(&_8$$5);
 	ZVAL_UNDEF(&_9$$5);
 	ZVAL_UNDEF(&_10$$5);
 	ZVAL_UNDEF(&_11$$5);
-	ZVAL_UNDEF(&_12$$5);
 #if PHP_VERSION_ID >= 80000
 	bool is_null_true = 1;
 	ZEND_PARSE_PARAMETERS_START(1, 1)
@@ -248,7 +247,7 @@ PHP_METHOD(Phalcon_Auth_Manager, resolve)
 		object_init_ex(&_0$$3, spl_ce_InvalidArgumentException);
 		ZEPHIR_INIT_VAR(&_1$$3);
 		ZVAL_STRING(&_1$$3, "Auth guard [%s] is not defined.");
-		ZEPHIR_CALL_FUNCTION(&_2$$3, "sprintf", &_3, 6, &_1$$3, &name);
+		ZEPHIR_CALL_FUNCTION(&_2$$3, "sprintf", NULL, 6, &_1$$3, &name);
 		zephir_check_call_status();
 		ZEPHIR_CALL_METHOD(NULL, &_0$$3, "__construct", NULL, 14, &_2$$3);
 		zephir_check_call_status();
@@ -256,43 +255,43 @@ PHP_METHOD(Phalcon_Auth_Manager, resolve)
 		ZEPHIR_MM_RESTORE();
 		return;
 	}
-	zephir_read_property(&_4, this_ptr, ZEND_STRL("customGuards"), PH_NOISY_CC | PH_READONLY);
-	zephir_array_fetch_string(&_5, &configGuard, SL("driver"), PH_READONLY, "phalcon/Auth/Manager.zep", 60);
-	if (zephir_array_isset(&_4, &_5)) {
+	zephir_read_property(&_3, this_ptr, ZEND_STRL("customGuards"), PH_NOISY_CC | PH_READONLY);
+	zephir_array_fetch_string(&_4, &configGuard, SL("driver"), PH_READONLY, "phalcon/Auth/Manager.zep", 60);
+	if (zephir_array_isset(&_3, &_4)) {
 		ZEPHIR_RETURN_CALL_METHOD(this_ptr, "callcustomguard", NULL, 0, &name, &configGuard);
 		zephir_check_call_status();
 		RETURN_MM();
 	}
 	ZEPHIR_CALL_METHOD(&provider, this_ptr, "createprovider", NULL, 0, &configGuard);
 	zephir_check_call_status();
-	ZEPHIR_INIT_VAR(&_6);
-	zephir_read_property(&_7, &configGuard, ZEND_STRL("driver"), PH_NOISY_CC | PH_READONLY);
-	zephir_ucfirst(&_6, &_7);
-	ZEPHIR_INIT_VAR(&_8);
-	ZVAL_STRING(&_8, "\\Phalcon\\Auth\\Guards\\%sGuard");
-	ZEPHIR_CALL_FUNCTION(&guardName, "sprintf", &_3, 6, &_8, &_6);
+	ZEPHIR_INIT_VAR(&_5);
+	zephir_read_property(&_6, &configGuard, ZEND_STRL("driver"), PH_NOISY_CC | PH_READONLY);
+	zephir_ucfirst(&_5, &_6);
+	ZEPHIR_INIT_VAR(&_7);
+	ZVAL_STRING(&_7, "\\Phalcon\\Auth\\Guards\\%sGuard");
+	ZEPHIR_CALL_FUNCTION(&guardName, "sprintf", NULL, 6, &_7, &_5);
 	zephir_check_call_status();
 	if (!(zephir_class_exists(&guardName, 1))) {
-		ZEPHIR_INIT_VAR(&_9$$5);
-		object_init_ex(&_9$$5, spl_ce_InvalidArgumentException);
-		zephir_read_property(&_10$$5, &configGuard, ZEND_STRL("driver"), PH_NOISY_CC | PH_READONLY);
-		ZEPHIR_INIT_VAR(&_11$$5);
-		ZVAL_STRING(&_11$$5, "Auth driver %s for guard %s is not defined.");
-		ZEPHIR_CALL_FUNCTION(&_12$$5, "sprintf", &_3, 6, &_11$$5, &_10$$5, &name);
+		ZEPHIR_INIT_VAR(&_8$$5);
+		object_init_ex(&_8$$5, spl_ce_InvalidArgumentException);
+		zephir_read_property(&_9$$5, &configGuard, ZEND_STRL("driver"), PH_NOISY_CC | PH_READONLY);
+		ZEPHIR_INIT_VAR(&_10$$5);
+		ZVAL_STRING(&_10$$5, "Auth driver %s for guard %s is not defined.");
+		ZEPHIR_CALL_FUNCTION(&_11$$5, "sprintf", NULL, 6, &_10$$5, &_9$$5, &name);
 		zephir_check_call_status();
-		ZEPHIR_CALL_METHOD(NULL, &_9$$5, "__construct", NULL, 14, &_12$$5);
+		ZEPHIR_CALL_METHOD(NULL, &_8$$5, "__construct", NULL, 14, &_11$$5);
 		zephir_check_call_status();
-		zephir_throw_exception_debug(&_9$$5, "phalcon/Auth/Manager.zep", 80);
+		zephir_throw_exception_debug(&_8$$5, "phalcon/Auth/Manager.zep", 76);
 		ZEPHIR_MM_RESTORE();
 		return;
 	}
 	ZEPHIR_INIT_VAR(&guard);
-	zephir_fetch_safe_class(&_13, &guardName);
-	_14 = zephir_fetch_class_str_ex(Z_STRVAL_P(&_13), Z_STRLEN_P(&_13), ZEND_FETCH_CLASS_AUTO);
-	if(!_14) {
+	zephir_fetch_safe_class(&_12, &guardName);
+	_13 = zephir_fetch_class_str_ex(Z_STRVAL_P(&_12), Z_STRLEN_P(&_12), ZEND_FETCH_CLASS_AUTO);
+	if(!_13) {
 		RETURN_MM_NULL();
 	}
-	object_init_ex(&guard, _14);
+	object_init_ex(&guard, _13);
 	if (zephir_has_constructor(&guard)) {
 		ZEPHIR_CALL_METHOD(NULL, &guard, "__construct", NULL, 0, &name, &provider);
 		zephir_check_call_status();
@@ -367,7 +366,7 @@ PHP_METHOD(Phalcon_Auth_Manager, createProvider)
 		zephir_check_call_status();
 		ZEPHIR_CALL_METHOD(NULL, &_6$$3, "__construct", NULL, 14, &_8$$3);
 		zephir_check_call_status();
-		zephir_throw_exception_debug(&_6$$3, "phalcon/Auth/Manager.zep", 102);
+		zephir_throw_exception_debug(&_6$$3, "phalcon/Auth/Manager.zep", 97);
 		ZEPHIR_MM_RESTORE();
 		return;
 	}
@@ -464,8 +463,8 @@ PHP_METHOD(Phalcon_Auth_Manager, callCustomGuard)
 	zephir_read_property(&_0, this_ptr, ZEND_STRL("customGuards"), PH_NOISY_CC | PH_READONLY);
 	ZEPHIR_OBS_VAR(&customGuard);
 	ZEPHIR_OBS_VAR(&_1);
-	zephir_array_fetch_string(&_1, config, SL("driver"), PH_NOISY, "phalcon/Auth/Manager.zep", 122);
-	zephir_array_fetch(&customGuard, &_0, &_1, PH_NOISY, "phalcon/Auth/Manager.zep", 122);
+	zephir_array_fetch_string(&_1, config, SL("driver"), PH_NOISY, "phalcon/Auth/Manager.zep", 117);
+	zephir_array_fetch(&customGuard, &_0, &_1, PH_NOISY, "phalcon/Auth/Manager.zep", 117);
 	ZEPHIR_RETURN_CALL_ZVAL_FUNCTION(&customGuard, NULL, 0, &name, config);
 	zephir_check_call_status();
 	RETURN_MM();

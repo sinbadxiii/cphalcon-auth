@@ -465,16 +465,15 @@ PHP_METHOD(Phalcon_Auth_Guards_SessionGuard, getRememberName)
 PHP_METHOD(Phalcon_Auth_Guards_SessionGuard, login)
 {
 	zephir_method_globals *ZEPHIR_METHOD_GLOBALS_PTR = NULL;
-	zephir_fcall_cache_entry *_1 = NULL;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
 	zend_bool remember;
-	zval *user, user_sub, *remember_param = NULL, _0, _2, _3;
+	zval *user, user_sub, *remember_param = NULL, _0, _1, _2;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&user_sub);
 	ZVAL_UNDEF(&_0);
+	ZVAL_UNDEF(&_1);
 	ZVAL_UNDEF(&_2);
-	ZVAL_UNDEF(&_3);
 #if PHP_VERSION_ID >= 80000
 	bool is_null_true = 1;
 	ZEND_PARSE_PARAMETERS_START(1, 2)
@@ -501,11 +500,11 @@ PHP_METHOD(Phalcon_Auth_Guards_SessionGuard, login)
 		zephir_check_call_status();
 	}
 
-	ZEPHIR_CALL_METHOD(NULL, this_ptr, "event", &_1, 0, &_0);
+	ZEPHIR_CALL_METHOD(NULL, this_ptr, "event", NULL, 0, &_0);
 	zephir_check_call_status();
-	ZEPHIR_CALL_METHOD(&_2, user, "getauthidentifier", NULL, 0);
+	ZEPHIR_CALL_METHOD(&_1, user, "getauthidentifier", NULL, 0);
 	zephir_check_call_status();
-	ZEPHIR_CALL_METHOD(NULL, this_ptr, "updatesession", NULL, 0, &_2);
+	ZEPHIR_CALL_METHOD(NULL, this_ptr, "updatesession", NULL, 0, &_1);
 	zephir_check_call_status();
 	if (remember) {
 		ZEPHIR_CALL_METHOD(NULL, this_ptr, "rememberuser", NULL, 0, user);
@@ -513,14 +512,14 @@ PHP_METHOD(Phalcon_Auth_Guards_SessionGuard, login)
 	}
 	ZEPHIR_CALL_METHOD(NULL, this_ptr, "setuser", NULL, 0, user);
 	zephir_check_call_status();
-	ZEPHIR_INIT_VAR(&_3);
-	object_init_ex(&_3, phalcon_auth_events_afterlogin_ce);
-	if (zephir_has_constructor(&_3)) {
-		ZEPHIR_CALL_METHOD(NULL, &_3, "__construct", NULL, 0);
+	ZEPHIR_INIT_VAR(&_2);
+	object_init_ex(&_2, phalcon_auth_events_afterlogin_ce);
+	if (zephir_has_constructor(&_2)) {
+		ZEPHIR_CALL_METHOD(NULL, &_2, "__construct", NULL, 0);
 		zephir_check_call_status();
 	}
 
-	ZEPHIR_CALL_METHOD(NULL, this_ptr, "event", &_1, 0, &_3);
+	ZEPHIR_CALL_METHOD(NULL, this_ptr, "event", NULL, 0, &_2);
 	zephir_check_call_status();
 	ZEPHIR_MM_RESTORE();
 }
@@ -575,17 +574,16 @@ PHP_METHOD(Phalcon_Auth_Guards_SessionGuard, loginById)
 PHP_METHOD(Phalcon_Auth_Guards_SessionGuard, once)
 {
 	zephir_method_globals *ZEPHIR_METHOD_GLOBALS_PTR = NULL;
-	zephir_fcall_cache_entry *_1 = NULL;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *credentials_param = NULL, _0, _2, _3$$3, _4$$3;
+	zval *credentials_param = NULL, _0, _1, _2$$3, _3$$3;
 	zval credentials;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&credentials);
 	ZVAL_UNDEF(&_0);
-	ZVAL_UNDEF(&_2);
+	ZVAL_UNDEF(&_1);
+	ZVAL_UNDEF(&_2$$3);
 	ZVAL_UNDEF(&_3$$3);
-	ZVAL_UNDEF(&_4$$3);
 #if PHP_VERSION_ID >= 80000
 	bool is_null_true = 1;
 	ZEND_PARSE_PARAMETERS_START(0, 1)
@@ -612,22 +610,22 @@ PHP_METHOD(Phalcon_Auth_Guards_SessionGuard, once)
 		zephir_check_call_status();
 	}
 
-	ZEPHIR_CALL_METHOD(NULL, this_ptr, "event", &_1, 0, &_0);
+	ZEPHIR_CALL_METHOD(NULL, this_ptr, "event", NULL, 0, &_0);
 	zephir_check_call_status();
-	ZEPHIR_CALL_METHOD(&_2, this_ptr, "validate", NULL, 0, &credentials);
+	ZEPHIR_CALL_METHOD(&_1, this_ptr, "validate", NULL, 0, &credentials);
 	zephir_check_call_status();
-	if (zephir_is_true(&_2)) {
-		zephir_read_property(&_3$$3, this_ptr, ZEND_STRL("lastUserAttempted"), PH_NOISY_CC | PH_READONLY);
-		ZEPHIR_CALL_METHOD(NULL, this_ptr, "setuser", NULL, 0, &_3$$3);
+	if (zephir_is_true(&_1)) {
+		zephir_read_property(&_2$$3, this_ptr, ZEND_STRL("lastUserAttempted"), PH_NOISY_CC | PH_READONLY);
+		ZEPHIR_CALL_METHOD(NULL, this_ptr, "setuser", NULL, 0, &_2$$3);
 		zephir_check_call_status();
-		ZEPHIR_INIT_VAR(&_4$$3);
-		object_init_ex(&_4$$3, phalcon_auth_events_afterlogin_ce);
-		if (zephir_has_constructor(&_4$$3)) {
-			ZEPHIR_CALL_METHOD(NULL, &_4$$3, "__construct", NULL, 0);
+		ZEPHIR_INIT_VAR(&_3$$3);
+		object_init_ex(&_3$$3, phalcon_auth_events_afterlogin_ce);
+		if (zephir_has_constructor(&_3$$3)) {
+			ZEPHIR_CALL_METHOD(NULL, &_3$$3, "__construct", NULL, 0);
 			zephir_check_call_status();
 		}
 
-		ZEPHIR_CALL_METHOD(NULL, this_ptr, "event", &_1, 0, &_4$$3);
+		ZEPHIR_CALL_METHOD(NULL, this_ptr, "event", NULL, 0, &_3$$3);
 		zephir_check_call_status();
 		RETURN_MM_BOOL(1);
 	}
