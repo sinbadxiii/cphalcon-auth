@@ -48,9 +48,9 @@ Providers determine where users will be retrieved from. By default, this is, of 
 
 ## How use
 
-### Config
+### 1. Config
 
-1. Your application's authentication configuration file will either need to be located in your config folder, such as config/auth.php or global config.php file with access by "auth" key (`$this->config->auth`).
+Your application's authentication configuration file will either need to be located in your config folder, such as config/auth.php or global config.php file with access by "auth" key (`$this->config->auth`).
 
 ```php
 <?php
@@ -76,3 +76,102 @@ Providers determine where users will be retrieved from. By default, this is, of 
     ],
 ...
 ```
+
+#### 1.1. Config Session
+
+With the default auth configuration - `defaults => guard => 'web'` and `driver => 'session'`, the user enters their username and password using the login form. 
+
+If these credentials are correct, the application will store information about the authenticated user in the user's session. 
+
+The cookie sent to the browser contains the session ID so that subsequent requests to the application can associate the user with the correct session. After receiving the session cookie, the application will retrieve the session data based on the session id, note that the authentication information will be stored in the session, and will consider the user to be "authenticated".
+
+```php
+<?php
+
+...
+    'auth' => [
+        'defaults' => [
+            'guard' => 'web',
+            'passwords' => 'users',
+        ],
+        'guards' => [
+            'web' => [
+                'driver' => 'session',
+                'provider' => 'users',
+            ],
+        ],
+        'providers' => [
+            'users' => [
+                'driver' => 'model',
+                'model'  => \Models\Users::class,
+            ]
+        ]
+    ],
+...
+```
+
+#### 1.2. Config Token
+
+If the auth configuration is set to `defaults => guard => 'api'` and `driver => 'token'`, this setting will allow authentication to access your API application, cookies are usually not used for authentication due to lack of web -browser. Instead, the remote service sends an API token on every request. The application can validate the incoming token against a table of valid API tokens and "authenticate" the request as being made by the user associated with that API token.
+
+```php
+<?php
+
+...
+    'auth' => [
+        'defaults' => [
+            'guard' => 'api',
+            'passwords' => 'users',
+        ],
+        'guards' => [
+            'api' => [
+                'driver' => 'token',
+                'provider' => 'users',
+            ],
+        ],
+        'providers' => [
+            'users' => [
+                'driver' => 'model',
+                'model'  => \Models\Users::class,
+            ]
+        ]
+    ],
+...
+```
+
+By default, the name of the parameter in the request and the field in the database is equal to `autn_token`, 
+
+for example GET request:
+
+```
+//GET
+https://yourapidomain/api/v2/users?auth_token=fGa$gdGPSfEgT41r3F4fg#^33
+```
+
+or POST:
+
+```
+//POST
+
+params request 
+
+[
+    "auth_token": "fGa$gdGPSfEgT41r3F4fg#^33"
+]
+
+https://yourapidomain/api/v2/users
+```
+
+or `Authorization` header:
+
+```
+
+Authorization: Bearer fGa$gdGPSfEgT41r3F4fg#^33
+
+https://yourapidomain/api/v2/users
+```
+
+### 2. Database
+
+Import files to create tables in the database `db/users.sql`, `db/users_remember_tokens.sql` and `db/create_auth_token_users.sql` if the auth_token field is needed
+
