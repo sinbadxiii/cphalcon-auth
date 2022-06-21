@@ -75,7 +75,7 @@ PHP_METHOD(Phalcon_Auth_RememberToken_RememberTokenModel, initialize)
 	zephir_read_property(&_5, &_7, ZEND_STRL("provider"), PH_NOISY_CC | PH_READONLY);
 	ZEPHIR_INIT_NVAR(&_3);
 	ZVAL_STRING(&_3, "%s_remember_tokens");
-	ZEPHIR_CALL_FUNCTION(&tableRememberToken, "sprintf", NULL, 6, &_3, &_5);
+	ZEPHIR_CALL_FUNCTION(&tableRememberToken, "sprintf", NULL, 12, &_3, &_5);
 	zephir_check_call_status();
 	ZEPHIR_CALL_METHOD(NULL, this_ptr, "setsource", NULL, 0, &tableRememberToken);
 	zephir_check_call_status();
@@ -101,19 +101,19 @@ PHP_METHOD(Phalcon_Auth_RememberToken_RememberTokenModel, beforeValidationOnCrea
 
 	ZEPHIR_INIT_VAR(&_0);
 	ZVAL_STRING(&_0, "Y-m-d\\TH:i:sP");
-	ZEPHIR_CALL_FUNCTION(&_1, "date", NULL, 7, &_0);
+	ZEPHIR_CALL_FUNCTION(&_1, "date", NULL, 13, &_0);
 	zephir_check_call_status();
 	zephir_update_property_zval(this_ptr, ZEND_STRL("created_at"), &_1);
 	ZEPHIR_INIT_NVAR(&_0);
 	ZVAL_STRING(&_0, "Y-m-d\\TH:i:sP");
-	ZEPHIR_CALL_FUNCTION(&_2, "date", NULL, 7, &_0);
+	ZEPHIR_CALL_FUNCTION(&_2, "date", NULL, 13, &_0);
 	zephir_check_call_status();
 	zephir_update_property_zval(this_ptr, ZEND_STRL("updated_at"), &_2);
 	zephir_read_property(&_3, this_ptr, ZEND_STRL("expired_at"), PH_NOISY_CC | PH_READONLY);
 	if (!(zephir_is_true(&_3))) {
 		ZEPHIR_INIT_VAR(&_4$$3);
 		ZVAL_STRING(&_4$$3, "Y-m-d\\TH:i:sP");
-		ZEPHIR_CALL_FUNCTION(&_5$$3, "date", NULL, 7, &_4$$3);
+		ZEPHIR_CALL_FUNCTION(&_5$$3, "date", NULL, 13, &_4$$3);
 		zephir_check_call_status();
 		zephir_update_property_zval(this_ptr, ZEND_STRL("expired_at"), &_5$$3);
 	}
@@ -143,7 +143,7 @@ PHP_METHOD(Phalcon_Auth_RememberToken_RememberTokenModel, beforeValidationOnSave
 	if (!(zephir_is_true(&_0))) {
 		ZEPHIR_INIT_VAR(&_1$$3);
 		ZVAL_STRING(&_1$$3, "Y-m-d\\TH:i:sP");
-		ZEPHIR_CALL_FUNCTION(&_2$$3, "date", NULL, 7, &_1$$3);
+		ZEPHIR_CALL_FUNCTION(&_2$$3, "date", NULL, 13, &_1$$3);
 		zephir_check_call_status();
 		zephir_update_property_zval(this_ptr, ZEND_STRL("created_at"), &_2$$3);
 	}
@@ -151,13 +151,13 @@ PHP_METHOD(Phalcon_Auth_RememberToken_RememberTokenModel, beforeValidationOnSave
 	if (!(zephir_is_true(&_3))) {
 		ZEPHIR_INIT_VAR(&_4$$4);
 		ZVAL_STRING(&_4$$4, "Y-m-d\\TH:i:sP");
-		ZEPHIR_CALL_FUNCTION(&_5$$4, "date", NULL, 7, &_4$$4);
+		ZEPHIR_CALL_FUNCTION(&_5$$4, "date", NULL, 13, &_4$$4);
 		zephir_check_call_status();
 		zephir_update_property_zval(this_ptr, ZEND_STRL("expired_at"), &_5$$4);
 	}
 	ZEPHIR_INIT_VAR(&_6);
 	ZVAL_STRING(&_6, "Y-m-d\\TH:i:sP");
-	ZEPHIR_CALL_FUNCTION(&_7, "date", NULL, 7, &_6);
+	ZEPHIR_CALL_FUNCTION(&_7, "date", NULL, 13, &_6);
 	zephir_check_call_status();
 	zephir_update_property_zval(this_ptr, ZEND_STRL("updated_at"), &_7);
 	ZEPHIR_MM_RESTORE();
@@ -178,7 +178,7 @@ PHP_METHOD(Phalcon_Auth_RememberToken_RememberTokenModel, beforeValidationOnUpda
 
 	ZEPHIR_INIT_VAR(&_0);
 	ZVAL_STRING(&_0, "Y-m-d\\TH:i:sP");
-	ZEPHIR_CALL_FUNCTION(&_1, "date", NULL, 7, &_0);
+	ZEPHIR_CALL_FUNCTION(&_1, "date", NULL, 13, &_0);
 	zephir_check_call_status();
 	zephir_update_property_zval(this_ptr, ZEND_STRL("updated_at"), &_1);
 	ZEPHIR_MM_RESTORE();

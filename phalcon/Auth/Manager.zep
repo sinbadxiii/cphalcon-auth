@@ -84,6 +84,7 @@ class Manager
     public function createProvider(configGuard = null)
     {
         var provider = configGuard->provider;
+
         var driver = sprintf("\\Phalcon\\Auth\\Providers\\%sProvider",
             ucfirst(this->config->providers->{provider}->driver)
         );
@@ -91,8 +92,8 @@ class Manager
          if (!class_exists(driver)) {
             throw new InvalidArgumentException(
                 sprintf(
-                    "Provider %s is not defined.",
-                    provider
+                    "%sProvider is not defined.",
+                    ucfirst(this->config->providers->{provider}->driver)
                 )
             );
         }

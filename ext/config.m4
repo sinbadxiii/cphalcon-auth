@@ -12,29 +12,34 @@ if test "$PHP_PHALCON_AUTH" = "yes"; then
 	phalcon_auth_sources="phalcon_auth.c kernel/main.c kernel/memory.c kernel/exception.c kernel/debug.c kernel/backtrace.c kernel/object.c kernel/array.c kernel/string.c kernel/fcall.c kernel/require.c kernel/file.c kernel/operators.c kernel/math.c kernel/concat.c kernel/variables.c kernel/filter.c kernel/iterator.c kernel/time.c kernel/exit.c phalcon/auth/events/eventinterface.zep.c
 	phalcon/auth/events/eventabstract.zep.c
 	phalcon/auth/exceptions/exception.zep.c
+	phalcon/auth/providers/providerinterface.zep.c
+	phalcon/auth/authenticatableinterface.zep.c
 	phalcon/auth/guards/basicauthinterface.zep.c
 	phalcon/auth/guards/guardinterface.zep.c
 	phalcon/auth/guards/guardstatefulinterface.zep.c
 	phalcon/auth/middlewares/authenticatesrequestinterface.zep.c
-	phalcon/auth/providers/providerinterface.zep.c
 	phalcon/auth/remembertoken/remembertokeninterface.zep.c
-	phalcon/auth/authenticatableinterface.zep.c
+	phalcon/auth/collection/user.zep.c
+	phalcon/auth/collection/userscollection.zep.c
 	phalcon/auth/events/afterlogin.zep.c
 	phalcon/auth/events/beforelogin.zep.c
 	phalcon/auth/events/logout.zep.c
 	phalcon/auth/exceptions/configfilenotexistexception.zep.c
+	phalcon/auth/exceptions/jsonnotvalidexception.zep.c
 	phalcon/auth/exceptions/unauthorizedhttpexception.zep.c
 	phalcon/auth/guards/sessionguard.zep.c
 	phalcon/auth/guards/tokenguard.zep.c
 	phalcon/auth/guards/userremember.zep.c
 	phalcon/auth/manager.zep.c
 	phalcon/auth/middlewares/authenticate.zep.c
+	phalcon/auth/providers/fileprovider.zep.c
+	phalcon/auth/providers/fileprovider/parser.zep.c
 	phalcon/auth/providers/modelprovider.zep.c
 	phalcon/auth/remembertoken/remembertokenmodel.zep.c
 	phalcon/auth/remembertoken/rememberinginterface.zep.c "
 	PHP_NEW_EXTENSION(phalcon_auth, $phalcon_auth_sources, $ext_shared,, )
 	PHP_ADD_BUILD_DIR([$ext_builddir/kernel/])
-	for dir in "phalcon/auth phalcon/auth/events phalcon/auth/exceptions phalcon/auth/guards phalcon/auth/middlewares phalcon/auth/providers phalcon/auth/remembertoken"; do
+	for dir in "phalcon/auth phalcon/auth/collection phalcon/auth/events phalcon/auth/exceptions phalcon/auth/guards phalcon/auth/middlewares phalcon/auth/providers phalcon/auth/providers/fileprovider phalcon/auth/remembertoken"; do
 		PHP_ADD_BUILD_DIR([$ext_builddir/$dir])
 	done
 	PHP_SUBST(PHALCON_AUTH_SHARED_LIBADD)

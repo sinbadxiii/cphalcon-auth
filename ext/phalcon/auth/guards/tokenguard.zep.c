@@ -254,7 +254,7 @@ PHP_METHOD(Phalcon_Auth_Guards_TokenGuard, getTokenForRequest)
 	ZEPHIR_CALL_METHOD(&token, &_0, "get", NULL, 0, &_1);
 	zephir_check_call_status();
 	if (ZEPHIR_IS_EMPTY(&token)) {
-		ZEPHIR_CALL_METHOD(&token, this_ptr, "bearertoken", NULL, 11);
+		ZEPHIR_CALL_METHOD(&token, this_ptr, "bearertoken", NULL, 17);
 		zephir_check_call_status();
 	}
 	RETURN_CCTOR(&token);
@@ -299,7 +299,7 @@ PHP_METHOD(Phalcon_Auth_Guards_TokenGuard, bearerToken)
 		ZVAL_LONG(&_3$$3, 7);
 		ZEPHIR_INIT_VAR(&_4$$3);
 		ZVAL_STRING(&_4$$3, "UTF-8");
-		ZEPHIR_RETURN_CALL_FUNCTION("mb_substr", NULL, 12, &header, &_3$$3, &__$null, &_4$$3);
+		ZEPHIR_RETURN_CALL_FUNCTION("mb_substr", NULL, 18, &header, &_3$$3, &__$null, &_4$$3);
 		zephir_check_call_status();
 		RETURN_MM();
 	}

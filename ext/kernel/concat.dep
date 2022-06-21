@@ -89,21 +89,26 @@ kernel/concat.lo: \
  phalcon/auth/events/eventinterface.zep.h \
  phalcon/auth/events/eventabstract.zep.h \
  phalcon/auth/exceptions/exception.zep.h \
+ phalcon/auth/providers/providerinterface.zep.h \
+ phalcon/auth/authenticatableinterface.zep.h \
  phalcon/auth/guards/basicauthinterface.zep.h \
  phalcon/auth/guards/guardinterface.zep.h \
  phalcon/auth/guards/guardstatefulinterface.zep.h \
  phalcon/auth/middlewares/authenticatesrequestinterface.zep.h \
- phalcon/auth/providers/providerinterface.zep.h \
  phalcon/auth/remembertoken/remembertokeninterface.zep.h \
- phalcon/auth/authenticatableinterface.zep.h \
+ phalcon/auth/collection/user.zep.h \
+ phalcon/auth/collection/userscollection.zep.h \
  phalcon/auth/events/afterlogin.zep.h \
  phalcon/auth/events/beforelogin.zep.h phalcon/auth/events/logout.zep.h \
  phalcon/auth/exceptions/configfilenotexistexception.zep.h \
+ phalcon/auth/exceptions/jsonnotvalidexception.zep.h \
  phalcon/auth/exceptions/unauthorizedhttpexception.zep.h \
  phalcon/auth/guards/sessionguard.zep.h \
  phalcon/auth/guards/tokenguard.zep.h \
  phalcon/auth/guards/userremember.zep.h phalcon/auth/manager.zep.h \
  phalcon/auth/middlewares/authenticate.zep.h \
+ phalcon/auth/providers/fileprovider.zep.h \
+ phalcon/auth/providers/fileprovider/parser.zep.h \
  phalcon/auth/providers/modelprovider.zep.h \
  phalcon/auth/remembertoken/remembertokenmodel.zep.h \
  phalcon/auth/remembertoken/rememberinginterface.zep.h kernel/main.h \

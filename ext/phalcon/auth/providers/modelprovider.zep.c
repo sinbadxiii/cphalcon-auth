@@ -133,7 +133,7 @@ PHP_METHOD(Phalcon_Auth_Providers_ModelProvider, retrieveByCredentials)
 			}
 			ZEPHIR_INIT_NVAR(&_11$$3);
 			ZVAL_STRING(&_11$$3, "%s = :%s:");
-			ZEPHIR_CALL_FUNCTION(&_12$$3, "sprintf", &_13, 6, &_11$$3, &key, &key);
+			ZEPHIR_CALL_FUNCTION(&_12$$3, "sprintf", &_13, 12, &_11$$3, &key, &key);
 			zephir_check_call_status();
 			ZEPHIR_INIT_NVAR(&_14$$3);
 			zephir_create_array(&_14$$3, 1, 0);
@@ -159,7 +159,7 @@ PHP_METHOD(Phalcon_Auth_Providers_ModelProvider, retrieveByCredentials)
 				}
 				ZEPHIR_INIT_NVAR(&_16$$5);
 				ZVAL_STRING(&_16$$5, "%s = :%s:");
-				ZEPHIR_CALL_FUNCTION(&_17$$5, "sprintf", &_13, 6, &_16$$5, &key, &key);
+				ZEPHIR_CALL_FUNCTION(&_17$$5, "sprintf", &_13, 12, &_16$$5, &key, &key);
 				zephir_check_call_status();
 				ZEPHIR_INIT_NVAR(&_18$$5);
 				zephir_create_array(&_18$$5, 1, 0);
@@ -318,7 +318,7 @@ PHP_METHOD(Phalcon_Auth_Providers_ModelProvider, createRememberToken)
 
 	ZEPHIR_INIT_VAR(&rememberToken);
 	object_init_ex(&rememberToken, phalcon_auth_remembertoken_remembertokenmodel_ce);
-	ZEPHIR_CALL_METHOD(NULL, &rememberToken, "__construct", NULL, 16);
+	ZEPHIR_CALL_METHOD(NULL, &rememberToken, "__construct", NULL, 25);
 	zephir_check_call_status();
 	zephir_read_property(&_0, this_ptr, ZEND_STRL("hasher"), PH_NOISY_CC | PH_READONLY);
 	ZEPHIR_CALL_METHOD(&_1, &_0, "getrandom", NULL, 0);

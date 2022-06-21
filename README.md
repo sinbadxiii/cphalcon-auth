@@ -6,7 +6,7 @@
 
 PHP Extension Phalcon Auth for Phalcon framework by Zephir lang
 
-[Based by Phalcon Auth](https://github.com/sinbadxiii/phalcon-auth)
+[Based by Phalcon Auth PHP](https://github.com/sinbadxiii/phalcon-auth)
 
 ## Installation
 
@@ -323,6 +323,48 @@ class Users extends BaseModel implements AuthenticatableInterface, RememberingIn
 }
 ```
 
+## Authenticated and Guest Controllers
+
+Controllers can have an `$authAccess` property or an `authAccess()` method that, depending on the value, will restrict access.
+
+For example, in these cases, access to the controllers will be possible even for non-authenticated users:
+
+```php 
+<?php
+
+namespace App\Controllers;
+
+use Phalcon\Mvc\Controller;
+
+//Guest Controller
+class PostsController extends Controller
+{
+    protected $authAccess = false;
+    
+    ...
+}
+```
+
+or method `authAccess()`:
+
+```php 
+<?php
+
+namespace App\Controllers;
+
+use Phalcon\Mvc\Controller;
+
+class ProfileController extends Controller
+{
+    public function authAccess(): bool
+    {
+        return true;
+    }
+}
+```
+
+By default `$authAccess` = `true`.
+
 ## Methods
 
 ### Checking the authentication of the current user
@@ -383,9 +425,9 @@ Remember that users from your database will be queried based on the "provider" c
 
 The `attempt()` method will return `true` if the authentication was successful. Otherwise, `false` will be returned.
 
-### Specifying additional credentials
+### Specifying additional conditions
 
-You can also add additional request credentials in addition to the user's email/username and password. To do this, simply add the request conditions to the array passed to the `attempt()` method. For example, we can check if a user is marked as "is_published":
+You can also add additional query conditions in addition to the user's email/username and password. To do this, simply add the request conditions to the array passed to the `attempt()` method. For example, we can check if a user is marked as "is_published":
 ```php 
 $username = $this->request->getPost("username");
 $password = $this->request->getPost("password");
@@ -427,6 +469,190 @@ Use the `viaRemember()` method to check if the user is authenticated with the "r
 //use method viaRemember to check the user was authenticated using the remember me cookie
 $this->auth->viaRemember();
 ```
+
+### Authenticate user instance
+
+If you need to set an existing user instance as the currently authenticated user, you can pass the user instance to the `login()` method. This user instance must be an implementation of Phalcon\Auth\AuthenticatableInterface. 
+
+This authentication method is useful when you already have a valid user instance, such as right after the user has registered with your application:
+
+```php
+
+$userId = 1;
+
+$user = Users::findFirst($userId);
+// Login and Remember the given user
+$this->auth->login($user, $remember = true);
+```
+### Authenticate user by ID
+
+To authenticate a user using the primary key of a database entry, you can use the `loginById()` method. This method accepts the primary key of the user you wish to authenticate:
+
+```php
+
+$userId = 1;
+
+//and force login user by id 
+$this->auth->loginById($userId, true);
+```
+
+### Authenticate user once
+
+Using the `once()` method you can authenticate a user in an application for a single request. Calling this method will not use sessions or cookies:
+
+```php
+//once auth without saving session and cookies
+$username = $this->request->getPost("username");
+$password = $this->request->getPost("password");
+
+$this->auth->once(['username' => $username, 'password' => $password]);
+```
+
+## Log out
+
+To manually log out a user from your application, you can use the `logout()` method. This will remove all authentication information from the user's session, so that subsequent requests will no longer be authenticated:
+
+```php
+
+$this->auth->logout();
+//log out user 
+```
+
+## HTTP Basic Authentication
+
+[HTTP Basic Authentication](https://en.wikipedia.org/wiki/Basic_access_authentication) provides a quick way to authenticate users of your application without setting up a special "login" page. It is enough to pass in the `Authorization` header, the value `Basic` and a pair of email (or other user field) and password, separated by a colon and encoded `base64_encode()`
+
+First, create an AuthBasic middleware with the `$this->auth->basic("email")` method and attach a dispatcher to the service provider as described above.
+
+The `email` argument specifies that the user will be searched for the email and password fields. By specifying another field, such as `username`, the search will be performed on the username and password pair.
+
+```php 
+<?php
+
+declare(strict_types=1);
+
+namespace App\Security;
+
+use Phalcon\Auth\Middlewares\Authenticate as AuthMiddleware;
+
+/**
+ * Class AuthenticateWithBasic
+ * @package App\Security
+ */
+class AuthenticateWithBasic extends AuthMiddleware
+{
+    /**
+     * @var
+     */
+    protected $message;
+
+    /**
+     * @return bool
+     */
+    protected function authenticate()
+    {
+        try {
+            if ($this->auth->basic("email") || $this->isGuest()) {
+                return true;
+            }
+        } catch (\Throwable $e) {
+            $this->message = $e->getMessage();
+        } 
+        $this->unauthenticated();
+    }
+
+    /**
+     * @return \Phalcon\Http\ResponseInterface|void
+     */
+    protected function redirectTo()
+    {
+        if (isset($this->response)) {
+            $this->response->setJsonContent(
+                [
+                    'message' => $this->message ?? "Unauthorized Error"
+                ]
+            )->setStatusCode(401)->send();
+        }
+    }
+}
+
+```
+
+```php
+$di->setShared("dispatcher", function () use ($di) {
+    $dispatcher = new Dispatcher();
+
+    $eventsManager = $di->getShared('eventsManager');
+    $eventsManager->attach('dispatch', new AuthenticateWithBasic());
+    $dispatcher->setEventsManager($eventsManager);
+
+    return $dispatcher;
+});
+```
+
+After the request, a user is logged into the session, and subsequent requests may no longer contain user data in the `Authorization` header, until the session "dies out".
+
+### Basic HTTP stateless authentication
+
+You can use HTTP basic authentication without keeping the user in session. This is primarily useful if you decide to use HTTP authentication to authenticate requests to your application's API. To do this, define a middleware that calls the `onceBasic()` method, for example:
+
+```php 
+<?php
+
+declare(strict_types=1);
+
+namespace App\Security;
+
+use Phalcon\Auth\Middlewares\Authenticate as AuthMiddleware;
+
+/**
+ * Class AuthenticateWithOnceBasic
+ * @package App\Security
+ */
+class AuthenticateWithOnceBasic extends AuthMiddleware
+{
+    /**
+     * @var
+     */
+    protected $message;
+
+    /**
+     * @return bool
+     */
+    protected function authenticate()
+    {
+        try {
+            if ($this->auth->onceBasic("email") || $this->isGuest()) {
+                return true;
+            }
+        } catch (\Throwable $e) {
+            $this->message = $e->getMessage();
+        }
+        $this->unauthenticated();
+    }
+
+    /**
+     * @return \Phalcon\Http\ResponseInterface|void
+     */
+    protected function redirectTo()
+    {
+        if (isset($this->response)) {
+            $this->response->setJsonContent(
+                [
+                    'message' => $this->message ?? "Unauthorized Error"
+                ]
+            )->setStatusCode(401)->send();
+        }
+    }
+}
+```
+
+After the request, neither the cookie nor the session will contain user data, and the next request must also contain the user's `Authorization` header data, otherwise a `Phalcon\Auth\Exceptions\UnauthorizedHttpException;`
+
+
+
+
+
 
 
 

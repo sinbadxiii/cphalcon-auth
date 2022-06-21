@@ -11,12 +11,14 @@ if (PHP_PHALCON_AUTH != "no") {
   }
   
   ADD_SOURCES(configure_module_dirname + "/phalcon/auth/events", "eventinterface.zep.c eventabstract.zep.c afterlogin.zep.c beforelogin.zep.c logout.zep.c", "phalcon_auth");
-	ADD_SOURCES(configure_module_dirname + "/phalcon/auth/exceptions", "exception.zep.c configfilenotexistexception.zep.c unauthorizedhttpexception.zep.c", "phalcon_auth");
+	ADD_SOURCES(configure_module_dirname + "/phalcon/auth/exceptions", "exception.zep.c configfilenotexistexception.zep.c jsonnotvalidexception.zep.c unauthorizedhttpexception.zep.c", "phalcon_auth");
+	ADD_SOURCES(configure_module_dirname + "/phalcon/auth/providers", "providerinterface.zep.c fileprovider.zep.c modelprovider.zep.c", "phalcon_auth");
+	ADD_SOURCES(configure_module_dirname + "/phalcon/auth", "authenticatableinterface.zep.c manager.zep.c", "phalcon_auth");
 	ADD_SOURCES(configure_module_dirname + "/phalcon/auth/guards", "basicauthinterface.zep.c guardinterface.zep.c guardstatefulinterface.zep.c sessionguard.zep.c tokenguard.zep.c userremember.zep.c", "phalcon_auth");
 	ADD_SOURCES(configure_module_dirname + "/phalcon/auth/middlewares", "authenticatesrequestinterface.zep.c authenticate.zep.c", "phalcon_auth");
-	ADD_SOURCES(configure_module_dirname + "/phalcon/auth/providers", "providerinterface.zep.c modelprovider.zep.c", "phalcon_auth");
 	ADD_SOURCES(configure_module_dirname + "/phalcon/auth/remembertoken", "remembertokeninterface.zep.c remembertokenmodel.zep.c rememberinginterface.zep.c", "phalcon_auth");
-	ADD_SOURCES(configure_module_dirname + "/phalcon/auth", "authenticatableinterface.zep.c manager.zep.c", "phalcon_auth");
+	ADD_SOURCES(configure_module_dirname + "/phalcon/auth/collection", "user.zep.c userscollection.zep.c", "phalcon_auth");
+	ADD_SOURCES(configure_module_dirname + "/phalcon/auth/providers/fileprovider", "parser.zep.c", "phalcon_auth");
   ADD_FLAG("CFLAGS_PHALCON_AUTH", "/D ZEPHIR_RELEASE /Oi /Ot /Oy /Ob2 /Gs /GF /Gy /GL");
   ADD_FLAG("CFLAGS", "/D ZEPHIR_RELEASE /Oi /Ot /Oy /Ob2 /Gs /GF /Gy /GL");
   ADD_FLAG("LDFLAGS", "/LTCG");
