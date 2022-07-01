@@ -1,0 +1,1 @@
+{"version":1,"defects":{"Phalcon\\Tests\\Auth\\AuthTest::itShouldReturnMatchingDefaultGuardFromConfig":4},"times":{"Phalcon\\Tests\\Auth\\AuthTest::itShouldReturnMatchingDefaultGuardFromConfig":0.005}}

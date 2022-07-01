@@ -339,7 +339,7 @@ use Phalcon\Mvc\Controller;
 //Guest Controller
 class PostsController extends Controller
 {
-    protected $authAccess = false;
+    public $authAccess = false;
     
     ...
 }
