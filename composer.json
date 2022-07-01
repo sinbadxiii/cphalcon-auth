@@ -1,5 +1,14 @@
 {
     "require": {
-        "phalcon/zephir": "^0.16.0"
+        "php": ">=7.4"
+    },
+    "require-dev": {
+        "phalcon/zephir": "^0.16.0",
+        "phpunit/phpunit": "^9.5"
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Phalcon\\Tests\\Auth\\": "tests/auth/"
+        }
     }
 }
