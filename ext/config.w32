@@ -10,15 +10,10 @@ if (PHP_PHALCON_AUTH != "no") {
     AC_DEFINE("ZEPHIR_USE_PHP_JSON", 1, "Whether PHP json extension is present at compile time");
   }
   
-  ADD_SOURCES(configure_module_dirname + "/phalcon/auth/events", "eventinterface.zep.c eventabstract.zep.c afterlogin.zep.c beforelogin.zep.c logout.zep.c", "phalcon_auth");
-	ADD_SOURCES(configure_module_dirname + "/phalcon/auth/exceptions", "exception.zep.c configfilenotexistexception.zep.c jsonnotvalidexception.zep.c unauthorizedhttpexception.zep.c", "phalcon_auth");
-	ADD_SOURCES(configure_module_dirname + "/phalcon/auth/providers", "providerinterface.zep.c fileprovider.zep.c modelprovider.zep.c", "phalcon_auth");
-	ADD_SOURCES(configure_module_dirname + "/phalcon/auth", "authenticatableinterface.zep.c manager.zep.c", "phalcon_auth");
-	ADD_SOURCES(configure_module_dirname + "/phalcon/auth/guards", "basicauthinterface.zep.c guardinterface.zep.c guardstatefulinterface.zep.c sessionguard.zep.c tokenguard.zep.c userremember.zep.c", "phalcon_auth");
-	ADD_SOURCES(configure_module_dirname + "/phalcon/auth/middlewares", "authenticatesrequestinterface.zep.c authenticate.zep.c", "phalcon_auth");
-	ADD_SOURCES(configure_module_dirname + "/phalcon/auth/remembertoken", "remembertokeninterface.zep.c remembertokenmodel.zep.c rememberinginterface.zep.c", "phalcon_auth");
-	ADD_SOURCES(configure_module_dirname + "/phalcon/auth/collection", "user.zep.c userscollection.zep.c", "phalcon_auth");
-	ADD_SOURCES(configure_module_dirname + "/phalcon/auth/providers/fileprovider", "parser.zep.c", "phalcon_auth");
+  ADD_SOURCES(configure_module_dirname + "/phalcon/auth/adapter", "adapterinterface.zep.c collectionadapterabstract.zep.c adapterwithremembertokeninterface.zep.c memory.zep.c model.zep.c stream.zep.c user.zep.c usercollection.zep.c", "phalcon_auth");
+	ADD_SOURCES(configure_module_dirname + "/phalcon/auth/access", "accessinterface.zep.c accessabstract.zep.c authenticatesrequestinterface.zep.c auth.zep.c authenticate.zep.c guest.zep.c", "phalcon_auth");
+	ADD_SOURCES(configure_module_dirname + "/phalcon/auth/guard", "guardinterface.zep.c basicauthinterface.zep.c guardstatefulinterface.zep.c session.zep.c token.zep.c userremember.zep.c", "phalcon_auth");
+	ADD_SOURCES(configure_module_dirname + "/phalcon/auth", "authenticatableinterface.zep.c managerinterface.zep.c exception.zep.c manager.zep.c remembertokeninterface.zep.c rememberinginterface.zep.c", "phalcon_auth");
   ADD_FLAG("CFLAGS_PHALCON_AUTH", "/D ZEPHIR_RELEASE /Oi /Ot /Oy /Ob2 /Gs /GF /Gy /GL");
   ADD_FLAG("CFLAGS", "/D ZEPHIR_RELEASE /Oi /Ot /Oy /Ob2 /Gs /GF /Gy /GL");
   ADD_FLAG("LDFLAGS", "/LTCG");

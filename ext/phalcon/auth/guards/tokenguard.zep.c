@@ -17,7 +17,6 @@
 #include "kernel/fcall.h"
 #include "kernel/operators.h"
 #include "kernel/array.h"
-#include "kernel/concat.h"
 
 
 ZEPHIR_INIT_CLASS(Phalcon_Auth_Guards_TokenGuard)
@@ -202,39 +201,6 @@ PHP_METHOD(Phalcon_Auth_Guards_TokenGuard, validate)
 	RETURN_MM_BOOL(0);
 }
 
-PHP_METHOD(Phalcon_Auth_Guards_TokenGuard, event)
-{
-	zephir_method_globals *ZEPHIR_METHOD_GLOBALS_PTR = NULL;
-	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *event, event_sub, _0, _1, _2;
-	zval *this_ptr = getThis();
-
-	ZVAL_UNDEF(&event_sub);
-	ZVAL_UNDEF(&_0);
-	ZVAL_UNDEF(&_1);
-	ZVAL_UNDEF(&_2);
-#if PHP_VERSION_ID >= 80000
-	bool is_null_true = 1;
-	ZEND_PARSE_PARAMETERS_START(1, 1)
-		Z_PARAM_OBJECT_OF_CLASS(event, zephir_get_internal_ce(SL("phalcon\\auth\\events\\eventinterface")))
-	ZEND_PARSE_PARAMETERS_END();
-#endif
-
-
-	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 1, 0, &event);
-
-
-	zephir_read_property(&_0, this_ptr, ZEND_STRL("eventsManager"), PH_NOISY_CC | PH_READONLY);
-	ZEPHIR_CALL_METHOD(&_1, event, "gettype", NULL, 0);
-	zephir_check_call_status();
-	ZEPHIR_INIT_VAR(&_2);
-	ZEPHIR_CONCAT_SV(&_2, "auth:", &_1);
-	ZEPHIR_RETURN_CALL_METHOD(&_0, "fire", NULL, 0, &_2, this_ptr);
-	zephir_check_call_status();
-	RETURN_MM();
-}
-
 PHP_METHOD(Phalcon_Auth_Guards_TokenGuard, getTokenForRequest)
 {
 	zval token, _0, _1;
@@ -254,7 +220,7 @@ PHP_METHOD(Phalcon_Auth_Guards_TokenGuard, getTokenForRequest)
 	ZEPHIR_CALL_METHOD(&token, &_0, "get", NULL, 0, &_1);
 	zephir_check_call_status();
 	if (ZEPHIR_IS_EMPTY(&token)) {
-		ZEPHIR_CALL_METHOD(&token, this_ptr, "bearertoken", NULL, 17);
+		ZEPHIR_CALL_METHOD(&token, this_ptr, "bearertoken", NULL, 14);
 		zephir_check_call_status();
 	}
 	RETURN_CCTOR(&token);
@@ -299,7 +265,7 @@ PHP_METHOD(Phalcon_Auth_Guards_TokenGuard, bearerToken)
 		ZVAL_LONG(&_3$$3, 7);
 		ZEPHIR_INIT_VAR(&_4$$3);
 		ZVAL_STRING(&_4$$3, "UTF-8");
-		ZEPHIR_RETURN_CALL_FUNCTION("mb_substr", NULL, 18, &header, &_3$$3, &__$null, &_4$$3);
+		ZEPHIR_RETURN_CALL_FUNCTION("mb_substr", NULL, 15, &header, &_3$$3, &__$null, &_4$$3);
 		zephir_check_call_status();
 		RETURN_MM();
 	}

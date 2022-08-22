@@ -158,7 +158,7 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_phalcon_auth_guards_sessionguard_attemptbasic, 0,
 #endif
 ZEND_END_ARG_INFO()
 
-ZEND_BEGIN_ARG_WITH_RETURN_OBJ_INFO_EX(arginfo_phalcon_auth_guards_sessionguard_failedbasicresponse, 0, 0, Phalcon\\Auth\\Exceptions\\UnauthorizedHttpException, 0)
+ZEND_BEGIN_ARG_WITH_RETURN_OBJ_INFO_EX(arginfo_phalcon_auth_guards_sessionguard_failedbasicresponse, 0, 0, Phalcon\\Auth\\Exception, 0)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_phalcon_auth_guards_sessionguard_basiccredentials, 0, 0, 2)

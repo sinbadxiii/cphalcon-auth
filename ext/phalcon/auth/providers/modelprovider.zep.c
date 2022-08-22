@@ -285,25 +285,26 @@ PHP_METHOD(Phalcon_Auth_Providers_ModelProvider, retrieveByToken)
 
 PHP_METHOD(Phalcon_Auth_Providers_ModelProvider, createRememberToken)
 {
-	zend_class_entry *_5, *_10;
+	zend_class_entry *_6, *_11;
+	zend_class_entry *_0 = NULL;
 	zephir_method_globals *ZEPHIR_METHOD_GLOBALS_PTR = NULL;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *user, user_sub, rememberToken, _0, _1, _2, _3, _4, _6, _7, _8, _9, _11, _12;
+	zval *user, user_sub, rememberToken, _1, _2, _3, _4, _5, _7, _8, _9, _10, _12, _13;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&user_sub);
 	ZVAL_UNDEF(&rememberToken);
-	ZVAL_UNDEF(&_0);
 	ZVAL_UNDEF(&_1);
 	ZVAL_UNDEF(&_2);
 	ZVAL_UNDEF(&_3);
 	ZVAL_UNDEF(&_4);
-	ZVAL_UNDEF(&_6);
+	ZVAL_UNDEF(&_5);
 	ZVAL_UNDEF(&_7);
 	ZVAL_UNDEF(&_8);
 	ZVAL_UNDEF(&_9);
-	ZVAL_UNDEF(&_11);
+	ZVAL_UNDEF(&_10);
 	ZVAL_UNDEF(&_12);
+	ZVAL_UNDEF(&_13);
 #if PHP_VERSION_ID >= 80000
 	bool is_null_true = 1;
 	ZEND_PARSE_PARAMETERS_START(1, 1)
@@ -317,36 +318,42 @@ PHP_METHOD(Phalcon_Auth_Providers_ModelProvider, createRememberToken)
 
 
 	ZEPHIR_INIT_VAR(&rememberToken);
-	object_init_ex(&rememberToken, phalcon_auth_remembertoken_remembertokenmodel_ce);
-	ZEPHIR_CALL_METHOD(NULL, &rememberToken, "__construct", NULL, 25);
+	if (!_0) {
+	_0 = zephir_fetch_class_str_ex(SL("Phalcon\\Auth\\RememberToken\\RememberTokenModel"), ZEND_FETCH_CLASS_AUTO);
+	}
+	object_init_ex(&rememberToken, _0);
+	if (zephir_has_constructor(&rememberToken)) {
+		ZEPHIR_CALL_METHOD(NULL, &rememberToken, "__construct", NULL, 0);
+		zephir_check_call_status();
+	}
+
+	zephir_read_property(&_1, this_ptr, ZEND_STRL("hasher"), PH_NOISY_CC | PH_READONLY);
+	ZEPHIR_CALL_METHOD(&_2, &_1, "getrandom", NULL, 0);
 	zephir_check_call_status();
-	zephir_read_property(&_0, this_ptr, ZEND_STRL("hasher"), PH_NOISY_CC | PH_READONLY);
-	ZEPHIR_CALL_METHOD(&_1, &_0, "getrandom", NULL, 0);
+	ZVAL_LONG(&_4, 60);
+	ZEPHIR_CALL_METHOD(&_3, &_2, "base64", NULL, 0, &_4);
 	zephir_check_call_status();
-	ZVAL_LONG(&_3, 60);
-	ZEPHIR_CALL_METHOD(&_2, &_1, "base64", NULL, 0, &_3);
+	zephir_update_property_zval(&rememberToken, ZEND_STRL("token"), &_3);
+	_6 = zephir_fetch_class_str_ex(SL("Phalcon\\Di\\Di"), ZEND_FETCH_CLASS_AUTO);
+	ZEPHIR_CALL_CE_STATIC(&_5, _6, "getdefault", NULL, 0);
 	zephir_check_call_status();
-	zephir_update_property_zval(&rememberToken, ZEND_STRL("token"), &_2);
-	_5 = zephir_fetch_class_str_ex(SL("Phalcon\\Di\\Di"), ZEND_FETCH_CLASS_AUTO);
-	ZEPHIR_CALL_CE_STATIC(&_4, _5, "getdefault", NULL, 0);
+	ZEPHIR_INIT_VAR(&_8);
+	ZVAL_STRING(&_8, "request");
+	ZEPHIR_CALL_METHOD(&_7, &_5, "get", NULL, 0, &_8);
 	zephir_check_call_status();
-	ZEPHIR_INIT_VAR(&_7);
-	ZVAL_STRING(&_7, "request");
-	ZEPHIR_CALL_METHOD(&_6, &_4, "get", NULL, 0, &_7);
+	ZEPHIR_CALL_METHOD(&_9, &_7, "getuseragent", NULL, 0);
 	zephir_check_call_status();
-	ZEPHIR_CALL_METHOD(&_8, &_6, "getuseragent", NULL, 0);
+	zephir_update_property_zval(&rememberToken, ZEND_STRL("user_agent"), &_9);
+	_11 = zephir_fetch_class_str_ex(SL("Phalcon\\Di\\Di"), ZEND_FETCH_CLASS_AUTO);
+	ZEPHIR_CALL_CE_STATIC(&_10, _11, "getdefault", NULL, 0);
 	zephir_check_call_status();
-	zephir_update_property_zval(&rememberToken, ZEND_STRL("user_agent"), &_8);
-	_10 = zephir_fetch_class_str_ex(SL("Phalcon\\Di\\Di"), ZEND_FETCH_CLASS_AUTO);
-	ZEPHIR_CALL_CE_STATIC(&_9, _10, "getdefault", NULL, 0);
+	ZEPHIR_INIT_NVAR(&_8);
+	ZVAL_STRING(&_8, "request");
+	ZEPHIR_CALL_METHOD(&_12, &_10, "get", NULL, 0, &_8);
 	zephir_check_call_status();
-	ZEPHIR_INIT_NVAR(&_7);
-	ZVAL_STRING(&_7, "request");
-	ZEPHIR_CALL_METHOD(&_11, &_9, "get", NULL, 0, &_7);
+	ZEPHIR_CALL_METHOD(&_13, &_12, "getclientaddress", NULL, 0);
 	zephir_check_call_status();
-	ZEPHIR_CALL_METHOD(&_12, &_11, "getclientaddress", NULL, 0);
-	zephir_check_call_status();
-	zephir_update_property_zval(&rememberToken, ZEND_STRL("ip"), &_12);
+	zephir_update_property_zval(&rememberToken, ZEND_STRL("ip"), &_13);
 	ZEPHIR_CALL_METHOD(NULL, user, "setremembertoken", NULL, 0, &rememberToken);
 	zephir_check_call_status();
 	ZEPHIR_CALL_METHOD(NULL, user, "update", NULL, 0);

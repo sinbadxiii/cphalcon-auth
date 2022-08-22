@@ -95,6 +95,7 @@ PHP_METHOD(Phalcon_Auth_Providers_FileProvider, retrieveByCredentials)
 
 PHP_METHOD(Phalcon_Auth_Providers_FileProvider, retrieveById)
 {
+	zend_class_entry *_2 = NULL;
 	zephir_method_globals *ZEPHIR_METHOD_GLOBALS_PTR = NULL;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
 	zval *identifier, identifier_sub, data, _0, _1;
@@ -121,9 +122,15 @@ PHP_METHOD(Phalcon_Auth_Providers_FileProvider, retrieveById)
 	zephir_array_fetch(&data, &_0, identifier, PH_NOISY, "phalcon/Auth/Providers/FileProvider.zep", 27);
 	ZEPHIR_INIT_VAR(&_1);
 	if (zephir_is_true(&data)) {
-		object_init_ex(&_1, phalcon_auth_collection_user_ce);
-		ZEPHIR_CALL_METHOD(NULL, &_1, "__construct", NULL, 8, &data);
-		zephir_check_call_status();
+		if (!_2) {
+		_2 = zephir_fetch_class_str_ex(SL("Phalcon\\Auth\\Collection\\User"), ZEND_FETCH_CLASS_AUTO);
+		}
+		object_init_ex(&_1, _2);
+		if (zephir_has_constructor(&_1)) {
+			ZEPHIR_CALL_METHOD(NULL, &_1, "__construct", NULL, 0, &data);
+			zephir_check_call_status();
+		}
+
 	} else {
 		ZVAL_NULL(&_1);
 	}

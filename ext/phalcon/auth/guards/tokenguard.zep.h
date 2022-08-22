@@ -6,7 +6,6 @@ ZEPHIR_INIT_CLASS(Phalcon_Auth_Guards_TokenGuard);
 PHP_METHOD(Phalcon_Auth_Guards_TokenGuard, __construct);
 PHP_METHOD(Phalcon_Auth_Guards_TokenGuard, user);
 PHP_METHOD(Phalcon_Auth_Guards_TokenGuard, validate);
-PHP_METHOD(Phalcon_Auth_Guards_TokenGuard, event);
 PHP_METHOD(Phalcon_Auth_Guards_TokenGuard, getTokenForRequest);
 PHP_METHOD(Phalcon_Auth_Guards_TokenGuard, bearerToken);
 PHP_METHOD(Phalcon_Auth_Guards_TokenGuard, id);
@@ -34,10 +33,6 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_phalcon_auth_guards_tokenguard_validate, 0, 0, 0)
 #endif
 ZEND_END_ARG_INFO()
 
-ZEND_BEGIN_ARG_INFO_EX(arginfo_phalcon_auth_guards_tokenguard_event, 0, 0, 1)
-	ZEND_ARG_OBJ_INFO(0, event, Phalcon\\Auth\\Events\\EventInterface, 0)
-ZEND_END_ARG_INFO()
-
 ZEND_BEGIN_ARG_INFO_EX(arginfo_phalcon_auth_guards_tokenguard_gettokenforrequest, 0, 0, 0)
 ZEND_END_ARG_INFO()
 
@@ -51,13 +46,13 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_phalcon_auth_guards_tokenguard_setuser, 0, 0, 1)
 	ZEND_ARG_OBJ_INFO(0, user, Phalcon\\Auth\\AuthenticatableInterface, 0)
 ZEND_END_ARG_INFO()
 
-ZEND_BEGIN_ARG_INFO_EX(arginfo_phalcon_auth_guards_tokenguard_check, 0, 0, 0)
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_phalcon_auth_guards_tokenguard_check, 0, 0, _IS_BOOL, 0)
 ZEND_END_ARG_INFO()
 
-ZEND_BEGIN_ARG_INFO_EX(arginfo_phalcon_auth_guards_tokenguard_hasuser, 0, 0, 0)
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_phalcon_auth_guards_tokenguard_hasuser, 0, 0, _IS_BOOL, 0)
 ZEND_END_ARG_INFO()
 
-ZEND_BEGIN_ARG_INFO_EX(arginfo_phalcon_auth_guards_tokenguard_guest, 0, 0, 0)
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_phalcon_auth_guards_tokenguard_guest, 0, 0, _IS_BOOL, 0)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_phalcon_auth_guards_tokenguard_authenticate, 0, 0, 0)
@@ -71,7 +66,6 @@ ZEPHIR_INIT_FUNCS(phalcon_auth_guards_tokenguard_method_entry) {
 	PHP_ME(Phalcon_Auth_Guards_TokenGuard, user, NULL, ZEND_ACC_PUBLIC)
 #endif
 	PHP_ME(Phalcon_Auth_Guards_TokenGuard, validate, arginfo_phalcon_auth_guards_tokenguard_validate, ZEND_ACC_PUBLIC)
-	PHP_ME(Phalcon_Auth_Guards_TokenGuard, event, arginfo_phalcon_auth_guards_tokenguard_event, ZEND_ACC_PUBLIC)
 #if PHP_VERSION_ID >= 80000
 	PHP_ME(Phalcon_Auth_Guards_TokenGuard, getTokenForRequest, arginfo_phalcon_auth_guards_tokenguard_gettokenforrequest, ZEND_ACC_PUBLIC)
 #else
@@ -88,21 +82,9 @@ ZEPHIR_INIT_FUNCS(phalcon_auth_guards_tokenguard_method_entry) {
 	PHP_ME(Phalcon_Auth_Guards_TokenGuard, id, NULL, ZEND_ACC_PUBLIC)
 #endif
 	PHP_ME(Phalcon_Auth_Guards_TokenGuard, setUser, arginfo_phalcon_auth_guards_tokenguard_setuser, ZEND_ACC_PUBLIC)
-#if PHP_VERSION_ID >= 80000
 	PHP_ME(Phalcon_Auth_Guards_TokenGuard, check, arginfo_phalcon_auth_guards_tokenguard_check, ZEND_ACC_PUBLIC)
-#else
-	PHP_ME(Phalcon_Auth_Guards_TokenGuard, check, NULL, ZEND_ACC_PUBLIC)
-#endif
-#if PHP_VERSION_ID >= 80000
 	PHP_ME(Phalcon_Auth_Guards_TokenGuard, hasUser, arginfo_phalcon_auth_guards_tokenguard_hasuser, ZEND_ACC_PUBLIC)
-#else
-	PHP_ME(Phalcon_Auth_Guards_TokenGuard, hasUser, NULL, ZEND_ACC_PUBLIC)
-#endif
-#if PHP_VERSION_ID >= 80000
 	PHP_ME(Phalcon_Auth_Guards_TokenGuard, guest, arginfo_phalcon_auth_guards_tokenguard_guest, ZEND_ACC_PUBLIC)
-#else
-	PHP_ME(Phalcon_Auth_Guards_TokenGuard, guest, NULL, ZEND_ACC_PUBLIC)
-#endif
 #if PHP_VERSION_ID >= 80000
 	PHP_ME(Phalcon_Auth_Guards_TokenGuard, authenticate, arginfo_phalcon_auth_guards_tokenguard_authenticate, ZEND_ACC_PUBLIC)
 #else

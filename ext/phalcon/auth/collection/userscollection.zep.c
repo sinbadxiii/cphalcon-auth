@@ -112,7 +112,7 @@ PHP_METHOD(Phalcon_Auth_Collection_UsersCollection, find)
 	zephir_get_arrval(&credentials, credentials_param);
 
 
-	ZEPHIR_CALL_FUNCTION(&_0, "array_key_first", NULL, 5, &credentials);
+	ZEPHIR_CALL_FUNCTION(&_0, "array_key_first", NULL, 6, &credentials);
 	zephir_check_call_status();
 	if (Z_TYPE_P(&_0) == IS_NULL) {
 		ZEPHIR_INIT_VAR(&field);
@@ -121,9 +121,9 @@ PHP_METHOD(Phalcon_Auth_Collection_UsersCollection, find)
 	ZEPHIR_OBS_VAR(&term);
 	zephir_array_fetch(&term, &credentials, &field, PH_NOISY, "phalcon/Auth/Collection/UsersCollection.zep", 23);
 	zephir_read_static_property_ce(&_1, phalcon_auth_collection_userscollection_ce, SL("collection"), PH_NOISY_CC | PH_READONLY);
-	ZEPHIR_CALL_FUNCTION(&_2, "array_column", NULL, 6, &_1, &field);
+	ZEPHIR_CALL_FUNCTION(&_2, "array_column", NULL, 7, &_1, &field);
 	zephir_check_call_status();
-	ZEPHIR_CALL_FUNCTION(&keys, "array_keys", NULL, 7, &_2, &term);
+	ZEPHIR_CALL_FUNCTION(&keys, "array_keys", NULL, 8, &_2, &term);
 	zephir_check_call_status();
 	if (Z_TYPE_P(&keys) != IS_NULL) {
 		zephir_is_iterable(&keys, 0, "phalcon/Auth/Collection/UsersCollection.zep", 34);
@@ -138,7 +138,7 @@ PHP_METHOD(Phalcon_Auth_Collection_UsersCollection, find)
 				zephir_array_update_string(&data$$5, SL("id"), &key$$4, PH_COPY | PH_SEPARATE);
 				ZEPHIR_INIT_NVAR(&_6$$5);
 				object_init_ex(&_6$$5, phalcon_auth_collection_user_ce);
-				ZEPHIR_CALL_METHOD(NULL, &_6$$5, "__construct", &_7, 8, &data$$5);
+				ZEPHIR_CALL_METHOD(NULL, &_6$$5, "__construct", &_7, 9, &data$$5);
 				zephir_check_call_status();
 				zephir_array_append(&result, &_6$$5, PH_SEPARATE, "phalcon/Auth/Collection/UsersCollection.zep", 32);
 			} ZEND_HASH_FOREACH_END();
@@ -159,7 +159,7 @@ PHP_METHOD(Phalcon_Auth_Collection_UsersCollection, find)
 					zephir_array_update_string(&data$$6, SL("id"), &key$$4, PH_COPY | PH_SEPARATE);
 					ZEPHIR_INIT_NVAR(&_9$$6);
 					object_init_ex(&_9$$6, phalcon_auth_collection_user_ce);
-					ZEPHIR_CALL_METHOD(NULL, &_9$$6, "__construct", &_7, 8, &data$$6);
+					ZEPHIR_CALL_METHOD(NULL, &_9$$6, "__construct", &_7, 9, &data$$6);
 					zephir_check_call_status();
 					zephir_array_append(&result, &_9$$6, PH_SEPARATE, "phalcon/Auth/Collection/UsersCollection.zep", 32);
 				ZEPHIR_CALL_METHOD(NULL, &keys, "next", NULL, 0);
@@ -175,7 +175,7 @@ PHP_METHOD(Phalcon_Auth_Collection_UsersCollection, first)
 {
 	zephir_method_globals *ZEPHIR_METHOD_GLOBALS_PTR = NULL;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *credentials_param = NULL, __$true, field, term, keys, _0, _1, key, _2, _3, data$$4, _4$$4;
+	zval *credentials_param = NULL, __$true, field, term, key, _0, _1, data$$4, _2$$4;
 	zval credentials;
 	zval *this_ptr = getThis();
 
@@ -183,14 +183,11 @@ PHP_METHOD(Phalcon_Auth_Collection_UsersCollection, first)
 	ZVAL_BOOL(&__$true, 1);
 	ZVAL_UNDEF(&field);
 	ZVAL_UNDEF(&term);
-	ZVAL_UNDEF(&keys);
+	ZVAL_UNDEF(&key);
 	ZVAL_UNDEF(&_0);
 	ZVAL_UNDEF(&_1);
-	ZVAL_UNDEF(&key);
-	ZVAL_UNDEF(&_2);
-	ZVAL_UNDEF(&_3);
 	ZVAL_UNDEF(&data$$4);
-	ZVAL_UNDEF(&_4$$4);
+	ZVAL_UNDEF(&_2$$4);
 #if PHP_VERSION_ID >= 80000
 	bool is_null_true = 1;
 	ZEND_PARSE_PARAMETERS_START(1, 1)
@@ -204,7 +201,7 @@ PHP_METHOD(Phalcon_Auth_Collection_UsersCollection, first)
 	zephir_get_arrval(&credentials, credentials_param);
 
 
-	ZEPHIR_CALL_FUNCTION(&field, "array_key_first", NULL, 5, &credentials);
+	ZEPHIR_CALL_FUNCTION(&field, "array_key_first", NULL, 6, &credentials);
 	zephir_check_call_status();
 	if (Z_TYPE_P(&field) == IS_NULL) {
 		ZEPHIR_INIT_NVAR(&field);
@@ -213,22 +210,17 @@ PHP_METHOD(Phalcon_Auth_Collection_UsersCollection, first)
 	ZEPHIR_OBS_VAR(&term);
 	zephir_array_fetch(&term, &credentials, &field, PH_NOISY, "phalcon/Auth/Collection/UsersCollection.zep", 47);
 	zephir_read_static_property_ce(&_0, phalcon_auth_collection_userscollection_ce, SL("collection"), PH_NOISY_CC | PH_READONLY);
-	ZEPHIR_CALL_FUNCTION(&_1, "array_column", NULL, 6, &_0, &field);
+	ZEPHIR_CALL_FUNCTION(&_1, "array_column", NULL, 7, &_0, &field);
 	zephir_check_call_status();
-	ZEPHIR_CALL_FUNCTION(&keys, "array_keys", NULL, 7, &_1, &term);
+	ZEPHIR_CALL_FUNCTION(&key, "array_search", NULL, 10, &term, &_1, &__$true);
 	zephir_check_call_status();
-	zephir_read_static_property_ce(&_2, phalcon_auth_collection_userscollection_ce, SL("collection"), PH_NOISY_CC | PH_READONLY);
-	ZEPHIR_CALL_FUNCTION(&_3, "array_column", NULL, 6, &_2, &field);
-	zephir_check_call_status();
-	ZEPHIR_CALL_FUNCTION(&key, "array_search", NULL, 9, &term, &_3, &__$true);
-	zephir_check_call_status();
-	if (!ZEPHIR_IS_FALSE_IDENTICAL(&keys)) {
-		zephir_read_static_property_ce(&_4$$4, phalcon_auth_collection_userscollection_ce, SL("collection"), PH_NOISY_CC | PH_READONLY);
+	if (!ZEPHIR_IS_FALSE_IDENTICAL(&key)) {
+		zephir_read_static_property_ce(&_2$$4, phalcon_auth_collection_userscollection_ce, SL("collection"), PH_NOISY_CC | PH_READONLY);
 		ZEPHIR_OBS_VAR(&data$$4);
-		zephir_array_fetch(&data$$4, &_4$$4, &key, PH_NOISY, "phalcon/Auth/Collection/UsersCollection.zep", 53);
+		zephir_array_fetch(&data$$4, &_2$$4, &key, PH_NOISY, "phalcon/Auth/Collection/UsersCollection.zep", 51);
 		zephir_array_update_string(&data$$4, SL("id"), &key, PH_COPY | PH_SEPARATE);
 		object_init_ex(return_value, phalcon_auth_collection_user_ce);
-		ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 8, &data$$4);
+		ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 9, &data$$4);
 		zephir_check_call_status();
 		RETURN_MM();
 	}

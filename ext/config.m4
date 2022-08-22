@@ -9,37 +9,35 @@ if test "$PHP_PHALCON_AUTH" = "yes"; then
 	fi
 
 	AC_DEFINE(HAVE_PHALCON_AUTH, 1, [Whether you have Phalcon_auth])
-	phalcon_auth_sources="phalcon_auth.c kernel/main.c kernel/memory.c kernel/exception.c kernel/debug.c kernel/backtrace.c kernel/object.c kernel/array.c kernel/string.c kernel/fcall.c kernel/require.c kernel/file.c kernel/operators.c kernel/math.c kernel/concat.c kernel/variables.c kernel/filter.c kernel/iterator.c kernel/time.c kernel/exit.c phalcon/auth/events/eventinterface.zep.c
-	phalcon/auth/events/eventabstract.zep.c
-	phalcon/auth/exceptions/exception.zep.c
-	phalcon/auth/providers/providerinterface.zep.c
+	phalcon_auth_sources="phalcon_auth.c kernel/main.c kernel/memory.c kernel/exception.c kernel/debug.c kernel/backtrace.c kernel/object.c kernel/array.c kernel/string.c kernel/fcall.c kernel/require.c kernel/file.c kernel/operators.c kernel/math.c kernel/concat.c kernel/variables.c kernel/filter.c kernel/iterator.c kernel/time.c kernel/exit.c phalcon/auth/adapter/adapterinterface.zep.c
+	phalcon/auth/access/accessinterface.zep.c
+	phalcon/auth/access/accessabstract.zep.c
+	phalcon/auth/adapter/collectionadapterabstract.zep.c
+	phalcon/auth/guard/guardinterface.zep.c
+	phalcon/auth/access/authenticatesrequestinterface.zep.c
+	phalcon/auth/adapter/adapterwithremembertokeninterface.zep.c
 	phalcon/auth/authenticatableinterface.zep.c
-	phalcon/auth/guards/basicauthinterface.zep.c
-	phalcon/auth/guards/guardinterface.zep.c
-	phalcon/auth/guards/guardstatefulinterface.zep.c
-	phalcon/auth/middlewares/authenticatesrequestinterface.zep.c
-	phalcon/auth/remembertoken/remembertokeninterface.zep.c
-	phalcon/auth/collection/user.zep.c
-	phalcon/auth/collection/userscollection.zep.c
-	phalcon/auth/events/afterlogin.zep.c
-	phalcon/auth/events/beforelogin.zep.c
-	phalcon/auth/events/logout.zep.c
-	phalcon/auth/exceptions/configfilenotexistexception.zep.c
-	phalcon/auth/exceptions/jsonnotvalidexception.zep.c
-	phalcon/auth/exceptions/unauthorizedhttpexception.zep.c
-	phalcon/auth/guards/sessionguard.zep.c
-	phalcon/auth/guards/tokenguard.zep.c
-	phalcon/auth/guards/userremember.zep.c
+	phalcon/auth/guard/basicauthinterface.zep.c
+	phalcon/auth/guard/guardstatefulinterface.zep.c
+	phalcon/auth/managerinterface.zep.c
+	phalcon/auth/access/auth.zep.c
+	phalcon/auth/access/authenticate.zep.c
+	phalcon/auth/access/guest.zep.c
+	phalcon/auth/adapter/memory.zep.c
+	phalcon/auth/adapter/model.zep.c
+	phalcon/auth/adapter/stream.zep.c
+	phalcon/auth/adapter/user.zep.c
+	phalcon/auth/adapter/usercollection.zep.c
+	phalcon/auth/exception.zep.c
+	phalcon/auth/guard/session.zep.c
+	phalcon/auth/guard/token.zep.c
+	phalcon/auth/guard/userremember.zep.c
 	phalcon/auth/manager.zep.c
-	phalcon/auth/middlewares/authenticate.zep.c
-	phalcon/auth/providers/fileprovider.zep.c
-	phalcon/auth/providers/fileprovider/parser.zep.c
-	phalcon/auth/providers/modelprovider.zep.c
-	phalcon/auth/remembertoken/remembertokenmodel.zep.c
-	phalcon/auth/remembertoken/rememberinginterface.zep.c "
+	phalcon/auth/remembertokeninterface.zep.c
+	phalcon/auth/rememberinginterface.zep.c "
 	PHP_NEW_EXTENSION(phalcon_auth, $phalcon_auth_sources, $ext_shared,, )
 	PHP_ADD_BUILD_DIR([$ext_builddir/kernel/])
-	for dir in "phalcon/auth phalcon/auth/collection phalcon/auth/events phalcon/auth/exceptions phalcon/auth/guards phalcon/auth/middlewares phalcon/auth/providers phalcon/auth/providers/fileprovider phalcon/auth/remembertoken"; do
+	for dir in "phalcon/auth phalcon/auth/access phalcon/auth/adapter phalcon/auth/guard"; do
 		PHP_ADD_BUILD_DIR([$ext_builddir/$dir])
 	done
 	PHP_SUBST(PHALCON_AUTH_SHARED_LIBADD)
