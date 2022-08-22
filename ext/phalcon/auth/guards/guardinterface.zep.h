@@ -3,7 +3,7 @@ extern zend_class_entry *phalcon_auth_guards_guardinterface_ce;
 
 ZEPHIR_INIT_CLASS(Phalcon_Auth_Guards_GuardInterface);
 
-ZEND_BEGIN_ARG_INFO_EX(arginfo_phalcon_auth_guards_guardinterface_check, 0, 0, 0)
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_phalcon_auth_guards_guardinterface_check, 0, 0, _IS_BOOL, 0)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_phalcon_auth_guards_guardinterface_user, 0, 0, 0)
@@ -16,7 +16,7 @@ ZEND_END_ARG_INFO()
 ZEND_BEGIN_ARG_INFO_EX(arginfo_phalcon_auth_guards_guardinterface_id, 0, 0, 0)
 ZEND_END_ARG_INFO()
 
-ZEND_BEGIN_ARG_INFO_EX(arginfo_phalcon_auth_guards_guardinterface_guest, 0, 0, 0)
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_phalcon_auth_guards_guardinterface_guest, 0, 0, _IS_BOOL, 0)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_phalcon_auth_guards_guardinterface_validate, 0, 0, 0)

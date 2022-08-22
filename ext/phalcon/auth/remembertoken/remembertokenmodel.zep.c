@@ -30,7 +30,7 @@ ZEPHIR_INIT_CLASS(Phalcon_Auth_RememberToken_RememberTokenModel)
 	zend_declare_property_null(phalcon_auth_remembertoken_remembertokenmodel_ce, SL("created_at"), ZEND_ACC_PUBLIC);
 	zend_declare_property_null(phalcon_auth_remembertoken_remembertokenmodel_ce, SL("updated_at"), ZEND_ACC_PUBLIC);
 	zend_declare_property_null(phalcon_auth_remembertoken_remembertokenmodel_ce, SL("expired_at"), ZEND_ACC_PUBLIC);
-	zend_class_implements(phalcon_auth_remembertoken_remembertokenmodel_ce, 1, phalcon_auth_remembertoken_remembertokeninterface_ce);
+	zend_class_implements(phalcon_auth_remembertoken_remembertokenmodel_ce, 1, zephir_get_internal_ce(SL("phalcon\\auth\\remembertoken\\remembertokeninterface")));
 	return SUCCESS;
 }
 

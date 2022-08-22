@@ -1,46 +1,58 @@
-
 namespace Phalcon\Auth;
 
 use Closure;
 use InvalidArgumentException;
+use Phalcon\Encryption\Security;
 use Phalcon\Di\Di;
 use Phalcon\Config\ConfigInterface;
 use Phalcon\Auth\Guards\SessionGuard;
 use Phalcon\Auth\Guards\TokenGuard;
 use Phalcon\Auth\Providers\ModelProvider;
-use Phalcon\Auth\Exceptions\ConfigFileNotExistException;
+use Phalcon\Auth\Access\AccessInterface;
+use Phalcon\Auth\Adapter\AdapterInterface;
+use Phalcon\Auth\Guard\GuardInterface;
 
-class Manager
+class Manager implements ManagerInterface
 {
     protected config;
     protected security;
     protected customGuards = [];
+    protected customAdapters = [];
     protected guards = [];
+    protected access = null;
+    protected accessList = [];
 
-    public function __construct(<ConfigInterface> config = null, security = null)
+    public function __construct(<ConfigInterface> config = null, <Security> security = null)
     {
-        let this->config = config ? config : Di::getDefault()->getShared("config")->auth;
+        let this->config = config;
 
-        if this->config === null {
-            throw new ConfigFileNotExistException();
+        if config === null {
+            let this->config = Di::getDefault()->getShared("config")->get("auth");
         }
 
+        if this->config === null {
+            throw new InvalidArgumentException(
+                "Configuration file auth.php (or key config->auth into your config) does not exist"
+            );
+        }
 
-        if security === null {
+        let this->security = security;
+
+        if this->security === null {
             let this->security = Di::getDefault()->getShared("security");
         }
     }
 
-    protected function getConfigGuard(string name)
+    protected function getConfigGuard(string name) -> <ConfigInterface> | null
     {
         return this->config->guards->{name};
     }
 
-    public function guard(string name = null)
+    public function guard(var name = null) -> <GuardInterface>
     {
-        let name = name ?: this->getDefaultDriver();
+        let name = name ? name : this->getDefaultDriver();
 
-        if this->guards[name] === null {
+        if !isset(this->guards[name]) {
             let this->guards[name] = this->resolve(name);
         }
 
@@ -49,75 +61,145 @@ class Manager
 
     protected function resolve(string name)
     {
-        var guard, configGuard;
+        var configGuard;
 
         let configGuard = this->getConfigGuard(name);
 
         if configGuard === null {
-            throw new InvalidArgumentException(sprintf("Auth guard [%s] is not defined.", name));
+            throw new InvalidArgumentException("Auth guard [" . name . "] is not defined.");
         }
 
-        if isset(this->customGuards[configGuard["driver"]]) {
-            return this->callCustomGuard(name, configGuard);
+        var providerAdapter = this->getAdapterProvider(configGuard->provider);
+
+        if (isset(this->customGuards[configGuard->driver])) {
+            return call_user_func(
+                this->customGuards[configGuard->driver],
+                providerAdapter,
+                configGuard,
+                name
+            );
         }
 
-        var provider = this->createProvider(configGuard);
         var guardName = sprintf(
-            "\\Phalcon\\Auth\\Guards\\%sGuard",
-            ucfirst(configGuard->driver)
+            "\\Phalcon\\Auth\\Guard\\%s", ucfirst(configGuard->driver)
         );
 
         if (!class_exists(guardName)) {
             throw new InvalidArgumentException(
-                sprintf(
-                    "Auth driver %s for guard %s is not defined.",
-                    configGuard->driver, name
-                )
+                "Auth driver " . configGuard->driver ." for guard " . name . " is not defined."
             );
         }
 
-        let guard = new {guardName}(name, provider);
-
-        return guard;
+        return new {guardName}(providerAdapter, configGuard, name);
     }
 
-    public function createProvider(configGuard = null)
+    public function getAdapterProvider(string provider = null)
     {
-        var provider = configGuard->provider;
+        var configProvider;
+        let configProvider = this->config->providers->{provider};
 
-        var driver = sprintf("\\Phalcon\\Auth\\Providers\\%sProvider",
-            ucfirst(this->config->providers->{provider}->driver)
+        if configProvider === null {
+            return;
+        }
+
+        var adapterName = configProvider->adapter;
+
+        if adapterName === null {
+            throw new InvalidArgumentException(
+                "Adapter not assigned in config->auth->providers->" . provider . "->adapter = ?"
+            );
+        }
+
+        if (isset(this->customAdapters[adapterName])) {
+            return call_user_func(
+                this->customAdapters[adapterName],
+                this->security,
+                configProvider
+            );
+        }
+
+        var adapterClass = sprintf("\\Phalcon\\Auth\\Adapter\\%s",
+            ucfirst(adapterName)
         );
 
-         if (!class_exists(driver)) {
+         if (!class_exists(adapterClass)) {
             throw new InvalidArgumentException(
-                sprintf(
-                    "%sProvider is not defined.",
-                    ucfirst(this->config->providers->{provider}->driver)
-                )
+                sprintf("%s not found.", adapterClass)
             );
         }
 
-        return new {driver}(this->security, this->config->providers->{provider});
+        var adapter;
+        let adapter = new {adapterClass}(this->security, configProvider);
+
+        if !(adapter instanceof AdapterInterface) {
+            throw new InvalidArgumentException(adapterClass . " not implementing AdapterInterface");
+        }
+
+        if !(adapter instanceof AdapterInterface) {
+            throw new InvalidArgumentException(adapterClass . " not implementing AdapterInterface");
+        }
+
+        return adapter;
     }
 
-    public function getDefaultDriver()
+    public function getDefaultDriver() -> string
     {
         return this->config->defaults->guard;
     }
 
-    public function extend(driver, var callback)
+    public function addGuard(driver, <Closure> callback) -> <ManagerInterface>
     {
         let this->customGuards[driver] = callback;
 
         return this;
     }
 
-    protected function callCustomGuard(string name, <ConfigInterface> config)
+    public function addProviderAdapter(string name, <Closure> callback) -> <ManagerInterface>
     {
-        var customGuard = this->customGuards[config["driver"]];
+        let this->customAdapters[name] = callback;
 
-        return {customGuard}(name, config);
+        return this;
+    }
+
+    public function getAccess() -> <AccessInterface> | null
+    {
+        return this->access;
+    }
+
+    public function setAccess(<AccessInterface> access) -> <ManagerInterface>
+    {
+        let this->access = access;
+
+        return this;
+    }
+
+    public function setAccessList(array accessList) -> <ManagerInterface>
+    {
+        let this->accessList = accessList;
+
+        return this;
+    }
+
+    public function addAccessList(array accessList) -> <ManagerInterface>
+    {
+        let this->accessList += accessList;
+
+        return this;
+    }
+
+    public function access(string accessName) -> <AccessInterface> | null
+    {
+        if !isset(this->accessList[accessName]) || !class_exists(this->accessList[accessName]) {
+            throw new InvalidArgumentException(
+                sprintf("Access with '%s' name is not included in the access list", accessName)
+            );
+        }
+
+        var access = this->accessList[accessName];
+
+        let this->access = new {access};
+
+        return this->access;
     }
 
     public function __call(method, params)

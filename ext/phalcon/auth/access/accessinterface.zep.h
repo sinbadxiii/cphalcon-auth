@@ -1,0 +1,29 @@
+
+extern zend_class_entry *phalcon_auth_access_accessinterface_ce;
+
+ZEPHIR_INIT_CLASS(Phalcon_Auth_Access_AccessInterface);
+
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_phalcon_auth_access_accessinterface_except, 0, 0, IS_VOID, 0)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_phalcon_auth_access_accessinterface_only, 0, 0, IS_VOID, 0)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_phalcon_auth_access_accessinterface_isallowed, 0, 1, _IS_BOOL, 0)
+	ZEND_ARG_TYPE_INFO(0, actionName, IS_STRING, 0)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_phalcon_auth_access_accessinterface_redirectto, 0, 0, 0)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_phalcon_auth_access_accessinterface_allowedif, 0, 0, _IS_BOOL, 0)
+ZEND_END_ARG_INFO()
+
+ZEPHIR_INIT_FUNCS(phalcon_auth_access_accessinterface_method_entry) {
+	PHP_ABSTRACT_ME(Phalcon_Auth_Access_AccessInterface, except, arginfo_phalcon_auth_access_accessinterface_except)
+	PHP_ABSTRACT_ME(Phalcon_Auth_Access_AccessInterface, only, arginfo_phalcon_auth_access_accessinterface_only)
+	PHP_ABSTRACT_ME(Phalcon_Auth_Access_AccessInterface, isAllowed, arginfo_phalcon_auth_access_accessinterface_isallowed)
+	PHP_ABSTRACT_ME(Phalcon_Auth_Access_AccessInterface, redirectTo, arginfo_phalcon_auth_access_accessinterface_redirectto)
+	PHP_ABSTRACT_ME(Phalcon_Auth_Access_AccessInterface, allowedIf, arginfo_phalcon_auth_access_accessinterface_allowedif)
+	PHP_FE_END
+};
