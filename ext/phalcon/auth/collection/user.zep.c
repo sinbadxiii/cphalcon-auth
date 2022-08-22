@@ -123,7 +123,7 @@ PHP_METHOD(Phalcon_Auth_Collection_User, getAuthIdentifier)
 
 	ZEPHIR_MM_GROW();
 
-	ZEPHIR_CALL_METHOD(&ident, this_ptr, "getkey", NULL, 5);
+	ZEPHIR_CALL_METHOD(&ident, this_ptr, "getkey", NULL, 4);
 	zephir_check_call_status();
 	ZEPHIR_OBS_VAR(&_0);
 	zephir_read_property_zval(&_0, this_ptr, &ident, PH_NOISY_CC);

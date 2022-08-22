@@ -15,8 +15,8 @@
 #include "kernel/file.h"
 #include "kernel/exception.h"
 #include "kernel/memory.h"
-#include "kernel/object.h"
 #include "kernel/fcall.h"
+#include "kernel/object.h"
 #include "kernel/string.h"
 #include "kernel/operators.h"
 
@@ -30,16 +30,15 @@ ZEPHIR_INIT_CLASS(Phalcon_Auth_Providers_FileProvider_Parser)
 
 PHP_METHOD(Phalcon_Auth_Providers_FileProvider_Parser, file)
 {
-	zend_class_entry *_0 = NULL;
 	zephir_method_globals *ZEPHIR_METHOD_GLOBALS_PTR = NULL;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zephir_fcall_cache_entry *_2 = NULL;
-	zval *path, path_sub, fileData, _1;
+	zephir_fcall_cache_entry *_1 = NULL;
+	zval *path, path_sub, fileData, _0;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&path_sub);
 	ZVAL_UNDEF(&fileData);
-	ZVAL_UNDEF(&_1);
+	ZVAL_UNDEF(&_0);
 #if PHP_VERSION_ID >= 80000
 	bool is_null_true = 1;
 	ZEND_PARSE_PARAMETERS_START(1, 1)
@@ -53,22 +52,16 @@ PHP_METHOD(Phalcon_Auth_Providers_FileProvider_Parser, file)
 
 
 	if (!((zephir_file_exists(path) == SUCCESS))) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(phalcon_auth_exception_ce, "file dont exist", "phalcon/Auth/Providers/FileProvider/Parser.zep", 11);
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(phalcon_auth_exceptions_exception_ce, "file dont exist", "phalcon/Auth/Providers/FileProvider/Parser.zep", 12);
 		return;
 	}
 	ZEPHIR_INIT_VAR(&fileData);
 	zephir_file_get_contents(&fileData, path);
-	if (!_0) {
-	_0 = zephir_fetch_class_str_ex(SL("Phalcon\\Auth\\Collection\\UsersCollection"), ZEND_FETCH_CLASS_AUTO);
-	}
-	object_init_ex(return_value, _0);
-	if (zephir_has_constructor(return_value)) {
-		ZEPHIR_CALL_SELF(&_1, "jsonvalidate", &_2, 16, &fileData);
-		zephir_check_call_status();
-		ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 0, &_1);
-		zephir_check_call_status();
-	}
-
+	object_init_ex(return_value, phalcon_auth_collection_userscollection_ce);
+	ZEPHIR_CALL_SELF(&_0, "jsonvalidate", &_1, 22, &fileData);
+	zephir_check_call_status();
+	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 23, &_0);
+	zephir_check_call_status();
 	RETURN_MM();
 }
 
@@ -101,7 +94,7 @@ PHP_METHOD(Phalcon_Auth_Providers_FileProvider_Parser, jsonValidate)
 
 	ZEPHIR_INIT_VAR(&result);
 	zephir_json_decode(&result, &data, zephir_get_intval(&__$true) );
-	ZEPHIR_CALL_FUNCTION(&_0, "json_last_error", NULL, 17);
+	ZEPHIR_CALL_FUNCTION(&_0, "json_last_error", NULL, 24);
 	zephir_check_call_status();
 	do {
 		if (ZEPHIR_IS_LONG(&_0, 0)) {
@@ -156,10 +149,10 @@ PHP_METHOD(Phalcon_Auth_Providers_FileProvider_Parser, jsonValidate)
 
 	if (!(ZEPHIR_IS_EMPTY(&error))) {
 		ZEPHIR_INIT_VAR(&_1$$13);
-		object_init_ex(&_1$$13, phalcon_auth_exception_ce);
-		ZEPHIR_CALL_METHOD(NULL, &_1$$13, "__construct", NULL, 18, &error);
+		object_init_ex(&_1$$13, phalcon_auth_exceptions_jsonnotvalidexception_ce);
+		ZEPHIR_CALL_METHOD(NULL, &_1$$13, "__construct", NULL, 19, &error);
 		zephir_check_call_status();
-		zephir_throw_exception_debug(&_1$$13, "phalcon/Auth/Providers/FileProvider/Parser.zep", 58);
+		zephir_throw_exception_debug(&_1$$13, "phalcon/Auth/Providers/FileProvider/Parser.zep", 59);
 		ZEPHIR_MM_RESTORE();
 		return;
 	}
