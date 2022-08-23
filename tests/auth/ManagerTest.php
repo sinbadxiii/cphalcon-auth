@@ -2,7 +2,6 @@
 
 namespace Phalcon\Tests\Auth;
 
-use Phalcon\Auth\Adapter\User;
 use Phalcon\Config\Config;
 use Phalcon\Encryption\Security;
 use Phalcon\Auth\Access\Auth;
@@ -14,8 +13,8 @@ use Phalcon\Auth\Manager;
 use Phalcon\Auth\ManagerInterface;
 
 /**
- * Class AuthTest
- * @package Phalcon\Auth\Tests
+ * Class ManagerTest
+ * @package Phalcon\Tests\Auth
  */
 class ManagerTest extends AbstractTestCase
 {
@@ -25,28 +24,7 @@ class ManagerTest extends AbstractTestCase
 
     protected function setUp(): void
     {
-        $this->config = new Config(
-            [
-                'auth' => [
-                    'defaults' => [
-                        'guard' => 'web'
-                    ],
-                    'guards' => [
-                        'web' => [
-                            'driver' => 'session',
-                            'provider' => 'users',
-                        ],
-                    ],
-                    'providers' => [
-                        'users' => [
-                            'adapter' => 'model',
-                            'model'  => User::class,
-                        ]
-                    ],
-                ]
-           ]
-        );
-
+        $this->config = new Config(require (__DIR__ . "/../config/auth.php"));
         $this->security = new Security();
         $this->manager = new Manager(
             $this->config->auth, $this->security

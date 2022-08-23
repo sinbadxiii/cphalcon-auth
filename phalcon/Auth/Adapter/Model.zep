@@ -1,28 +1,22 @@
 namespace Phalcon\Auth\Adapter;
 
 use Phalcon\Di\Di;
-use Phalcon\Config\ConfigInterface;
-use Phalcon\Encryption\Security;
 use Phalcon\Auth\AuthenticatableInterface;
 use Phalcon\Auth\RememberingInterface;
 use Phalcon\Auth\RememberTokenInterface;
 
-class Model implements AdapterInterface, AdapterWithRememberTokenInterface
+class Model extends AbstractAdapter implements AdapterWithRememberTokenInterface
 {
-    protected model;
-    protected hasher;
-    protected di;
-
-    public function __construct(<Security> hasher, <ConfigInterface> config)
+    protected function getProviderStorage() -> mixed
     {
-        let this->hasher = hasher, this->model = config->model;
+        return this->config->model;
     }
 
-    public function retrieveByCredentials(array credentials)
+    public function retrieveByCredentials(array credentials) -> <AuthenticatableInterface> | null
     {
         var builder = Di::getDefault()->get("modelsManager")
             ->createBuilder()
-            ->from([this->model]);
+            ->from([$this->getProviderStorage()]);
 
         var key, value;
 
@@ -37,15 +31,15 @@ class Model implements AdapterInterface, AdapterWithRememberTokenInterface
         return builder->getQuery()->execute()->getFirst();
     }
 
-    public function retrieveById(identifier)
+    public function retrieveById(identifier) -> <AuthenticatableInterface> | null
     {
-        var model = this->model;
+        var model = this->getProviderStorage();
         return {model}::findFirst(identifier);
     }
 
-    public function retrieveByToken(identifier, token, user_agent)
+    public function retrieveByToken(identifier, token, user_agent) -> <AuthenticatableInterface> | null
     {
-        var model = this->model;
+        var model = this->getProviderStorage();
         var retrievedModel = {model}::findFirst(identifier);
 
         if !retrievedModel {

@@ -2,7 +2,7 @@ namespace Phalcon\Auth\Access;
 
 use Phalcon\Di\Di;
 
-class Auth extends AccessAbstract
+class Auth extends AbstractAccess
 {
     public function allowedIf() -> bool
     {

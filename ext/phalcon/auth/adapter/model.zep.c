@@ -22,39 +22,28 @@
 
 ZEPHIR_INIT_CLASS(Phalcon_Auth_Adapter_Model)
 {
-	ZEPHIR_REGISTER_CLASS(Phalcon\\Auth\\Adapter, Model, phalcon, auth_adapter_model, phalcon_auth_adapter_model_method_entry, 0);
+	ZEPHIR_REGISTER_CLASS_EX(Phalcon\\Auth\\Adapter, Model, phalcon, auth_adapter_model, phalcon_auth_adapter_abstractadapter_ce, phalcon_auth_adapter_model_method_entry, 0);
 
-	zend_declare_property_null(phalcon_auth_adapter_model_ce, SL("model"), ZEND_ACC_PROTECTED);
-	zend_declare_property_null(phalcon_auth_adapter_model_ce, SL("hasher"), ZEND_ACC_PROTECTED);
-	zend_declare_property_null(phalcon_auth_adapter_model_ce, SL("di"), ZEND_ACC_PROTECTED);
-	zend_class_implements(phalcon_auth_adapter_model_ce, 1, phalcon_auth_adapter_adapterinterface_ce);
 	zend_class_implements(phalcon_auth_adapter_model_ce, 1, phalcon_auth_adapter_adapterwithremembertokeninterface_ce);
 	return SUCCESS;
 }
 
-PHP_METHOD(Phalcon_Auth_Adapter_Model, __construct)
+PHP_METHOD(Phalcon_Auth_Adapter_Model, getProviderStorage)
 {
-	zval *hasher, hasher_sub, *config, config_sub, _0;
+	zval _0, _1;
+	zephir_method_globals *ZEPHIR_METHOD_GLOBALS_PTR = NULL;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&hasher_sub);
-	ZVAL_UNDEF(&config_sub);
 	ZVAL_UNDEF(&_0);
-#if PHP_VERSION_ID >= 80000
-	bool is_null_true = 1;
-	ZEND_PARSE_PARAMETERS_START(2, 2)
-		Z_PARAM_OBJECT_OF_CLASS(hasher, zephir_get_internal_ce(SL("phalcon\\encryption\\security")))
-		Z_PARAM_OBJECT_OF_CLASS(config, zephir_get_internal_ce(SL("phalcon\\config\\configinterface")))
-	ZEND_PARSE_PARAMETERS_END();
-#endif
+	ZVAL_UNDEF(&_1);
 
 
-	zephir_fetch_params_without_memory_grow(2, 0, &hasher, &config);
+	ZEPHIR_MM_GROW();
 
-
-	zephir_update_property_zval(this_ptr, ZEND_STRL("hasher"), hasher);
-	zephir_read_property(&_0, config, ZEND_STRL("model"), PH_NOISY_CC | PH_READONLY);
-	zephir_update_property_zval(this_ptr, ZEND_STRL("model"), &_0);
+	zephir_read_property(&_0, this_ptr, ZEND_STRL("config"), PH_NOISY_CC | PH_READONLY);
+	ZEPHIR_OBS_VAR(&_1);
+	zephir_read_property(&_1, &_0, ZEND_STRL("model"), PH_NOISY_CC);
+	RETURN_CCTOR(&_1);
 }
 
 PHP_METHOD(Phalcon_Auth_Adapter_Model, retrieveByCredentials)
@@ -65,7 +54,7 @@ PHP_METHOD(Phalcon_Auth_Adapter_Model, retrieveByCredentials)
 	zephir_method_globals *ZEPHIR_METHOD_GLOBALS_PTR = NULL;
 	zephir_fcall_cache_entry *_13 = NULL, *_15 = NULL, *_19 = NULL;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *credentials_param = NULL, builder, _0, _2, _3, _4, _6, key, value, *_7, _8, _20, _21, _11$$3, _12$$3, _16$$5, _17$$5;
+	zval *credentials_param = NULL, builder, _0, _2, _3, _4, _6, key, value, *_7, _8, _20, _11$$3, _12$$3, _16$$5, _17$$5;
 	zval credentials, _5, _14$$3, _18$$5;
 	zval *this_ptr = getThis();
 
@@ -83,7 +72,6 @@ PHP_METHOD(Phalcon_Auth_Adapter_Model, retrieveByCredentials)
 	ZVAL_UNDEF(&value);
 	ZVAL_UNDEF(&_8);
 	ZVAL_UNDEF(&_20);
-	ZVAL_UNDEF(&_21);
 	ZVAL_UNDEF(&_11$$3);
 	ZVAL_UNDEF(&_12$$3);
 	ZVAL_UNDEF(&_16$$5);
@@ -112,12 +100,12 @@ PHP_METHOD(Phalcon_Auth_Adapter_Model, retrieveByCredentials)
 	zephir_check_call_status();
 	ZEPHIR_INIT_VAR(&_5);
 	zephir_create_array(&_5, 1, 0);
-	ZEPHIR_OBS_VAR(&_6);
-	zephir_read_property(&_6, this_ptr, ZEND_STRL("model"), PH_NOISY_CC);
+	ZEPHIR_CALL_METHOD(&_6, this_ptr, "getproviderstorage", NULL, 0);
+	zephir_check_call_status();
 	zephir_array_fast_append(&_5, &_6);
 	ZEPHIR_CALL_METHOD(&builder, &_4, "from", NULL, 0, &_5);
 	zephir_check_call_status();
-	zephir_is_iterable(&credentials, 0, "phalcon/Auth/Adapter/Model.zep", 37);
+	zephir_is_iterable(&credentials, 0, "phalcon/Auth/Adapter/Model.zep", 31);
 	if (Z_TYPE_P(&credentials) == IS_ARRAY) {
 		ZEND_HASH_FOREACH_KEY_VAL(Z_ARRVAL_P(&credentials), _9, _10, _7)
 		{
@@ -134,7 +122,7 @@ PHP_METHOD(Phalcon_Auth_Adapter_Model, retrieveByCredentials)
 			}
 			ZEPHIR_INIT_NVAR(&_11$$3);
 			ZVAL_STRING(&_11$$3, "%s = :%s:");
-			ZEPHIR_CALL_FUNCTION(&_12$$3, "sprintf", &_13, 4, &_11$$3, &key, &key);
+			ZEPHIR_CALL_FUNCTION(&_12$$3, "sprintf", &_13, 5, &_11$$3, &key, &key);
 			zephir_check_call_status();
 			ZEPHIR_INIT_NVAR(&_14$$3);
 			zephir_create_array(&_14$$3, 1, 0);
@@ -160,7 +148,7 @@ PHP_METHOD(Phalcon_Auth_Adapter_Model, retrieveByCredentials)
 				}
 				ZEPHIR_INIT_NVAR(&_16$$5);
 				ZVAL_STRING(&_16$$5, "%s = :%s:");
-				ZEPHIR_CALL_FUNCTION(&_17$$5, "sprintf", &_13, 4, &_16$$5, &key, &key);
+				ZEPHIR_CALL_FUNCTION(&_17$$5, "sprintf", &_13, 5, &_16$$5, &key, &key);
 				zephir_check_call_status();
 				ZEPHIR_INIT_NVAR(&_18$$5);
 				zephir_create_array(&_18$$5, 1, 0);
@@ -173,26 +161,25 @@ PHP_METHOD(Phalcon_Auth_Adapter_Model, retrieveByCredentials)
 	}
 	ZEPHIR_INIT_NVAR(&value);
 	ZEPHIR_INIT_NVAR(&key);
-	ZEPHIR_CALL_METHOD(&_20, &builder, "getquery", NULL, 0);
+	ZEPHIR_CALL_METHOD(&_6, &builder, "getquery", NULL, 0);
 	zephir_check_call_status();
-	ZEPHIR_CALL_METHOD(&_21, &_20, "execute", NULL, 0);
+	ZEPHIR_CALL_METHOD(&_20, &_6, "execute", NULL, 0);
 	zephir_check_call_status();
-	ZEPHIR_RETURN_CALL_METHOD(&_21, "getfirst", NULL, 0);
+	ZEPHIR_RETURN_CALL_METHOD(&_20, "getfirst", NULL, 0);
 	zephir_check_call_status();
 	RETURN_MM();
 }
 
 PHP_METHOD(Phalcon_Auth_Adapter_Model, retrieveById)
 {
-	zend_class_entry *_1;
+	zend_class_entry *_0;
 	zephir_method_globals *ZEPHIR_METHOD_GLOBALS_PTR = NULL;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *identifier, identifier_sub, model, _0;
+	zval *identifier, identifier_sub, model;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&identifier_sub);
 	ZVAL_UNDEF(&model);
-	ZVAL_UNDEF(&_0);
 #if PHP_VERSION_ID >= 80000
 	bool is_null_true = 1;
 	ZEND_PARSE_PARAMETERS_START(1, 1)
@@ -205,35 +192,34 @@ PHP_METHOD(Phalcon_Auth_Adapter_Model, retrieveById)
 	zephir_fetch_params(1, 1, 0, &identifier);
 
 
-	zephir_read_property(&_0, this_ptr, ZEND_STRL("model"), PH_NOISY_CC | PH_READONLY);
-	ZEPHIR_CPY_WRT(&model, &_0);
-	_1 = zephir_fetch_class(&model);
-	ZEPHIR_RETURN_CALL_CE_STATIC(_1, "findfirst", NULL, 0, identifier);
+	ZEPHIR_CALL_METHOD(&model, this_ptr, "getproviderstorage", NULL, 0);
+	zephir_check_call_status();
+	_0 = zephir_fetch_class(&model);
+	ZEPHIR_RETURN_CALL_CE_STATIC(_0, "findfirst", NULL, 0, identifier);
 	zephir_check_call_status();
 	RETURN_MM();
 }
 
 PHP_METHOD(Phalcon_Auth_Adapter_Model, retrieveByToken)
 {
-	zend_bool _3, _5;
-	zend_class_entry *_1;
+	zend_bool _2, _4;
+	zend_class_entry *_0;
 	zephir_method_globals *ZEPHIR_METHOD_GLOBALS_PTR = NULL;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *identifier, identifier_sub, *token, token_sub, *user_agent, user_agent_sub, model, _0, retrievedModel, rememberTokenModel, rememberToken, _2, _4, _6, _7;
+	zval *identifier, identifier_sub, *token, token_sub, *user_agent, user_agent_sub, model, retrievedModel, rememberTokenModel, rememberToken, _1, _3, _5, _6;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&identifier_sub);
 	ZVAL_UNDEF(&token_sub);
 	ZVAL_UNDEF(&user_agent_sub);
 	ZVAL_UNDEF(&model);
-	ZVAL_UNDEF(&_0);
 	ZVAL_UNDEF(&retrievedModel);
 	ZVAL_UNDEF(&rememberTokenModel);
 	ZVAL_UNDEF(&rememberToken);
-	ZVAL_UNDEF(&_2);
-	ZVAL_UNDEF(&_4);
+	ZVAL_UNDEF(&_1);
+	ZVAL_UNDEF(&_3);
+	ZVAL_UNDEF(&_5);
 	ZVAL_UNDEF(&_6);
-	ZVAL_UNDEF(&_7);
 #if PHP_VERSION_ID >= 80000
 	bool is_null_true = 1;
 	ZEND_PARSE_PARAMETERS_START(3, 3)
@@ -248,10 +234,10 @@ PHP_METHOD(Phalcon_Auth_Adapter_Model, retrieveByToken)
 	zephir_fetch_params(1, 3, 0, &identifier, &token, &user_agent);
 
 
-	zephir_read_property(&_0, this_ptr, ZEND_STRL("model"), PH_NOISY_CC | PH_READONLY);
-	ZEPHIR_CPY_WRT(&model, &_0);
-	_1 = zephir_fetch_class(&model);
-	ZEPHIR_CALL_CE_STATIC(&retrievedModel, _1, "findfirst", NULL, 0, identifier);
+	ZEPHIR_CALL_METHOD(&model, this_ptr, "getproviderstorage", NULL, 0);
+	zephir_check_call_status();
+	_0 = zephir_fetch_class(&model);
+	ZEPHIR_CALL_CE_STATIC(&retrievedModel, _0, "findfirst", NULL, 0, identifier);
 	zephir_check_call_status();
 	if (!(zephir_is_true(&retrievedModel))) {
 		RETURN_MM_NULL();
@@ -263,25 +249,25 @@ PHP_METHOD(Phalcon_Auth_Adapter_Model, retrieveByToken)
 	}
 	ZEPHIR_CALL_METHOD(&rememberToken, &rememberTokenModel, "gettoken", NULL, 0);
 	zephir_check_call_status();
-	ZEPHIR_INIT_VAR(&_2);
-	_3 = zephir_is_true(&rememberToken);
-	if (_3) {
-		ZEPHIR_INIT_VAR(&_4);
-		_3 = zephir_hash_equals(&rememberToken, token);
+	ZEPHIR_INIT_VAR(&_1);
+	_2 = zephir_is_true(&rememberToken);
+	if (_2) {
+		ZEPHIR_INIT_VAR(&_3);
+		_2 = zephir_hash_equals(&rememberToken, token);
 	}
-	_5 = _3;
-	if (_5) {
-		ZEPHIR_INIT_VAR(&_6);
-		ZEPHIR_CALL_METHOD(&_7, &rememberTokenModel, "getuseragent", NULL, 0);
+	_4 = _2;
+	if (_4) {
+		ZEPHIR_INIT_VAR(&_5);
+		ZEPHIR_CALL_METHOD(&_6, &rememberTokenModel, "getuseragent", NULL, 0);
 		zephir_check_call_status();
-		_5 = zephir_hash_equals(&_7, user_agent);
+		_4 = zephir_hash_equals(&_6, user_agent);
 	}
-	if (_5) {
-		ZEPHIR_CPY_WRT(&_2, &retrievedModel);
+	if (_4) {
+		ZEPHIR_CPY_WRT(&_1, &retrievedModel);
 	} else {
-		ZVAL_NULL(&_2);
+		ZVAL_NULL(&_1);
 	}
-	RETURN_CCTOR(&_2);
+	RETURN_CCTOR(&_1);
 }
 
 PHP_METHOD(Phalcon_Auth_Adapter_Model, createRememberToken)
@@ -337,7 +323,7 @@ PHP_METHOD(Phalcon_Auth_Adapter_Model, validateCredentials)
 
 
 	zephir_read_property(&_0, this_ptr, ZEND_STRL("hasher"), PH_NOISY_CC | PH_READONLY);
-	zephir_array_fetch_string(&_1, &credentials, SL("password"), PH_NOISY | PH_READONLY, "phalcon/Auth/Adapter/Model.zep", 75);
+	zephir_array_fetch_string(&_1, &credentials, SL("password"), PH_NOISY | PH_READONLY, "phalcon/Auth/Adapter/Model.zep", 69);
 	ZEPHIR_CALL_METHOD(&_2, user, "getauthpassword", NULL, 0);
 	zephir_check_call_status();
 	ZEPHIR_RETURN_CALL_METHOD(&_0, "checkhash", NULL, 0, &_1, &_2);

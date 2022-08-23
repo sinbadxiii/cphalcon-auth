@@ -22,13 +22,12 @@
 
 ZEPHIR_INIT_CLASS(Phalcon_Auth_Adapter_Memory)
 {
-	ZEPHIR_REGISTER_CLASS_EX(Phalcon\\Auth\\Adapter, Memory, phalcon, auth_adapter_memory, phalcon_auth_adapter_collectionadapterabstract_ce, phalcon_auth_adapter_memory_method_entry, 0);
+	ZEPHIR_REGISTER_CLASS_EX(Phalcon\\Auth\\Adapter, Memory, phalcon, auth_adapter_memory, phalcon_auth_adapter_abstractadapter_ce, phalcon_auth_adapter_memory_method_entry, 0);
 
-	zend_class_implements(phalcon_auth_adapter_memory_ce, 1, phalcon_auth_adapter_adapterinterface_ce);
 	return SUCCESS;
 }
 
-PHP_METHOD(Phalcon_Auth_Adapter_Memory, getData)
+PHP_METHOD(Phalcon_Auth_Adapter_Memory, getProviderStorage)
 {
 	zval _0, _1, _2, _3, _4;
 	zephir_method_globals *ZEPHIR_METHOD_GLOBALS_PTR = NULL;

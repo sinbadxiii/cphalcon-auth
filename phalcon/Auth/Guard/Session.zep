@@ -131,10 +131,10 @@ class Session implements GuardInterface, GuardStatefulInterface, BasicAuthInterf
         this->updateSession(user->getAuthIdentifier());
 
         if remember {
-            if !(this->adapter instanceof AdapterWithRememberTokenInterface) {
 
+            if !(this->adapter instanceof AdapterWithRememberTokenInterface) {
                 throw new InvalidArgumentException(
-                    "Adapter " . this->adapter . " not instanceof AdapterWithRememberTokenInterface"
+                    "Adapter " . get_class(this->adapter) . " not instanceof AdapterWithRememberTokenInterface"
                 );
              }
 

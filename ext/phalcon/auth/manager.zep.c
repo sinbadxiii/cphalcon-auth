@@ -250,7 +250,7 @@ PHP_METHOD(Phalcon_Auth_Manager, resolve)
 		object_init_ex(&_0$$3, spl_ce_InvalidArgumentException);
 		ZEPHIR_INIT_VAR(&_1$$3);
 		ZEPHIR_CONCAT_SVS(&_1$$3, "Auth guard [", &name, "] is not defined.");
-		ZEPHIR_CALL_METHOD(NULL, &_0$$3, "__construct", NULL, 8, &_1$$3);
+		ZEPHIR_CALL_METHOD(NULL, &_0$$3, "__construct", NULL, 10, &_1$$3);
 		zephir_check_call_status();
 		zephir_throw_exception_debug(&_0$$3, "phalcon/Auth/Manager.zep", 69);
 		ZEPHIR_MM_RESTORE();
@@ -266,7 +266,7 @@ PHP_METHOD(Phalcon_Auth_Manager, resolve)
 		ZEPHIR_OBS_VAR(&_7$$4);
 		zephir_read_property(&_7$$4, &configGuard, ZEND_STRL("driver"), PH_NOISY_CC);
 		zephir_array_fetch(&_6$$4, &_5$$4, &_7$$4, PH_NOISY | PH_READONLY, "phalcon/Auth/Manager.zep", 76);
-		ZEPHIR_RETURN_CALL_FUNCTION("call_user_func", NULL, 21, &_6$$4, &providerAdapter, &configGuard, &name);
+		ZEPHIR_RETURN_CALL_FUNCTION("call_user_func", NULL, 18, &_6$$4, &providerAdapter, &configGuard, &name);
 		zephir_check_call_status();
 		RETURN_MM();
 	}
@@ -275,7 +275,7 @@ PHP_METHOD(Phalcon_Auth_Manager, resolve)
 	zephir_ucfirst(&_8, &_9);
 	ZEPHIR_INIT_VAR(&_10);
 	ZVAL_STRING(&_10, "\\Phalcon\\Auth\\Guard\\%s");
-	ZEPHIR_CALL_FUNCTION(&guardName, "sprintf", NULL, 4, &_10, &_8);
+	ZEPHIR_CALL_FUNCTION(&guardName, "sprintf", NULL, 5, &_10, &_8);
 	zephir_check_call_status();
 	if (!(zephir_class_exists(&guardName, 1))) {
 		ZEPHIR_INIT_VAR(&_11$$5);
@@ -283,7 +283,7 @@ PHP_METHOD(Phalcon_Auth_Manager, resolve)
 		zephir_read_property(&_12$$5, &configGuard, ZEND_STRL("driver"), PH_NOISY_CC | PH_READONLY);
 		ZEPHIR_INIT_VAR(&_13$$5);
 		ZEPHIR_CONCAT_SVSVS(&_13$$5, "Auth driver ", &_12$$5, " for guard ", &name, " is not defined.");
-		ZEPHIR_CALL_METHOD(NULL, &_11$$5, "__construct", NULL, 8, &_13$$5);
+		ZEPHIR_CALL_METHOD(NULL, &_11$$5, "__construct", NULL, 10, &_13$$5);
 		zephir_check_call_status();
 		zephir_throw_exception_debug(&_11$$5, "phalcon/Auth/Manager.zep", 90);
 		ZEPHIR_MM_RESTORE();
@@ -308,7 +308,7 @@ PHP_METHOD(Phalcon_Auth_Manager, getAdapterProvider)
 	zend_class_entry *_14;
 	zephir_method_globals *ZEPHIR_METHOD_GLOBALS_PTR = NULL;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *provider_param = NULL, configProvider, _0, _1, adapterName, _4, adapterClass, _8, _9, adapter, _13, _15, _2$$4, _5$$5, _6$$5, _7$$5, _10$$6, _11$$6, _12$$6, _16$$7, _17$$7, _18$$8, _19$$8;
+	zval *provider_param = NULL, configProvider, _0, _1, adapterName, _4, adapterClass, _8, _9, adapter, _13, _15, _2$$4, _5$$5, _6$$5, _7$$5, _10$$6, _11$$6, _12$$6, _16$$7, _17$$7;
 	zval provider, _3$$4;
 	zval *this_ptr = getThis();
 
@@ -334,8 +334,6 @@ PHP_METHOD(Phalcon_Auth_Manager, getAdapterProvider)
 	ZVAL_UNDEF(&_12$$6);
 	ZVAL_UNDEF(&_16$$7);
 	ZVAL_UNDEF(&_17$$7);
-	ZVAL_UNDEF(&_18$$8);
-	ZVAL_UNDEF(&_19$$8);
 #if PHP_VERSION_ID >= 80000
 	bool is_null_true = 1;
 	ZEND_PARSE_PARAMETERS_START(0, 1)
@@ -369,7 +367,7 @@ PHP_METHOD(Phalcon_Auth_Manager, getAdapterProvider)
 		object_init_ex(&_2$$4, spl_ce_InvalidArgumentException);
 		ZEPHIR_INIT_VAR(&_3$$4);
 		ZEPHIR_CONCAT_SVS(&_3$$4, "Adapter not assigned in config->auth->providers->", &provider, "->adapter = ?");
-		ZEPHIR_CALL_METHOD(NULL, &_2$$4, "__construct", NULL, 8, &_3$$4);
+		ZEPHIR_CALL_METHOD(NULL, &_2$$4, "__construct", NULL, 10, &_3$$4);
 		zephir_check_call_status();
 		zephir_throw_exception_debug(&_2$$4, "phalcon/Auth/Manager.zep", 110);
 		ZEPHIR_MM_RESTORE();
@@ -380,7 +378,7 @@ PHP_METHOD(Phalcon_Auth_Manager, getAdapterProvider)
 		zephir_read_property(&_5$$5, this_ptr, ZEND_STRL("customAdapters"), PH_NOISY_CC | PH_READONLY);
 		zephir_array_fetch(&_6$$5, &_5$$5, &adapterName, PH_NOISY | PH_READONLY, "phalcon/Auth/Manager.zep", 115);
 		zephir_read_property(&_7$$5, this_ptr, ZEND_STRL("security"), PH_NOISY_CC | PH_READONLY);
-		ZEPHIR_RETURN_CALL_FUNCTION("call_user_func", NULL, 21, &_6$$5, &_7$$5, &configProvider);
+		ZEPHIR_RETURN_CALL_FUNCTION("call_user_func", NULL, 18, &_6$$5, &_7$$5, &configProvider);
 		zephir_check_call_status();
 		RETURN_MM();
 	}
@@ -388,16 +386,16 @@ PHP_METHOD(Phalcon_Auth_Manager, getAdapterProvider)
 	zephir_ucfirst(&_8, &adapterName);
 	ZEPHIR_INIT_VAR(&_9);
 	ZVAL_STRING(&_9, "\\Phalcon\\Auth\\Adapter\\%s");
-	ZEPHIR_CALL_FUNCTION(&adapterClass, "sprintf", NULL, 4, &_9, &_8);
+	ZEPHIR_CALL_FUNCTION(&adapterClass, "sprintf", NULL, 5, &_9, &_8);
 	zephir_check_call_status();
 	if (!(zephir_class_exists(&adapterClass, 1))) {
 		ZEPHIR_INIT_VAR(&_10$$6);
 		object_init_ex(&_10$$6, spl_ce_InvalidArgumentException);
 		ZEPHIR_INIT_VAR(&_11$$6);
 		ZVAL_STRING(&_11$$6, "%s not found.");
-		ZEPHIR_CALL_FUNCTION(&_12$$6, "sprintf", NULL, 4, &_11$$6, &adapterClass);
+		ZEPHIR_CALL_FUNCTION(&_12$$6, "sprintf", NULL, 5, &_11$$6, &adapterClass);
 		zephir_check_call_status();
-		ZEPHIR_CALL_METHOD(NULL, &_10$$6, "__construct", NULL, 8, &_12$$6);
+		ZEPHIR_CALL_METHOD(NULL, &_10$$6, "__construct", NULL, 10, &_12$$6);
 		zephir_check_call_status();
 		zephir_throw_exception_debug(&_10$$6, "phalcon/Auth/Manager.zep", 128);
 		ZEPHIR_MM_RESTORE();
@@ -421,20 +419,9 @@ PHP_METHOD(Phalcon_Auth_Manager, getAdapterProvider)
 		object_init_ex(&_16$$7, spl_ce_InvalidArgumentException);
 		ZEPHIR_INIT_VAR(&_17$$7);
 		ZEPHIR_CONCAT_VS(&_17$$7, &adapterClass, " not implementing AdapterInterface");
-		ZEPHIR_CALL_METHOD(NULL, &_16$$7, "__construct", NULL, 8, &_17$$7);
+		ZEPHIR_CALL_METHOD(NULL, &_16$$7, "__construct", NULL, 10, &_17$$7);
 		zephir_check_call_status();
 		zephir_throw_exception_debug(&_16$$7, "phalcon/Auth/Manager.zep", 135);
-		ZEPHIR_MM_RESTORE();
-		return;
-	}
-	if (!(zephir_instance_of_ev(&adapter, phalcon_auth_adapter_adapterinterface_ce))) {
-		ZEPHIR_INIT_VAR(&_18$$8);
-		object_init_ex(&_18$$8, spl_ce_InvalidArgumentException);
-		ZEPHIR_INIT_VAR(&_19$$8);
-		ZEPHIR_CONCAT_VS(&_19$$8, &adapterClass, " not implementing AdapterInterface");
-		ZEPHIR_CALL_METHOD(NULL, &_18$$8, "__construct", NULL, 8, &_19$$8);
-		zephir_check_call_status();
-		zephir_throw_exception_debug(&_18$$8, "phalcon/Auth/Manager.zep", 139);
 		ZEPHIR_MM_RESTORE();
 		return;
 	}
@@ -629,7 +616,7 @@ PHP_METHOD(Phalcon_Auth_Manager, access)
 	_1 = !(zephir_array_isset(&_0, &accessName));
 	if (!(_1)) {
 		zephir_read_property(&_2, this_ptr, ZEND_STRL("accessList"), PH_NOISY_CC | PH_READONLY);
-		zephir_array_fetch(&_3, &_2, &accessName, PH_NOISY | PH_READONLY, "phalcon/Auth/Manager.zep", 192);
+		zephir_array_fetch(&_3, &_2, &accessName, PH_NOISY | PH_READONLY, "phalcon/Auth/Manager.zep", 188);
 		_1 = !(zephir_class_exists(&_3, 1));
 	}
 	if (_1) {
@@ -637,17 +624,17 @@ PHP_METHOD(Phalcon_Auth_Manager, access)
 		object_init_ex(&_4$$3, spl_ce_InvalidArgumentException);
 		ZEPHIR_INIT_VAR(&_5$$3);
 		ZVAL_STRING(&_5$$3, "Access with '%s' name is not included in the access list");
-		ZEPHIR_CALL_FUNCTION(&_6$$3, "sprintf", NULL, 4, &_5$$3, &accessName);
+		ZEPHIR_CALL_FUNCTION(&_6$$3, "sprintf", NULL, 5, &_5$$3, &accessName);
 		zephir_check_call_status();
-		ZEPHIR_CALL_METHOD(NULL, &_4$$3, "__construct", NULL, 8, &_6$$3);
+		ZEPHIR_CALL_METHOD(NULL, &_4$$3, "__construct", NULL, 10, &_6$$3);
 		zephir_check_call_status();
-		zephir_throw_exception_debug(&_4$$3, "phalcon/Auth/Manager.zep", 195);
+		zephir_throw_exception_debug(&_4$$3, "phalcon/Auth/Manager.zep", 191);
 		ZEPHIR_MM_RESTORE();
 		return;
 	}
 	zephir_read_property(&_7, this_ptr, ZEND_STRL("accessList"), PH_NOISY_CC | PH_READONLY);
 	ZEPHIR_OBS_VAR(&access);
-	zephir_array_fetch(&access, &_7, &accessName, PH_NOISY, "phalcon/Auth/Manager.zep", 198);
+	zephir_array_fetch(&access, &_7, &accessName, PH_NOISY, "phalcon/Auth/Manager.zep", 194);
 	ZEPHIR_INIT_VAR(&_8);
 	zephir_fetch_safe_class(&_9, &access);
 	_10 = zephir_fetch_class_str_ex(Z_STRVAL_P(&_9), Z_STRLEN_P(&_9), ZEND_FETCH_CLASS_AUTO);

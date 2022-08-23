@@ -125,7 +125,7 @@ PHP_METHOD(Phalcon_Auth_Access_Authenticate, beforeExecuteRoute)
 			_2$$4 = !(zephir_array_isset_long(&handler$$4, 1));
 		}
 		if (_2$$4) {
-			ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "Handler is not defined.", "phalcon/Auth/Access/Authenticate.zep", 56);
+			ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "Action is not defined.", "phalcon/Auth/Access/Authenticate.zep", 56);
 			return;
 		}
 		zephir_array_fetch_long(&_3$$4, &handler$$4, 1, PH_NOISY | PH_READONLY, "phalcon/Auth/Access/Authenticate.zep", 59);

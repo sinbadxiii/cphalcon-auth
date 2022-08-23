@@ -11,12 +11,11 @@ if test "$PHP_PHALCON_AUTH" = "yes"; then
 	AC_DEFINE(HAVE_PHALCON_AUTH, 1, [Whether you have Phalcon_auth])
 	phalcon_auth_sources="phalcon_auth.c kernel/main.c kernel/memory.c kernel/exception.c kernel/debug.c kernel/backtrace.c kernel/object.c kernel/array.c kernel/string.c kernel/fcall.c kernel/require.c kernel/file.c kernel/operators.c kernel/math.c kernel/concat.c kernel/variables.c kernel/filter.c kernel/iterator.c kernel/time.c kernel/exit.c phalcon/auth/adapter/adapterinterface.zep.c
 	phalcon/auth/access/accessinterface.zep.c
-	phalcon/auth/access/accessabstract.zep.c
-	phalcon/auth/adapter/collectionadapterabstract.zep.c
+	phalcon/auth/adapter/abstractadapter.zep.c
+	phalcon/auth/access/abstractaccess.zep.c
 	phalcon/auth/guard/guardinterface.zep.c
 	phalcon/auth/access/authenticatesrequestinterface.zep.c
 	phalcon/auth/adapter/adapterwithremembertokeninterface.zep.c
-	phalcon/auth/authenticatableinterface.zep.c
 	phalcon/auth/guard/basicauthinterface.zep.c
 	phalcon/auth/guard/guardstatefulinterface.zep.c
 	phalcon/auth/managerinterface.zep.c
@@ -26,8 +25,7 @@ if test "$PHP_PHALCON_AUTH" = "yes"; then
 	phalcon/auth/adapter/memory.zep.c
 	phalcon/auth/adapter/model.zep.c
 	phalcon/auth/adapter/stream.zep.c
-	phalcon/auth/adapter/user.zep.c
-	phalcon/auth/adapter/usercollection.zep.c
+	phalcon/auth/authenticatableinterface.zep.c
 	phalcon/auth/exception.zep.c
 	phalcon/auth/guard/session.zep.c
 	phalcon/auth/guard/token.zep.c

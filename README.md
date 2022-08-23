@@ -286,7 +286,7 @@ class RegisterController extends ControllerBase
 Если доступ удовлетворяет условию в методе `allowIf`, то дается разрешение на дальнейшее использование контроллера, например в дефолтном `auth` условием является:
 
 ```php 
-class Auth extends AccessAbstract
+class Auth extends AbstractAccess
 {
     /**
      * @return bool
@@ -313,7 +313,7 @@ namespace Phalcon\Auth\Access;
  * Class Guest
  * @package Phalcon\Auth\Access
  */
-class Guest extends AccessAbstract
+class Guest extends AbstractAccess
 {
     /**
      * @return bool
@@ -387,15 +387,15 @@ interface AccessInterface
     public function allowedIf(): bool;
 }
 ```
-либо просто наследовав абстрактный класс `Phalcon\Auth\Access\AccessAbstract` для более быстрого и гибкого использования кастомных доступов, например, давайте создадим доступ для пользователей, имеющих роль админа:
+либо просто наследовав абстрактный класс `Phalcon\Auth\Access\AbstractAccess` для более быстрого и гибкого использования кастомных доступов, например, давайте создадим доступ для пользователей, имеющих роль админа:
 ```php 
 <?php
 
 namespace App\Security\Access;
 
-use Phalcon\Auth\Access\AccessAbstract;
+use Phalcon\Auth\Access\AbstractAccess;
 
-class Admin extends AccessAbstract
+class Admin extends AbstractAccess
 {
     /**
      * @return bool
@@ -428,10 +428,10 @@ class Admin extends AccessAbstract
 
 namespace App\Security\Access;
 
-use Phalcon\Auth\Access\AccessAbstract;
+use Phalcon\Auth\Access\AbstractAccess;
 use Phalcon\Auth\Exception;
 
-class AuthWithBasic extends AccessAbstract
+class AuthWithBasic extends AbstractAccess
 {
     /**
      * @return bool
@@ -1039,10 +1039,10 @@ $this->auth->logout();
 
 namespace App\Security\Access;
 
-use Phalcon\Auth\Access\AccessAbstract;
+use Phalcon\Auth\Access\AbstractAccess;
 use Phalcon\Auth\Exception;
 
-class AuthWithBasic extends AccessAbstract
+class AuthWithBasic extends AbstractAccess
 {
     /**
      * @return bool
@@ -1078,10 +1078,10 @@ class AuthWithBasic extends AccessAbstract
 
 namespace App\Security\Access;
 
-use Phalcon\Auth\Access\AccessAbstract;
+use Phalcon\Auth\Access\AbstractAccess;
 use Phalcon\Auth\Exception;
 
-class AuthWithBasic extends AccessAbstract
+class AuthWithBasic extends AbstractAccess
 {
     /**
      * @return bool

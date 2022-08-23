@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Phalcon\Tests\Auth;
+namespace Phalcon\Tests\Auth\User;
 
 use Phalcon\Auth\RememberTokenInterface;
 
-class RememberTokenModelStub implements  RememberTokenInterface
+class RememberTokenModelFake implements  RememberTokenInterface
 {
     public $id;
     public $user_id;

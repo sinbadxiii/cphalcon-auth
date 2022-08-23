@@ -53,7 +53,7 @@ class Authenticate extends Injectable implements AuthenticatesRequestInterface, 
             var handler = app->getActiveHandler();
 
             if (typeof handler !== "object" && typeof handler !== "array" && !isset handler[1] ) {
-                throw new InvalidArgumentException("Handler is not defined.");
+                throw new InvalidArgumentException("Action is not defined.");
             }
 
             let this->actionName = handler[1];
