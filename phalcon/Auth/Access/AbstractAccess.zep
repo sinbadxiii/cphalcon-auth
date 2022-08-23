@@ -3,7 +3,7 @@ namespace Phalcon\Auth\Access;
 use Phalcon\Di\Injectable;
 use Phalcon\Di\Di;
 
-abstract class AccessAbstract extends Injectable implements AccessInterface
+abstract class AbstractAccess extends Injectable implements AccessInterface
 {
     protected exceptActions = [];
     protected onlyActions   = [];

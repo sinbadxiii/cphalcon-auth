@@ -3,7 +3,7 @@ extern zend_class_entry *phalcon_auth_adapter_adapterwithremembertokeninterface_
 
 ZEPHIR_INIT_CLASS(Phalcon_Auth_Adapter_AdapterWithRememberTokenInterface);
 
-ZEND_BEGIN_ARG_INFO_EX(arginfo_phalcon_auth_adapter_adapterwithremembertokeninterface_retrievebytoken, 0, 0, 3)
+ZEND_BEGIN_ARG_WITH_RETURN_OBJ_INFO_EX(arginfo_phalcon_auth_adapter_adapterwithremembertokeninterface_retrievebytoken, 0, 3, Phalcon\\Auth\\AuthenticatableInterface, 1)
 	ZEND_ARG_INFO(0, identifier)
 	ZEND_ARG_INFO(0, token)
 	ZEND_ARG_INFO(0, user_agent)

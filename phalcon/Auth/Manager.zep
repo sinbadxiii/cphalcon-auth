@@ -135,10 +135,6 @@ class Manager implements ManagerInterface
             throw new InvalidArgumentException(adapterClass . " not implementing AdapterInterface");
         }
 
-        if !(adapter instanceof AdapterInterface) {
-            throw new InvalidArgumentException(adapterClass . " not implementing AdapterInterface");
-        }
-
         return adapter;
     }
 

@@ -93,12 +93,11 @@ phalcon/auth/access/accessinterface.lo: \
  /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/access/../../../phalcon_auth.h \
  /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/access/../../../phalcon/auth/adapter/adapterinterface.zep.h \
  /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/access/../../../phalcon/auth/access/accessinterface.zep.h \
- /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/access/../../../phalcon/auth/access/accessabstract.zep.h \
- /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/access/../../../phalcon/auth/adapter/collectionadapterabstract.zep.h \
+ /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/access/../../../phalcon/auth/adapter/abstractadapter.zep.h \
+ /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/access/../../../phalcon/auth/access/abstractaccess.zep.h \
  /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/access/../../../phalcon/auth/guard/guardinterface.zep.h \
  /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/access/../../../phalcon/auth/access/authenticatesrequestinterface.zep.h \
  /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/access/../../../phalcon/auth/adapter/adapterwithremembertokeninterface.zep.h \
- /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/access/../../../phalcon/auth/authenticatableinterface.zep.h \
  /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/access/../../../phalcon/auth/guard/basicauthinterface.zep.h \
  /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/access/../../../phalcon/auth/guard/guardstatefulinterface.zep.h \
  /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/access/../../../phalcon/auth/managerinterface.zep.h \
@@ -108,8 +107,7 @@ phalcon/auth/access/accessinterface.lo: \
  /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/access/../../../phalcon/auth/adapter/memory.zep.h \
  /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/access/../../../phalcon/auth/adapter/model.zep.h \
  /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/access/../../../phalcon/auth/adapter/stream.zep.h \
- /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/access/../../../phalcon/auth/adapter/user.zep.h \
- /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/access/../../../phalcon/auth/adapter/usercollection.zep.h \
+ /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/access/../../../phalcon/auth/authenticatableinterface.zep.h \
  /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/access/../../../phalcon/auth/exception.zep.h \
  /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/access/../../../phalcon/auth/guard/session.zep.h \
  /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/access/../../../phalcon/auth/guard/token.zep.h \

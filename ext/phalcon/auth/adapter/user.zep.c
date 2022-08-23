@@ -22,7 +22,6 @@ ZEPHIR_INIT_CLASS(Phalcon_Auth_Adapter_User)
 	ZEPHIR_REGISTER_CLASS(Phalcon\\Auth\\Adapter, User, phalcon, auth_adapter_user, phalcon_auth_adapter_user_method_entry, 0);
 
 	zend_declare_property_null(phalcon_auth_adapter_user_ce, SL("id"), ZEND_ACC_PRIVATE);
-	zend_declare_property_null(phalcon_auth_adapter_user_ce, SL("key"), ZEND_ACC_PRIVATE);
 	zend_declare_property_null(phalcon_auth_adapter_user_ce, SL("password"), ZEND_ACC_PRIVATE);
 	zend_class_implements(phalcon_auth_adapter_user_ce, 1, phalcon_auth_authenticatableinterface_ce);
 	return SUCCESS;
@@ -53,7 +52,7 @@ PHP_METHOD(Phalcon_Auth_Adapter_User, __construct)
 	zephir_fetch_params(1, 1, 0, &data);
 
 
-	zephir_is_iterable(data, 0, "phalcon/Auth/Adapter/User.zep", 18);
+	zephir_is_iterable(data, 0, "phalcon/Auth/Adapter/User.zep", 17);
 	if (Z_TYPE_P(data) == IS_ARRAY) {
 		ZEND_HASH_FOREACH_KEY_VAL(Z_ARRVAL_P(data), _2, _3, _0)
 		{
@@ -90,44 +89,13 @@ PHP_METHOD(Phalcon_Auth_Adapter_User, __construct)
 	ZEPHIR_MM_RESTORE();
 }
 
-PHP_METHOD(Phalcon_Auth_Adapter_User, setKey)
-{
-	zval *key, key_sub;
-	zval *this_ptr = getThis();
-
-	ZVAL_UNDEF(&key_sub);
-#if PHP_VERSION_ID >= 80000
-	bool is_null_true = 1;
-	ZEND_PARSE_PARAMETERS_START(1, 1)
-		Z_PARAM_ZVAL(key)
-	ZEND_PARSE_PARAMETERS_END();
-#endif
-
-
-	zephir_fetch_params_without_memory_grow(1, 0, &key);
-
-
-	zephir_update_property_zval(this_ptr, ZEND_STRL("key"), key);
-}
-
 PHP_METHOD(Phalcon_Auth_Adapter_User, getAuthIdentifier)
 {
-	zval ident, _0;
-	zephir_method_globals *ZEPHIR_METHOD_GLOBALS_PTR = NULL;
-	zend_long ZEPHIR_LAST_CALL_STATUS;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&ident);
-	ZVAL_UNDEF(&_0);
 
 
-	ZEPHIR_MM_GROW();
-
-	ZEPHIR_CALL_METHOD(&ident, this_ptr, "getkey", NULL, 9);
-	zephir_check_call_status();
-	ZEPHIR_OBS_VAR(&_0);
-	zephir_read_property_zval(&_0, this_ptr, &ident, PH_NOISY_CC);
-	RETURN_CCTOR(&_0);
+	RETURN_MEMBER(getThis(), "id");
 }
 
 PHP_METHOD(Phalcon_Auth_Adapter_User, getAuthPassword)
@@ -137,15 +105,6 @@ PHP_METHOD(Phalcon_Auth_Adapter_User, getAuthPassword)
 
 
 	RETURN_MEMBER(getThis(), "password");
-}
-
-PHP_METHOD(Phalcon_Auth_Adapter_User, getKey)
-{
-	zval *this_ptr = getThis();
-
-
-
-	RETURN_STRING("id");
 }
 
 PHP_METHOD(Phalcon_Auth_Adapter_User, getId)

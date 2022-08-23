@@ -20,7 +20,7 @@
 
 ZEPHIR_INIT_CLASS(Phalcon_Auth_Access_Auth)
 {
-	ZEPHIR_REGISTER_CLASS_EX(Phalcon\\Auth\\Access, Auth, phalcon, auth_access_auth, phalcon_auth_access_accessabstract_ce, phalcon_auth_access_auth_method_entry, 0);
+	ZEPHIR_REGISTER_CLASS_EX(Phalcon\\Auth\\Access, Auth, phalcon, auth_access_auth, phalcon_auth_access_abstractaccess_ce, phalcon_auth_access_auth_method_entry, 0);
 
 	return SUCCESS;
 }

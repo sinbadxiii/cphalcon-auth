@@ -1,6 +1,6 @@
 <?php
 
-namespace Phalcon\Tests\Auth;
+namespace Phalcon\Tests\Auth\Access;
 
 use Phalcon\Di\Injectable;
 use Phalcon\Auth\Access\Authenticate;
@@ -9,7 +9,7 @@ use Phalcon\Tests\Auth\AbstractTestCase;
 
 /**
  * Class AuthenticateTest
- * @package Sinbadxiii\PhalconAuth\Tests\Access
+ * @package Phalcon\Tests\Auth\Access
  */
 class AuthenticateTest extends AbstractTestCase
 {

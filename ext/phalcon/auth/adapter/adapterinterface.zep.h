@@ -3,11 +3,11 @@ extern zend_class_entry *phalcon_auth_adapter_adapterinterface_ce;
 
 ZEPHIR_INIT_CLASS(Phalcon_Auth_Adapter_AdapterInterface);
 
-ZEND_BEGIN_ARG_INFO_EX(arginfo_phalcon_auth_adapter_adapterinterface_retrievebycredentials, 0, 0, 1)
+ZEND_BEGIN_ARG_WITH_RETURN_OBJ_INFO_EX(arginfo_phalcon_auth_adapter_adapterinterface_retrievebycredentials, 0, 1, Phalcon\\Auth\\AuthenticatableInterface, 1)
 	ZEND_ARG_ARRAY_INFO(0, credentials, 0)
 ZEND_END_ARG_INFO()
 
-ZEND_BEGIN_ARG_INFO_EX(arginfo_phalcon_auth_adapter_adapterinterface_retrievebyid, 0, 0, 1)
+ZEND_BEGIN_ARG_WITH_RETURN_OBJ_INFO_EX(arginfo_phalcon_auth_adapter_adapterinterface_retrievebyid, 0, 1, Phalcon\\Auth\\AuthenticatableInterface, 1)
 	ZEND_ARG_INFO(0, id)
 ZEND_END_ARG_INFO()
 

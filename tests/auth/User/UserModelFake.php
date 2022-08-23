@@ -1,16 +1,16 @@
 <?php
 
-namespace Phalcon\Tests\Auth;
+namespace Phalcon\Tests\Auth\User;
 
 use Phalcon\Auth\AuthenticatableInterface;
 use Phalcon\Auth\RememberingInterface;
 use Phalcon\Auth\RememberTokenInterface;
 
 /**
- * Class UserStub
- * @package Phalcon\Tests\Auth\\User
+ * Class UserModelFake
+ * @package Phalcon\Tests\Auth\User
  */
-class UserModelStub implements AuthenticatableInterface, RememberingInterface
+class UserModelFake implements AuthenticatableInterface, RememberingInterface
 {
     public int $id;
     public string $password;
@@ -35,7 +35,7 @@ class UserModelStub implements AuthenticatableInterface, RememberingInterface
 
     public function createRememberToken(): RememberTokenInterface
     {
-        return new RememberTokenModelStub();
+        return new RememberTokenModelFake();
     }
 
     public function getRememberToken(string $token = null): ?RememberTokenInterface
