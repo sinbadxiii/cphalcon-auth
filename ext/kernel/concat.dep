@@ -91,17 +91,18 @@ kernel/concat.lo: \
  phalcon/auth/adapter/abstractadapter.zep.h \
  phalcon/auth/access/abstractaccess.zep.h \
  phalcon/auth/guard/guardinterface.zep.h \
+ phalcon/auth/managerinterface.zep.h \
  phalcon/auth/access/authenticatesrequestinterface.zep.h \
  phalcon/auth/adapter/adapterwithremembertokeninterface.zep.h \
+ phalcon/auth/adapter/memory.zep.h \
  phalcon/auth/guard/basicauthinterface.zep.h \
  phalcon/auth/guard/guardstatefulinterface.zep.h \
- phalcon/auth/managerinterface.zep.h phalcon/auth/access/auth.zep.h \
+ phalcon/auth/manager.zep.h phalcon/auth/access/auth.zep.h \
  phalcon/auth/access/authenticate.zep.h phalcon/auth/access/guest.zep.h \
- phalcon/auth/adapter/memory.zep.h phalcon/auth/adapter/model.zep.h \
- phalcon/auth/adapter/stream.zep.h \
+ phalcon/auth/adapter/model.zep.h phalcon/auth/adapter/stream.zep.h \
  phalcon/auth/authenticatableinterface.zep.h phalcon/auth/exception.zep.h \
  phalcon/auth/guard/session.zep.h phalcon/auth/guard/token.zep.h \
- phalcon/auth/guard/userremember.zep.h phalcon/auth/manager.zep.h \
+ phalcon/auth/guard/userremember.zep.h phalcon/auth/managerfactory.zep.h \
  phalcon/auth/remembertokeninterface.zep.h \
  phalcon/auth/rememberinginterface.zep.h kernel/main.h \
  /usr/include/php/20210902/Zend/zend_interfaces.h \

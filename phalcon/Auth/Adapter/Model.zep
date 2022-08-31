@@ -1,5 +1,6 @@
 namespace Phalcon\Auth\Adapter;
 
+use InvalidArgumentException;
 use Phalcon\Di\Di;
 use Phalcon\Auth\AuthenticatableInterface;
 use Phalcon\Auth\RememberingInterface;
@@ -9,7 +10,10 @@ class Model extends AbstractAdapter implements AdapterWithRememberTokenInterface
 {
     protected function getProviderStorage() -> mixed
     {
-        return this->config->model;
+        if this->model === null {
+            throw new InvalidArgumentException("Model is not defined");
+        }
+        return this->model;
     }
 
     public function retrieveByCredentials(array credentials) -> <AuthenticatableInterface> | null

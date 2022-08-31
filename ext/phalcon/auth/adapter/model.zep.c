@@ -13,10 +13,12 @@
 
 #include "kernel/main.h"
 #include "kernel/object.h"
+#include "kernel/operators.h"
+#include "kernel/exception.h"
+#include "ext/spl/spl_exceptions.h"
 #include "kernel/memory.h"
 #include "kernel/fcall.h"
 #include "kernel/array.h"
-#include "kernel/operators.h"
 #include "kernel/string.h"
 
 
@@ -30,20 +32,19 @@ ZEPHIR_INIT_CLASS(Phalcon_Auth_Adapter_Model)
 
 PHP_METHOD(Phalcon_Auth_Adapter_Model, getProviderStorage)
 {
-	zval _0, _1;
-	zephir_method_globals *ZEPHIR_METHOD_GLOBALS_PTR = NULL;
+	zval _0;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&_0);
-	ZVAL_UNDEF(&_1);
 
 
-	ZEPHIR_MM_GROW();
 
-	zephir_read_property(&_0, this_ptr, ZEND_STRL("config"), PH_NOISY_CC | PH_READONLY);
-	ZEPHIR_OBS_VAR(&_1);
-	zephir_read_property(&_1, &_0, ZEND_STRL("model"), PH_NOISY_CC);
-	RETURN_CCTOR(&_1);
+	zephir_read_property(&_0, this_ptr, ZEND_STRL("model"), PH_NOISY_CC | PH_READONLY);
+	if (Z_TYPE_P(&_0) == IS_NULL) {
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STRW(spl_ce_InvalidArgumentException, "Model is not defined", "phalcon/Auth/Adapter/Model.zep", 14);
+		return;
+	}
+	RETURN_MEMBER(getThis(), "model");
 }
 
 PHP_METHOD(Phalcon_Auth_Adapter_Model, retrieveByCredentials)
@@ -105,7 +106,7 @@ PHP_METHOD(Phalcon_Auth_Adapter_Model, retrieveByCredentials)
 	zephir_array_fast_append(&_5, &_6);
 	ZEPHIR_CALL_METHOD(&builder, &_4, "from", NULL, 0, &_5);
 	zephir_check_call_status();
-	zephir_is_iterable(&credentials, 0, "phalcon/Auth/Adapter/Model.zep", 31);
+	zephir_is_iterable(&credentials, 0, "phalcon/Auth/Adapter/Model.zep", 35);
 	if (Z_TYPE_P(&credentials) == IS_ARRAY) {
 		ZEND_HASH_FOREACH_KEY_VAL(Z_ARRVAL_P(&credentials), _9, _10, _7)
 		{
@@ -323,7 +324,7 @@ PHP_METHOD(Phalcon_Auth_Adapter_Model, validateCredentials)
 
 
 	zephir_read_property(&_0, this_ptr, ZEND_STRL("hasher"), PH_NOISY_CC | PH_READONLY);
-	zephir_array_fetch_string(&_1, &credentials, SL("password"), PH_NOISY | PH_READONLY, "phalcon/Auth/Adapter/Model.zep", 69);
+	zephir_array_fetch_string(&_1, &credentials, SL("password"), PH_NOISY | PH_READONLY, "phalcon/Auth/Adapter/Model.zep", 73);
 	ZEPHIR_CALL_METHOD(&_2, user, "getauthpassword", NULL, 0);
 	zephir_check_call_status();
 	ZEPHIR_RETURN_CALL_METHOD(&_0, "checkhash", NULL, 0, &_1, &_2);

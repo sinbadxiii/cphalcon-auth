@@ -13,7 +13,7 @@ if (PHP_PHALCON_AUTH != "no") {
   ADD_SOURCES(configure_module_dirname + "/phalcon/auth/adapter", "adapterinterface.zep.c abstractadapter.zep.c adapterwithremembertokeninterface.zep.c memory.zep.c model.zep.c stream.zep.c", "phalcon_auth");
 	ADD_SOURCES(configure_module_dirname + "/phalcon/auth/access", "accessinterface.zep.c abstractaccess.zep.c authenticatesrequestinterface.zep.c auth.zep.c authenticate.zep.c guest.zep.c", "phalcon_auth");
 	ADD_SOURCES(configure_module_dirname + "/phalcon/auth/guard", "guardinterface.zep.c basicauthinterface.zep.c guardstatefulinterface.zep.c session.zep.c token.zep.c userremember.zep.c", "phalcon_auth");
-	ADD_SOURCES(configure_module_dirname + "/phalcon/auth", "managerinterface.zep.c authenticatableinterface.zep.c exception.zep.c manager.zep.c remembertokeninterface.zep.c rememberinginterface.zep.c", "phalcon_auth");
+	ADD_SOURCES(configure_module_dirname + "/phalcon/auth", "managerinterface.zep.c manager.zep.c authenticatableinterface.zep.c exception.zep.c managerfactory.zep.c remembertokeninterface.zep.c rememberinginterface.zep.c", "phalcon_auth");
   ADD_FLAG("CFLAGS_PHALCON_AUTH", "/D ZEPHIR_RELEASE /Oi /Ot /Oy /Ob2 /Gs /GF /Gy /GL");
   ADD_FLAG("CFLAGS", "/D ZEPHIR_RELEASE /Oi /Ot /Oy /Ob2 /Gs /GF /Gy /GL");
   ADD_FLAG("LDFLAGS", "/LTCG");

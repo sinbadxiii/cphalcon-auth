@@ -1,16 +1,13 @@
 namespace Phalcon\Auth\Access;
 
 use Phalcon\Di\Injectable;
-use Phalcon\Di\Di;
 
 abstract class AbstractAccess extends Injectable implements AccessInterface
 {
     protected exceptActions = [];
     protected onlyActions   = [];
 
-    abstract public function allowedIf() -> bool;
-
-    public function except() -> void
+    public function setExceptActions() -> void
     {
         let this->exceptActions = func_get_args();
     }
@@ -20,7 +17,7 @@ abstract class AbstractAccess extends Injectable implements AccessInterface
         return this->exceptActions;
     }
 
-    public function only() -> void
+    public function setOnlyActions() -> void
     {
         let this->onlyActions = func_get_args();
     }

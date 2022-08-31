@@ -14,15 +14,16 @@ if test "$PHP_PHALCON_AUTH" = "yes"; then
 	phalcon/auth/adapter/abstractadapter.zep.c
 	phalcon/auth/access/abstractaccess.zep.c
 	phalcon/auth/guard/guardinterface.zep.c
+	phalcon/auth/managerinterface.zep.c
 	phalcon/auth/access/authenticatesrequestinterface.zep.c
 	phalcon/auth/adapter/adapterwithremembertokeninterface.zep.c
+	phalcon/auth/adapter/memory.zep.c
 	phalcon/auth/guard/basicauthinterface.zep.c
 	phalcon/auth/guard/guardstatefulinterface.zep.c
-	phalcon/auth/managerinterface.zep.c
+	phalcon/auth/manager.zep.c
 	phalcon/auth/access/auth.zep.c
 	phalcon/auth/access/authenticate.zep.c
 	phalcon/auth/access/guest.zep.c
-	phalcon/auth/adapter/memory.zep.c
 	phalcon/auth/adapter/model.zep.c
 	phalcon/auth/adapter/stream.zep.c
 	phalcon/auth/authenticatableinterface.zep.c
@@ -30,7 +31,7 @@ if test "$PHP_PHALCON_AUTH" = "yes"; then
 	phalcon/auth/guard/session.zep.c
 	phalcon/auth/guard/token.zep.c
 	phalcon/auth/guard/userremember.zep.c
-	phalcon/auth/manager.zep.c
+	phalcon/auth/managerfactory.zep.c
 	phalcon/auth/remembertokeninterface.zep.c
 	phalcon/auth/rememberinginterface.zep.c "
 	PHP_NEW_EXTENSION(phalcon_auth, $phalcon_auth_sources, $ext_shared,, )

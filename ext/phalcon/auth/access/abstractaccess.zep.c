@@ -32,11 +32,7 @@ ZEPHIR_INIT_CLASS(Phalcon_Auth_Access_AbstractAccess)
 	return SUCCESS;
 }
 
-PHP_METHOD(Phalcon_Auth_Access_AbstractAccess, allowedIf)
-{
-}
-
-PHP_METHOD(Phalcon_Auth_Access_AbstractAccess, except)
+PHP_METHOD(Phalcon_Auth_Access_AbstractAccess, setExceptActions)
 {
 	zval _0;
 	zephir_method_globals *ZEPHIR_METHOD_GLOBALS_PTR = NULL;
@@ -62,7 +58,7 @@ PHP_METHOD(Phalcon_Auth_Access_AbstractAccess, getExceptActions)
 	RETURN_MEMBER(getThis(), "exceptActions");
 }
 
-PHP_METHOD(Phalcon_Auth_Access_AbstractAccess, only)
+PHP_METHOD(Phalcon_Auth_Access_AbstractAccess, setOnlyActions)
 {
 	zval _0;
 	zephir_method_globals *ZEPHIR_METHOD_GLOBALS_PTR = NULL;

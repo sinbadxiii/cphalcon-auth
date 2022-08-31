@@ -93,15 +93,16 @@ phalcon_auth.lo: /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon_auth.c \
  /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/adapter/abstractadapter.zep.h \
  /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/access/abstractaccess.zep.h \
  /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/guard/guardinterface.zep.h \
+ /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/managerinterface.zep.h \
  /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/access/authenticatesrequestinterface.zep.h \
  /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/adapter/adapterwithremembertokeninterface.zep.h \
+ /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/adapter/memory.zep.h \
  /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/guard/basicauthinterface.zep.h \
  /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/guard/guardstatefulinterface.zep.h \
- /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/managerinterface.zep.h \
+ /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/manager.zep.h \
  /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/access/auth.zep.h \
  /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/access/authenticate.zep.h \
  /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/access/guest.zep.h \
- /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/adapter/memory.zep.h \
  /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/adapter/model.zep.h \
  /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/adapter/stream.zep.h \
  /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/authenticatableinterface.zep.h \
@@ -109,7 +110,7 @@ phalcon_auth.lo: /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon_auth.c \
  /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/guard/session.zep.h \
  /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/guard/token.zep.h \
  /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/guard/userremember.zep.h \
- /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/manager.zep.h \
+ /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/managerfactory.zep.h \
  /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/remembertokeninterface.zep.h \
  /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/rememberinginterface.zep.h \
  /usr/include/php/20210902/ext/standard/info.h \

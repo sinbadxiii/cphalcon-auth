@@ -9,5 +9,5 @@ interface GuardInterface
     public function setUser(<AuthenticatableInterface> user);
     public function id();
     public function guest() -> bool;
-    public function validate(array credentials = []);
+    public function validate(array credentials = []) -> bool;
 }

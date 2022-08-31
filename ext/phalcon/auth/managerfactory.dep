@@ -1,7 +1,7 @@
-phalcon/auth/adapter/adapterwithremembertokeninterface.lo: \
- /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/adapter/adapterwithremembertokeninterface.zep.c \
- /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/adapter/../../../ext_config.h \
- /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/adapter/../../../config.h \
+phalcon/auth/managerfactory.lo: \
+ /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/managerfactory.zep.c \
+ /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/../../ext_config.h \
+ /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/../../config.h \
  /usr/include/php/20210902/main/php.h \
  /usr/include/php/20210902/main/php_config.h \
  /usr/include/php/20210902/main/php_version.h \
@@ -86,39 +86,40 @@ phalcon/auth/adapter/adapterwithremembertokeninterface.lo: \
  /usr/include/php/20210902/TSRM/TSRM.h \
  /usr/include/php/20210902/Zend/zend_constants.h \
  /usr/include/php/20210902/main/php_reentrancy.h \
- /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/adapter/../../../php_ext.h \
- /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/adapter/../../../php_phalcon_auth.h \
- /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/adapter/../../../kernel/globals.h \
- /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/adapter/../../../ext.h \
- /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/adapter/../../../phalcon_auth.h \
- /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/adapter/../../../phalcon/auth/adapter/adapterinterface.zep.h \
- /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/adapter/../../../phalcon/auth/access/accessinterface.zep.h \
- /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/adapter/../../../phalcon/auth/adapter/abstractadapter.zep.h \
- /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/adapter/../../../phalcon/auth/access/abstractaccess.zep.h \
- /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/adapter/../../../phalcon/auth/guard/guardinterface.zep.h \
- /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/adapter/../../../phalcon/auth/managerinterface.zep.h \
- /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/adapter/../../../phalcon/auth/access/authenticatesrequestinterface.zep.h \
- /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/adapter/../../../phalcon/auth/adapter/adapterwithremembertokeninterface.zep.h \
- /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/adapter/../../../phalcon/auth/adapter/memory.zep.h \
- /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/adapter/../../../phalcon/auth/guard/basicauthinterface.zep.h \
- /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/adapter/../../../phalcon/auth/guard/guardstatefulinterface.zep.h \
- /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/adapter/../../../phalcon/auth/manager.zep.h \
- /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/adapter/../../../phalcon/auth/access/auth.zep.h \
- /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/adapter/../../../phalcon/auth/access/authenticate.zep.h \
- /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/adapter/../../../phalcon/auth/access/guest.zep.h \
- /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/adapter/../../../phalcon/auth/adapter/model.zep.h \
- /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/adapter/../../../phalcon/auth/adapter/stream.zep.h \
- /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/adapter/../../../phalcon/auth/authenticatableinterface.zep.h \
- /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/adapter/../../../phalcon/auth/exception.zep.h \
- /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/adapter/../../../phalcon/auth/guard/session.zep.h \
- /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/adapter/../../../phalcon/auth/guard/token.zep.h \
- /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/adapter/../../../phalcon/auth/guard/userremember.zep.h \
- /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/adapter/../../../phalcon/auth/managerfactory.zep.h \
- /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/adapter/../../../phalcon/auth/remembertokeninterface.zep.h \
- /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/adapter/../../../phalcon/auth/rememberinginterface.zep.h \
- /usr/include/php/20210902/Zend/zend_exceptions.h kernel/main.h \
+ /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/../../php_ext.h \
+ /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/../../php_phalcon_auth.h \
+ /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/../../kernel/globals.h \
+ /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/../../ext.h \
+ /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/../../phalcon_auth.h \
+ /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/../../phalcon/auth/adapter/adapterinterface.zep.h \
+ /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/../../phalcon/auth/access/accessinterface.zep.h \
+ /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/../../phalcon/auth/adapter/abstractadapter.zep.h \
+ /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/../../phalcon/auth/access/abstractaccess.zep.h \
+ /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/../../phalcon/auth/guard/guardinterface.zep.h \
+ /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/../../phalcon/auth/managerinterface.zep.h \
+ /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/../../phalcon/auth/access/authenticatesrequestinterface.zep.h \
+ /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/../../phalcon/auth/adapter/adapterwithremembertokeninterface.zep.h \
+ /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/../../phalcon/auth/adapter/memory.zep.h \
+ /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/../../phalcon/auth/guard/basicauthinterface.zep.h \
+ /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/../../phalcon/auth/guard/guardstatefulinterface.zep.h \
+ /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/../../phalcon/auth/manager.zep.h \
+ /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/../../phalcon/auth/access/auth.zep.h \
+ /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/../../phalcon/auth/access/authenticate.zep.h \
+ /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/../../phalcon/auth/access/guest.zep.h \
+ /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/../../phalcon/auth/adapter/model.zep.h \
+ /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/../../phalcon/auth/adapter/stream.zep.h \
+ /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/../../phalcon/auth/authenticatableinterface.zep.h \
+ /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/../../phalcon/auth/exception.zep.h \
+ /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/../../phalcon/auth/guard/session.zep.h \
+ /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/../../phalcon/auth/guard/token.zep.h \
+ /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/../../phalcon/auth/guard/userremember.zep.h \
+ /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/../../phalcon/auth/managerfactory.zep.h \
+ /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/../../phalcon/auth/remembertokeninterface.zep.h \
+ /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/../../phalcon/auth/rememberinginterface.zep.h \
+ /usr/include/php/20210902/Zend/zend_operators.h \
+ /usr/include/php/20210902/Zend/zend_exceptions.h \
  /usr/include/php/20210902/Zend/zend_interfaces.h \
- /usr/include/php/20210902/Zend/zend_API.h \
+ /usr/include/php/20210902/Zend/zend_API.h kernel/main.h \
  /usr/include/php/20210902/ext/spl/spl_exceptions.h \
  /usr/include/php/20210902/ext/spl/php_spl.h \
  /usr/include/php/20210902/ext/spl/spl_iterators.h \
@@ -126,4 +127,10 @@ phalcon/auth/adapter/adapterwithremembertokeninterface.lo: \
  /usr/include/php/20210902/main/php_version.h \
  /usr/include/php/20210902/Zend/zend_string.h \
  /usr/include/php/20210902/Zend/zend.h \
- /usr/include/php/20210902/Zend/zend_constants.h kernel/exception.h
+ /usr/include/php/20210902/Zend/zend_constants.h kernel/exception.h \
+ kernel/object.h kernel/globals.h kernel/operators.h kernel/memory.h \
+ php_ext.h php_phalcon_auth.h kernel/fcall.h kernel/fcall_internal.h \
+ /usr/include/php/20210902/Zend/zend_hash.h kernel/array.h \
+ kernel/concat.h kernel/string.h \
+ /usr/include/php/20210902/Zend/zend_smart_str.h \
+ /usr/include/php/20210902/Zend/zend_closures.h

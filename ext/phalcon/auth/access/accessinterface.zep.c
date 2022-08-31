@@ -19,8 +19,8 @@ ZEPHIR_INIT_CLASS(Phalcon_Auth_Access_AccessInterface)
 	return SUCCESS;
 }
 
-ZEPHIR_DOC_METHOD(Phalcon_Auth_Access_AccessInterface, except);
-ZEPHIR_DOC_METHOD(Phalcon_Auth_Access_AccessInterface, only);
+ZEPHIR_DOC_METHOD(Phalcon_Auth_Access_AccessInterface, setExceptActions);
+ZEPHIR_DOC_METHOD(Phalcon_Auth_Access_AccessInterface, setOnlyActions);
 ZEPHIR_DOC_METHOD(Phalcon_Auth_Access_AccessInterface, isAllowed);
 ZEPHIR_DOC_METHOD(Phalcon_Auth_Access_AccessInterface, redirectTo);
 ZEPHIR_DOC_METHOD(Phalcon_Auth_Access_AccessInterface, allowedIf);

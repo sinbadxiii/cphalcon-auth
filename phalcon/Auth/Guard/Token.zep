@@ -1,10 +1,9 @@
 namespace Phalcon\Auth\Guard;
 
-use Phalcon\Config\ConfigInterface;
-use Phalcon\Auth\Events\EventInterface;
+use Phalcon\Http\Request;
 use Phalcon\Support\Helper\Str\StartsWith;
-use Phalcon\Auth\AuthenticatableInterface;
 use Phalcon\Auth\Adapter\AdapterInterface;
+use Phalcon\Auth\AuthenticatableInterface;
 use Phalcon\Di\Di;
 
 class Token implements GuardInterface
@@ -15,12 +14,12 @@ class Token implements GuardInterface
     protected adapter;
     protected user;
 
-    public function __construct(<AdapterInterface> adapter, <ConfigInterface> config, string nameGuard)
+    public function __construct(<AdapterInterface> adapter, array config, <Request> request)
     {
         let this->adapter        = adapter;
-        let this->request        = Di::getDefault()->getShared("request");
-        let this->inputKey       = config->inputKey ? config->inputKey : "auth_token";
-        let this->storageKey     = config->storageKey ? config->storageKey : "auth_token";
+        let this->request        = request;
+        let this->inputKey       = config["inputKey"];
+        let this->storageKey     = config["storageKey"];
     }
 
     public function user()
@@ -43,7 +42,7 @@ class Token implements GuardInterface
         return user;
     }
 
-    public function validate(array credentials = [])
+    public function validate(array credentials = []) -> bool
     {
         if empty credentials[this->inputKey] {
             return false;
@@ -78,6 +77,25 @@ class Token implements GuardInterface
         if {helper}(header, "Bearer ") {
             return mb_substr(header, 7, null, "UTF-8");
         }
+    }
+
+    public function setRequest(<Request> request)
+    {
+        let this->request = request;
+
+        return this;
+    }
+
+    public function getAdapter() -> <AdapterInterface>
+    {
+        return this->adapter;
+    }
+
+    public function setAdapter(<AdapterInterface> adapter)
+    {
+        let this->adapter = adapter;
+
+        return this;
     }
 
     public function id()

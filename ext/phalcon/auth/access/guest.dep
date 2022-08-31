@@ -96,15 +96,16 @@ phalcon/auth/access/guest.lo: \
  /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/access/../../../phalcon/auth/adapter/abstractadapter.zep.h \
  /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/access/../../../phalcon/auth/access/abstractaccess.zep.h \
  /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/access/../../../phalcon/auth/guard/guardinterface.zep.h \
+ /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/access/../../../phalcon/auth/managerinterface.zep.h \
  /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/access/../../../phalcon/auth/access/authenticatesrequestinterface.zep.h \
  /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/access/../../../phalcon/auth/adapter/adapterwithremembertokeninterface.zep.h \
+ /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/access/../../../phalcon/auth/adapter/memory.zep.h \
  /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/access/../../../phalcon/auth/guard/basicauthinterface.zep.h \
  /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/access/../../../phalcon/auth/guard/guardstatefulinterface.zep.h \
- /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/access/../../../phalcon/auth/managerinterface.zep.h \
+ /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/access/../../../phalcon/auth/manager.zep.h \
  /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/access/../../../phalcon/auth/access/auth.zep.h \
  /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/access/../../../phalcon/auth/access/authenticate.zep.h \
  /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/access/../../../phalcon/auth/access/guest.zep.h \
- /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/access/../../../phalcon/auth/adapter/memory.zep.h \
  /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/access/../../../phalcon/auth/adapter/model.zep.h \
  /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/access/../../../phalcon/auth/adapter/stream.zep.h \
  /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/access/../../../phalcon/auth/authenticatableinterface.zep.h \
@@ -112,7 +113,7 @@ phalcon/auth/access/guest.lo: \
  /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/access/../../../phalcon/auth/guard/session.zep.h \
  /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/access/../../../phalcon/auth/guard/token.zep.h \
  /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/access/../../../phalcon/auth/guard/userremember.zep.h \
- /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/access/../../../phalcon/auth/manager.zep.h \
+ /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/access/../../../phalcon/auth/managerfactory.zep.h \
  /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/access/../../../phalcon/auth/remembertokeninterface.zep.h \
  /home/sinbad/www/zephir/cphalcon-auth/ext/phalcon/auth/access/../../../phalcon/auth/rememberinginterface.zep.h \
  /usr/include/php/20210902/Zend/zend_operators.h \

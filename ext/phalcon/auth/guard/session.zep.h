@@ -23,8 +23,11 @@ PHP_METHOD(Phalcon_Auth_Guard_Session, logout);
 PHP_METHOD(Phalcon_Auth_Guard_Session, getLastUserAttempted);
 PHP_METHOD(Phalcon_Auth_Guard_Session, viaRemember);
 PHP_METHOD(Phalcon_Auth_Guard_Session, getUser);
-PHP_METHOD(Phalcon_Auth_Guard_Session, getRequest);
 PHP_METHOD(Phalcon_Auth_Guard_Session, setRequest);
+PHP_METHOD(Phalcon_Auth_Guard_Session, setSession);
+PHP_METHOD(Phalcon_Auth_Guard_Session, setCookies);
+PHP_METHOD(Phalcon_Auth_Guard_Session, getAdapter);
+PHP_METHOD(Phalcon_Auth_Guard_Session, setAdapter);
 PHP_METHOD(Phalcon_Auth_Guard_Session, basic);
 PHP_METHOD(Phalcon_Auth_Guard_Session, attemptBasic);
 PHP_METHOD(Phalcon_Auth_Guard_Session, basicCredentials);
@@ -38,10 +41,12 @@ PHP_METHOD(Phalcon_Auth_Guard_Session, hasUser);
 PHP_METHOD(Phalcon_Auth_Guard_Session, guest);
 PHP_METHOD(Phalcon_Auth_Guard_Session, authenticate);
 
-ZEND_BEGIN_ARG_INFO_EX(arginfo_phalcon_auth_guard_session___construct, 0, 0, 3)
+ZEND_BEGIN_ARG_INFO_EX(arginfo_phalcon_auth_guard_session___construct, 0, 0, 5)
 	ZEND_ARG_OBJ_INFO(0, adapter, Phalcon\\Auth\\Adapter\\AdapterInterface, 0)
-	ZEND_ARG_OBJ_INFO(0, config, Phalcon\\Config\\ConfigInterface, 0)
-	ZEND_ARG_TYPE_INFO(0, nameGuard, IS_STRING, 0)
+	ZEND_ARG_OBJ_INFO(0, session, Phalcon\\Session\\ManagerInterface, 0)
+	ZEND_ARG_OBJ_INFO(0, cookies, Phalcon\\Http\\Response\\Cookies, 0)
+	ZEND_ARG_OBJ_INFO(0, request, Phalcon\\Http\\Request, 0)
+	ZEND_ARG_OBJ_INFO(0, eventsManager, Phalcon\\Events\\ManagerInterface, 0)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_phalcon_auth_guard_session_attempt, 0, 0, _IS_BOOL, 0)
@@ -69,7 +74,7 @@ ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_phalcon_auth_guard_session_valid
 #endif
 ZEND_END_ARG_INFO()
 
-ZEND_BEGIN_ARG_INFO_EX(arginfo_phalcon_auth_guard_session_userfromrecaller, 0, 0, 1)
+ZEND_BEGIN_ARG_WITH_RETURN_OBJ_INFO_EX(arginfo_phalcon_auth_guard_session_userfromrecaller, 0, 1, Phalcon\\Auth\\AuthenticatableInterface, 1)
 	ZEND_ARG_INFO(0, recaller)
 ZEND_END_ARG_INFO()
 
@@ -129,11 +134,23 @@ ZEND_END_ARG_INFO()
 ZEND_BEGIN_ARG_INFO_EX(arginfo_phalcon_auth_guard_session_getuser, 0, 0, 0)
 ZEND_END_ARG_INFO()
 
-ZEND_BEGIN_ARG_WITH_RETURN_OBJ_INFO_EX(arginfo_phalcon_auth_guard_session_getrequest, 0, 0, Phalcon\\Http\\Request, 0)
-ZEND_END_ARG_INFO()
-
 ZEND_BEGIN_ARG_INFO_EX(arginfo_phalcon_auth_guard_session_setrequest, 0, 0, 1)
 	ZEND_ARG_OBJ_INFO(0, request, Phalcon\\Http\\Request, 0)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_phalcon_auth_guard_session_setsession, 0, 0, 1)
+	ZEND_ARG_OBJ_INFO(0, session, Phalcon\\Session\\ManagerInterface, 0)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_phalcon_auth_guard_session_setcookies, 0, 0, 1)
+	ZEND_ARG_OBJ_INFO(0, cookies, Phalcon\\Http\\Response\\Cookies, 0)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_WITH_RETURN_OBJ_INFO_EX(arginfo_phalcon_auth_guard_session_getadapter, 0, 0, Phalcon\\Auth\\Adapter\\AdapterInterface, 0)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_phalcon_auth_guard_session_setadapter, 0, 0, 1)
+	ZEND_ARG_OBJ_INFO(0, adapter, Phalcon\\Auth\\Adapter\\AdapterInterface, 0)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_phalcon_auth_guard_session_basic, 0, 0, _IS_BOOL, 0)
@@ -241,8 +258,11 @@ ZEPHIR_INIT_FUNCS(phalcon_auth_guard_session_method_entry) {
 #else
 	PHP_ME(Phalcon_Auth_Guard_Session, getUser, NULL, ZEND_ACC_PUBLIC)
 #endif
-	PHP_ME(Phalcon_Auth_Guard_Session, getRequest, arginfo_phalcon_auth_guard_session_getrequest, ZEND_ACC_PUBLIC)
 	PHP_ME(Phalcon_Auth_Guard_Session, setRequest, arginfo_phalcon_auth_guard_session_setrequest, ZEND_ACC_PUBLIC)
+	PHP_ME(Phalcon_Auth_Guard_Session, setSession, arginfo_phalcon_auth_guard_session_setsession, ZEND_ACC_PUBLIC)
+	PHP_ME(Phalcon_Auth_Guard_Session, setCookies, arginfo_phalcon_auth_guard_session_setcookies, ZEND_ACC_PUBLIC)
+	PHP_ME(Phalcon_Auth_Guard_Session, getAdapter, arginfo_phalcon_auth_guard_session_getadapter, ZEND_ACC_PUBLIC)
+	PHP_ME(Phalcon_Auth_Guard_Session, setAdapter, arginfo_phalcon_auth_guard_session_setadapter, ZEND_ACC_PUBLIC)
 	PHP_ME(Phalcon_Auth_Guard_Session, basic, arginfo_phalcon_auth_guard_session_basic, ZEND_ACC_PUBLIC)
 	PHP_ME(Phalcon_Auth_Guard_Session, attemptBasic, arginfo_phalcon_auth_guard_session_attemptbasic, ZEND_ACC_PROTECTED)
 	PHP_ME(Phalcon_Auth_Guard_Session, basicCredentials, arginfo_phalcon_auth_guard_session_basiccredentials, ZEND_ACC_PROTECTED)

@@ -18,7 +18,6 @@ ZEPHIR_INIT_CLASS(Phalcon_Auth_Exception)
 {
 	ZEPHIR_REGISTER_CLASS_EX(Phalcon\\Auth, Exception, phalcon, auth_exception, zend_ce_exception, NULL, 0);
 
-	zend_declare_property_string(phalcon_auth_exception_ce, SL("message"), "An error occurred", ZEND_ACC_PROTECTED);
 	return SUCCESS;
 }
 

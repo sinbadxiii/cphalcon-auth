@@ -3,7 +3,7 @@ extern zend_class_entry *phalcon_auth_guard_basicauthinterface_ce;
 
 ZEPHIR_INIT_CLASS(Phalcon_Auth_Guard_BasicAuthInterface);
 
-ZEND_BEGIN_ARG_INFO_EX(arginfo_phalcon_auth_guard_basicauthinterface_basic, 0, 0, 0)
+ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_phalcon_auth_guard_basicauthinterface_basic, 0, 0, _IS_BOOL, 0)
 	ZEND_ARG_TYPE_INFO(0, field, IS_STRING, 0)
 #if PHP_VERSION_ID >= 80000
 	ZEND_ARG_TYPE_INFO_WITH_DEFAULT_VALUE(0, extraConditions, IS_ARRAY, 0, "[]")

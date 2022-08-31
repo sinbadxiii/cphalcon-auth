@@ -7,7 +7,7 @@ ZEND_BEGIN_ARG_WITH_RETURN_OBJ_INFO_EX(arginfo_phalcon_auth_managerinterface_gua
 	ZEND_ARG_INFO(0, name)
 ZEND_END_ARG_INFO()
 
-ZEND_BEGIN_ARG_WITH_RETURN_OBJ_INFO_EX(arginfo_phalcon_auth_managerinterface_access, 0, 1, Phalcon\\Auth\\Access\\AccessInterface, 1)
+ZEND_BEGIN_ARG_WITH_RETURN_OBJ_INFO_EX(arginfo_phalcon_auth_managerinterface_access, 0, 1, Phalcon\\Auth\\ManagerInterface, 1)
 	ZEND_ARG_TYPE_INFO(0, accessName, IS_STRING, 0)
 ZEND_END_ARG_INFO()
 

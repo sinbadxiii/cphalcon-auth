@@ -3,11 +3,31 @@ namespace Phalcon\Auth\Adapter;
 use InvalidArgumentException;
 use Exception;
 
-class Stream extends AbstractAdapter
+class Stream extends Memory
 {
-    protected function getProviderStorage() -> var
+    protected srcFile;
+
+    public function getData()
     {
-        return this->read(this->config->src);
+        if this->config && !isset(this->config["src"]) {
+            throw new InvalidArgumentException(
+                "Сonfig key 'src' with user data array empty or does not exist"
+            );
+        }
+
+        if !empty(this->config["src"]) {
+            let this->srcFile = this->config["src"];
+        }
+
+        if empty(this->srcFile) {
+            throw new InvalidArgumentException(
+                "File source is empty"
+            );
+        }
+
+        let this->data = this->read(this->srcFile);
+
+        return this->data;
     }
 
     public function read(string src)
@@ -35,5 +55,15 @@ class Stream extends AbstractAdapter
         }
 
         return decoded;
+    }
+
+    public function getFileSource() -> string
+    {
+        return this->srcFile;
+    }
+
+    public function setFileSource(string src) -> void
+    {
+        let this->srcFile = src;
     }
 }

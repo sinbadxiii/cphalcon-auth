@@ -26,27 +26,28 @@
 zend_class_entry *phalcon_auth_adapter_adapterinterface_ce;
 zend_class_entry *phalcon_auth_access_accessinterface_ce;
 zend_class_entry *phalcon_auth_guard_guardinterface_ce;
+zend_class_entry *phalcon_auth_managerinterface_ce;
 zend_class_entry *phalcon_auth_access_authenticatesrequestinterface_ce;
 zend_class_entry *phalcon_auth_adapter_adapterwithremembertokeninterface_ce;
 zend_class_entry *phalcon_auth_guard_basicauthinterface_ce;
 zend_class_entry *phalcon_auth_guard_guardstatefulinterface_ce;
-zend_class_entry *phalcon_auth_managerinterface_ce;
 zend_class_entry *phalcon_auth_authenticatableinterface_ce;
 zend_class_entry *phalcon_auth_rememberinginterface_ce;
 zend_class_entry *phalcon_auth_remembertokeninterface_ce;
 zend_class_entry *phalcon_auth_adapter_abstractadapter_ce;
 zend_class_entry *phalcon_auth_access_abstractaccess_ce;
+zend_class_entry *phalcon_auth_adapter_memory_ce;
+zend_class_entry *phalcon_auth_manager_ce;
 zend_class_entry *phalcon_auth_access_auth_ce;
 zend_class_entry *phalcon_auth_access_authenticate_ce;
 zend_class_entry *phalcon_auth_access_guest_ce;
-zend_class_entry *phalcon_auth_adapter_memory_ce;
 zend_class_entry *phalcon_auth_adapter_model_ce;
 zend_class_entry *phalcon_auth_adapter_stream_ce;
 zend_class_entry *phalcon_auth_exception_ce;
 zend_class_entry *phalcon_auth_guard_session_ce;
 zend_class_entry *phalcon_auth_guard_token_ce;
 zend_class_entry *phalcon_auth_guard_userremember_ce;
-zend_class_entry *phalcon_auth_manager_ce;
+zend_class_entry *phalcon_auth_managerfactory_ce;
 
 ZEND_DECLARE_MODULE_GLOBALS(phalcon_auth)
 
@@ -61,27 +62,28 @@ static PHP_MINIT_FUNCTION(phalcon_auth)
 	ZEPHIR_INIT(Phalcon_Auth_Adapter_AdapterInterface);
 	ZEPHIR_INIT(Phalcon_Auth_Access_AccessInterface);
 	ZEPHIR_INIT(Phalcon_Auth_Guard_GuardInterface);
+	ZEPHIR_INIT(Phalcon_Auth_ManagerInterface);
 	ZEPHIR_INIT(Phalcon_Auth_Access_AuthenticatesRequestInterface);
 	ZEPHIR_INIT(Phalcon_Auth_Adapter_AdapterWithRememberTokenInterface);
 	ZEPHIR_INIT(Phalcon_Auth_Guard_BasicAuthInterface);
 	ZEPHIR_INIT(Phalcon_Auth_Guard_GuardStatefulInterface);
-	ZEPHIR_INIT(Phalcon_Auth_ManagerInterface);
 	ZEPHIR_INIT(Phalcon_Auth_AuthenticatableInterface);
 	ZEPHIR_INIT(Phalcon_Auth_RememberTokenInterface);
 	ZEPHIR_INIT(Phalcon_Auth_RememberingInterface);
 	ZEPHIR_INIT(Phalcon_Auth_Adapter_AbstractAdapter);
 	ZEPHIR_INIT(Phalcon_Auth_Access_AbstractAccess);
+	ZEPHIR_INIT(Phalcon_Auth_Adapter_Memory);
+	ZEPHIR_INIT(Phalcon_Auth_Manager);
 	ZEPHIR_INIT(Phalcon_Auth_Access_Auth);
 	ZEPHIR_INIT(Phalcon_Auth_Access_Authenticate);
 	ZEPHIR_INIT(Phalcon_Auth_Access_Guest);
-	ZEPHIR_INIT(Phalcon_Auth_Adapter_Memory);
 	ZEPHIR_INIT(Phalcon_Auth_Adapter_Model);
 	ZEPHIR_INIT(Phalcon_Auth_Adapter_Stream);
 	ZEPHIR_INIT(Phalcon_Auth_Exception);
 	ZEPHIR_INIT(Phalcon_Auth_Guard_Session);
 	ZEPHIR_INIT(Phalcon_Auth_Guard_Token);
 	ZEPHIR_INIT(Phalcon_Auth_Guard_UserRemember);
-	ZEPHIR_INIT(Phalcon_Auth_Manager);
+	ZEPHIR_INIT(Phalcon_Auth_ManagerFactory);
 	
 	return SUCCESS;
 }

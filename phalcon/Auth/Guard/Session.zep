@@ -1,38 +1,41 @@
 namespace Phalcon\Auth\Guard;
 
-use Phalcon\Config\ConfigInterface;
+use Phalcon\Events\AbstractEventsAware;
+use Phalcon\Http\Response\Cookies;
 use Phalcon\Http\Request;
 use Phalcon\Auth\AuthenticatableInterface;
-use Phalcon\Auth\RememberTokenInterface;
 use Phalcon\Auth\Adapter\AdapterInterface;
 use Phalcon\Auth\Adapter\AdapterWithRememberTokenInterface;
 use InvalidArgumentException;
 use Phalcon\Di\Di;
+use Phalcon\Auth\RememberTokenInterface;
+use Phalcon\Session\ManagerInterface as SessionManagerInterface;
+use Phalcon\Events\ManagerInterface as EventsManagerInterface;
 
-class Session implements GuardInterface, GuardStatefulInterface, BasicAuthInterface
+class Session extends AbstractEventsAware implements
+        GuardInterface, GuardStatefulInterface, BasicAuthInterface
 {
-    protected nameGuard;
     protected session;
     protected cookies;
-    protected eventsManager;
     protected request;
+    protected eventsManager;
     protected lastUserAttempted;
 
     protected viaRemember = false;
     protected adapter;
 
-    protected di;
     protected user;
 
-    public function __construct(<AdapterInterface> adapter, <ConfigInterface> config, string nameGuard)
+    public function __construct(
+        <AdapterInterface> adapter, <SessionManagerInterface> session,
+        <Cookies> cookies, <Request> request, <EventsManagerInterface> eventsManager
+    )
     {
-        let  this->nameGuard = nameGuard;
-        let  this->adapter   = adapter;
-
-        let  this->session        = Di::getDefault()->getShared("session");
-        let  this->cookies        = Di::getDefault()->getShared("cookies");
-        let  this->eventsManager  = Di::getDefault()->getShared("eventsManager");
-        let  this->request        = this->getRequest();
+        let  this->adapter        = adapter;
+        let  this->session        = session;
+        let  this->cookies        = cookies;
+        let  this->request        = request;
+        let  this->eventsManager  = eventsManager;
     }
 
     public function attempt(array credentials = [], bool remember = false) -> bool
@@ -85,7 +88,7 @@ class Session implements GuardInterface, GuardStatefulInterface, BasicAuthInterf
         return this->hasValidCredentials(this->lastUserAttempted, credentials);
     }
 
-    protected function userFromRecaller(recaller)
+    protected function userFromRecaller(recaller) -> <AuthenticatableInterface> | null
     {
         var user;
         let user = this->adapter->retrieveByToken(
@@ -116,12 +119,12 @@ class Session implements GuardInterface, GuardStatefulInterface, BasicAuthInterf
 
     public function getName() -> string
     {
-        return sprintf("auth_%s_%s", this->nameGuard, sha1(get_class(this)));
+        return sprintf("auth_%s", sha1(get_class(this) . get_class(this->adapter)));
     }
 
     public function getRememberName() -> string
     {
-        return sprintf("remember_%s_%s", this->nameGuard, sha1(get_class(this)));
+        return sprintf("remember_%s", sha1(get_class(this) . get_class(this->adapter)));
     }
 
     public function login(<AuthenticatableInterface> user, bool remember = false) -> void
@@ -131,7 +134,6 @@ class Session implements GuardInterface, GuardStatefulInterface, BasicAuthInterf
         this->updateSession(user->getAuthIdentifier());
 
         if remember {
-
             if !(this->adapter instanceof AdapterWithRememberTokenInterface) {
                 throw new InvalidArgumentException(
                     "Adapter " . get_class(this->adapter) . " not instanceof AdapterWithRememberTokenInterface"
@@ -244,14 +246,35 @@ class Session implements GuardInterface, GuardStatefulInterface, BasicAuthInterf
         return this->user;
     }
 
-    public function getRequest() -> <Request>
-    {
-        return this->request ? this->request : Di::getDefault()->getShared("request");
-    }
-
     public function setRequest(<Request> request)
     {
         let this->request = request;
+
+        return this;
+    }
+
+    public function setSession(<SessionManagerInterface> session)
+    {
+        let this->session = session;
+
+        return this;
+    }
+
+    public function setCookies(<Cookies> cookies)
+    {
+        let this->cookies = cookies;
+
+        return this;
+    }
+
+    public function getAdapter() -> <AdapterInterface>
+    {
+        return this->adapter;
+    }
+
+    public function setAdapter(<AdapterInterface> adapter)
+    {
+        let this->adapter = adapter;
 
         return this;
     }
@@ -262,7 +285,7 @@ class Session implements GuardInterface, GuardStatefulInterface, BasicAuthInterf
             return true;
         }
 
-        if this->attemptBasic(this->getRequest(), field, extraConditions) {
+        if this->attemptBasic(this->request, field, extraConditions) {
             return true;
         }
 
@@ -291,7 +314,7 @@ class Session implements GuardInterface, GuardStatefulInterface, BasicAuthInterf
     public function onceBasic(string field = "email", array extraConditions = [])
     {
         var credentials;
-        let credentials = this->basicCredentials(this->getRequest(), field);
+        let credentials = this->basicCredentials(this->request, field);
 
         if this->once(array_merge(credentials, extraConditions)) {
             return this->getUser();

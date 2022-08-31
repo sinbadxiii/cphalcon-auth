@@ -9,95 +9,38 @@ abstract class AbstractAdapter implements AdapterInterface
 {
     protected hasher;
     protected config;
+    protected model;
 
-    public function __construct(<Security> hasher, <ConfigInterface> config)
+    public function __construct(<Security> hasher, array config = [])
     {
         let this->hasher = hasher, this->config = config;
+
+        if !empty(this->config["model"]) {
+            let this->model = $this->config["model"];
+        }
     }
 
-    abstract protected function getProviderStorage() -> var;
-
-    public function retrieveByCredentials(array credentials) -> <AuthenticatableInterface> | null
+    public function getModel() -> string
     {
-        var providerStorage;
-        let providerStorage = this->getProviderStorage();
-
-        return this->first(providerStorage, credentials);
+        return this->model;
     }
 
-    public function retrieveById(var identifier) -> <AuthenticatableInterface> | null
+    public function setModel(string model) -> var
     {
-        var providerStorage, userData, userModel;
+        let this->model = model;
 
-        let providerStorage = this->getProviderStorage();
-        let userData = providerStorage[identifier];
-
-        if empty(this->config->model) {
-            throw new InvalidArgumentException("Сonfig with key 'model' is empty");
-        }
-        let userModel = this->config->model;
-
-        return userData ? new {userModel}(userData) : null;
+        return this;
     }
 
-    public function validateCredentials(<AuthenticatableInterface> user, array credentials) -> bool
+    public function getConfig() -> array
     {
-        return (this->config->passsword_crypted) ? this->hasher->checkHash(
-            credentials["password"], user->getAuthPassword()
-        ) : credentials["password"] === user->getAuthPassword();
+        return this->config;
     }
 
-    public function find(array providerStorage, array credentials) -> array
+    public function setConfig(array config) -> var
     {
-        var field;
+        let this->config = config;
 
-        if (array_key_first(credentials) === null) {
-            let field = "email";
-        }
-
-        var term = credentials[field],
-        keys = array_keys(array_column(providerStorage, field), term),
-        userModel, result = [];
-
-        if empty(this->config->model) {
-            throw new InvalidArgumentException("Сonfig with key 'model' is empty");
-        }
-        let userModel = this->config->model;
-
-        if keys !== null {
-            var key;
-            for key in keys {
-                var data = providerStorage[key];
-                let data["id"] = key;
-                let result[] = new {userModel}(data);
-            }
-        }
-
-        return result;
-    }
-
-    public function first(array providerStorage, array credentials) -> <AuthenticatableInterface> | null
-    {
-        var field = array_key_first(credentials), userModel;
-
-        if (field === null) {
-            let field = "email";
-        }
-
-        var term = credentials[field];
-        var key = array_search(term, array_column(providerStorage, field), true);
-
-        if empty(this->config->model) {
-            throw new InvalidArgumentException("Сonfig with key 'model' is empty");
-        }
-        let userModel = this->config->model;
-
-        if key !== false {
-            var data = providerStorage[key];
-            let data["id"] = key;
-            return new {userModel}(data);
-        }
-
-        return null;
+        return this;
     }
 }
