@@ -34,8 +34,8 @@ ZEPHIR_INIT_CLASS(Phalcon_Auth_Adapter_Stream)
 
 PHP_METHOD(Phalcon_Auth_Adapter_Stream, getData)
 {
-	zend_bool _1;
-	zval _0, _2, _3, _4, _7, _8, _9, _5$$4, _6$$4;
+	zend_bool _1, _8;
+	zval _0, _2, _3, _4, _7, _9, _10, _13, _5$$4, _6$$4, _11$$6, _12$$6;
 	zephir_method_globals *ZEPHIR_METHOD_GLOBALS_PTR = NULL;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
 	zval *this_ptr = getThis();
@@ -45,10 +45,13 @@ PHP_METHOD(Phalcon_Auth_Adapter_Stream, getData)
 	ZVAL_UNDEF(&_3);
 	ZVAL_UNDEF(&_4);
 	ZVAL_UNDEF(&_7);
-	ZVAL_UNDEF(&_8);
 	ZVAL_UNDEF(&_9);
+	ZVAL_UNDEF(&_10);
+	ZVAL_UNDEF(&_13);
 	ZVAL_UNDEF(&_5$$4);
 	ZVAL_UNDEF(&_6$$4);
+	ZVAL_UNDEF(&_11$$6);
+	ZVAL_UNDEF(&_12$$6);
 
 
 	ZEPHIR_MM_GROW();
@@ -60,7 +63,7 @@ PHP_METHOD(Phalcon_Auth_Adapter_Stream, getData)
 		_1 = !(zephir_array_isset_string(&_2, SL("src")));
 	}
 	if (_1) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "Сonfig key 'src' with user data array empty or does not exist", "phalcon/Auth/Adapter/Stream.zep", 15);
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "Сonfig key 'src' with path source file not exist", "phalcon/Auth/Adapter/Stream.zep", 15);
 		return;
 	}
 	zephir_read_property(&_3, this_ptr, ZEND_STRL("config"), PH_NOISY_CC | PH_READONLY);
@@ -72,15 +75,31 @@ PHP_METHOD(Phalcon_Auth_Adapter_Stream, getData)
 		zephir_update_property_zval(this_ptr, ZEND_STRL("srcFile"), &_6$$4);
 	}
 	ZEPHIR_OBS_VAR(&_7);
-	zephir_read_property(&_7, this_ptr, ZEND_STRL("srcFile"), PH_NOISY_CC);
-	if (ZEPHIR_IS_EMPTY(&_7)) {
+	zephir_read_property(&_7, this_ptr, ZEND_STRL("data"), PH_NOISY_CC);
+	_8 = ZEPHIR_IS_EMPTY(&_7);
+	if (_8) {
+		ZEPHIR_OBS_VAR(&_9);
+		zephir_read_property(&_9, this_ptr, ZEND_STRL("srcFile"), PH_NOISY_CC);
+		_8 = ZEPHIR_IS_EMPTY(&_9);
+	}
+	if (_8) {
 		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "File source is empty", "phalcon/Auth/Adapter/Stream.zep", 25);
 		return;
 	}
-	zephir_read_property(&_9, this_ptr, ZEND_STRL("srcFile"), PH_NOISY_CC | PH_READONLY);
-	ZEPHIR_CALL_METHOD(&_8, this_ptr, "read", NULL, 0, &_9);
-	zephir_check_call_status();
-	zephir_update_property_zval(this_ptr, ZEND_STRL("data"), &_8);
+	ZEPHIR_OBS_VAR(&_10);
+	zephir_read_property(&_10, this_ptr, ZEND_STRL("data"), PH_NOISY_CC);
+	if (ZEPHIR_IS_EMPTY(&_10)) {
+		zephir_read_property(&_12$$6, this_ptr, ZEND_STRL("srcFile"), PH_NOISY_CC | PH_READONLY);
+		ZEPHIR_CALL_METHOD(&_11$$6, this_ptr, "read", NULL, 0, &_12$$6);
+		zephir_check_call_status();
+		zephir_update_property_zval(this_ptr, ZEND_STRL("data"), &_11$$6);
+	}
+	ZEPHIR_OBS_VAR(&_13);
+	zephir_read_property(&_13, this_ptr, ZEND_STRL("data"), PH_NOISY_CC);
+	if (ZEPHIR_IS_EMPTY(&_13)) {
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "Data is empty", "phalcon/Auth/Adapter/Stream.zep", 35);
+		return;
+	}
 	RETURN_MM_MEMBER(getThis(), "data");
 }
 
@@ -116,7 +135,7 @@ PHP_METHOD(Phalcon_Auth_Adapter_Stream, read)
 		ZEPHIR_CONCAT_VS(&_1$$3, &src, " file don't exist");
 		ZEPHIR_CALL_METHOD(NULL, &_0$$3, "__construct", NULL, 6, &_1$$3);
 		zephir_check_call_status();
-		zephir_throw_exception_debug(&_0$$3, "phalcon/Auth/Adapter/Stream.zep", 38);
+		zephir_throw_exception_debug(&_0$$3, "phalcon/Auth/Adapter/Stream.zep", 46);
 		ZEPHIR_MM_RESTORE();
 		return;
 	}
@@ -170,7 +189,7 @@ PHP_METHOD(Phalcon_Auth_Adapter_Stream, validate)
 		ZEPHIR_CONCAT_VSV(&_3$$3, &src, " json_decode error: ", &_2$$3);
 		ZEPHIR_CALL_METHOD(NULL, &_1$$3, "__construct", NULL, 4, &_3$$3);
 		zephir_check_call_status();
-		zephir_throw_exception_debug(&_1$$3, "phalcon/Auth/Adapter/Stream.zep", 54);
+		zephir_throw_exception_debug(&_1$$3, "phalcon/Auth/Adapter/Stream.zep", 62);
 		ZEPHIR_MM_RESTORE();
 		return;
 	}

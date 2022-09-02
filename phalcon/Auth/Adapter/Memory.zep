@@ -67,7 +67,6 @@ class Memory extends AbstractAdapter
         return this->getData();
     }
 
-
     public function getData()
     {
         if (this->config && !isset(this->config["data"])) {

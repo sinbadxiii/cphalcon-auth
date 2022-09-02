@@ -281,21 +281,21 @@ PHP_METHOD(Phalcon_Auth_Adapter_Memory, getData)
 		_1 = !(zephir_array_isset_string(&_2, SL("data")));
 	}
 	if (_1) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "Сonfig key 'datа' with user data array empty or does not exist", "phalcon/Auth/Adapter/Memory.zep", 76);
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "Сonfig key 'datа' with user data array empty or does not exist", "phalcon/Auth/Adapter/Memory.zep", 75);
 		return;
 	}
 	zephir_read_property(&_3, this_ptr, ZEND_STRL("config"), PH_NOISY_CC | PH_READONLY);
 	ZEPHIR_OBS_VAR(&_4);
-	zephir_array_fetch_string(&_4, &_3, SL("data"), PH_NOISY, "phalcon/Auth/Adapter/Memory.zep", 79);
+	zephir_array_fetch_string(&_4, &_3, SL("data"), PH_NOISY, "phalcon/Auth/Adapter/Memory.zep", 78);
 	if (!(ZEPHIR_IS_EMPTY(&_4))) {
 		zephir_read_property(&_5$$4, this_ptr, ZEND_STRL("config"), PH_NOISY_CC | PH_READONLY);
-		zephir_array_fetch_string(&_6$$4, &_5$$4, SL("data"), PH_NOISY | PH_READONLY, "phalcon/Auth/Adapter/Memory.zep", 80);
+		zephir_array_fetch_string(&_6$$4, &_5$$4, SL("data"), PH_NOISY | PH_READONLY, "phalcon/Auth/Adapter/Memory.zep", 79);
 		zephir_update_property_zval(this_ptr, ZEND_STRL("data"), &_6$$4);
 	}
 	ZEPHIR_OBS_VAR(&_7);
 	zephir_read_property(&_7, this_ptr, ZEND_STRL("data"), PH_NOISY_CC);
 	if (ZEPHIR_IS_EMPTY(&_7)) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "Data is empty", "phalcon/Auth/Adapter/Memory.zep", 86);
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "Data is empty", "phalcon/Auth/Adapter/Memory.zep", 85);
 		return;
 	}
 	RETURN_MM_MEMBER(getThis(), "data");
