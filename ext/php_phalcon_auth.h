@@ -14,7 +14,7 @@
 #define PHP_PHALCON_AUTH_VERSION     "1.0.0"
 #define PHP_PHALCON_AUTH_EXTNAME     "phalcon_auth"
 #define PHP_PHALCON_AUTH_AUTHOR      "Sergey Mukhin"
-#define PHP_PHALCON_AUTH_ZEPVERSION  "0.16.0-4fac47b"
+#define PHP_PHALCON_AUTH_ZEPVERSION  "0.17.0-9f99da6"
 #define PHP_PHALCON_AUTH_DESCRIPTION "Phalcon Auth - Guard-Based Authentication"
 
 

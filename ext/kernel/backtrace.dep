@@ -1,0 +1,2 @@
+kernel/backtrace.lo: \
+ /home/sinbad/www/zephir/cphalcon-auth/ext/kernel/backtrace.c

@@ -47,7 +47,7 @@ PHP_METHOD(Phalcon_Auth_Guard_Token, __construct)
 #if PHP_VERSION_ID >= 80000
 	bool is_null_true = 1;
 	ZEND_PARSE_PARAMETERS_START(3, 3)
-		Z_PARAM_OBJECT_OF_CLASS(adapter, zephir_get_internal_ce(SL("phalcon\\auth\\adapter\\adapterinterface")))
+		Z_PARAM_OBJECT_OF_CLASS(adapter, phalcon_auth_adapter_adapterinterface_ce)
 		Z_PARAM_ARRAY(config)
 		Z_PARAM_OBJECT_OF_CLASS(request, zephir_get_internal_ce(SL("phalcon\\http\\request")))
 	ZEND_PARSE_PARAMETERS_END();
@@ -279,7 +279,7 @@ PHP_METHOD(Phalcon_Auth_Guard_Token, setAdapter)
 #if PHP_VERSION_ID >= 80000
 	bool is_null_true = 1;
 	ZEND_PARSE_PARAMETERS_START(1, 1)
-		Z_PARAM_OBJECT_OF_CLASS(adapter, zephir_get_internal_ce(SL("phalcon\\auth\\adapter\\adapterinterface")))
+		Z_PARAM_OBJECT_OF_CLASS(adapter, phalcon_auth_adapter_adapterinterface_ce)
 	ZEND_PARSE_PARAMETERS_END();
 #endif
 
@@ -325,7 +325,7 @@ PHP_METHOD(Phalcon_Auth_Guard_Token, setUser)
 #if PHP_VERSION_ID >= 80000
 	bool is_null_true = 1;
 	ZEND_PARSE_PARAMETERS_START(1, 1)
-		Z_PARAM_OBJECT_OF_CLASS(user, zephir_get_internal_ce(SL("phalcon\\auth\\authenticatableinterface")))
+		Z_PARAM_OBJECT_OF_CLASS(user, phalcon_auth_authenticatableinterface_ce)
 	ZEND_PARSE_PARAMETERS_END();
 #endif
 

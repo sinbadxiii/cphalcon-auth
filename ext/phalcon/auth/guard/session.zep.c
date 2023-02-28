@@ -54,7 +54,7 @@ PHP_METHOD(Phalcon_Auth_Guard_Session, __construct)
 #if PHP_VERSION_ID >= 80000
 	bool is_null_true = 1;
 	ZEND_PARSE_PARAMETERS_START(5, 5)
-		Z_PARAM_OBJECT_OF_CLASS(adapter, zephir_get_internal_ce(SL("phalcon\\auth\\adapter\\adapterinterface")))
+		Z_PARAM_OBJECT_OF_CLASS(adapter, phalcon_auth_adapter_adapterinterface_ce)
 		Z_PARAM_OBJECT_OF_CLASS(session, zephir_get_internal_ce(SL("phalcon\\session\\managerinterface")))
 		Z_PARAM_OBJECT_OF_CLASS(cookies, zephir_get_internal_ce(SL("phalcon\\http\\response\\cookies")))
 		Z_PARAM_OBJECT_OF_CLASS(request, zephir_get_internal_ce(SL("phalcon\\http\\request")))
@@ -464,7 +464,7 @@ PHP_METHOD(Phalcon_Auth_Guard_Session, login)
 #if PHP_VERSION_ID >= 80000
 	bool is_null_true = 1;
 	ZEND_PARSE_PARAMETERS_START(1, 2)
-		Z_PARAM_OBJECT_OF_CLASS(user, zephir_get_internal_ce(SL("phalcon\\auth\\authenticatableinterface")))
+		Z_PARAM_OBJECT_OF_CLASS(user, phalcon_auth_authenticatableinterface_ce)
 		Z_PARAM_OPTIONAL
 		Z_PARAM_BOOL(remember)
 	ZEND_PARSE_PARAMETERS_END();
@@ -644,7 +644,7 @@ PHP_METHOD(Phalcon_Auth_Guard_Session, rememberUser)
 #if PHP_VERSION_ID >= 80000
 	bool is_null_true = 1;
 	ZEND_PARSE_PARAMETERS_START(1, 1)
-		Z_PARAM_OBJECT_OF_CLASS(user, zephir_get_internal_ce(SL("phalcon\\auth\\authenticatableinterface")))
+		Z_PARAM_OBJECT_OF_CLASS(user, phalcon_auth_authenticatableinterface_ce)
 	ZEND_PARSE_PARAMETERS_END();
 #endif
 
@@ -697,7 +697,7 @@ PHP_METHOD(Phalcon_Auth_Guard_Session, createRememberToken)
 #if PHP_VERSION_ID >= 80000
 	bool is_null_true = 1;
 	ZEND_PARSE_PARAMETERS_START(1, 1)
-		Z_PARAM_OBJECT_OF_CLASS(user, zephir_get_internal_ce(SL("phalcon\\auth\\authenticatableinterface")))
+		Z_PARAM_OBJECT_OF_CLASS(user, phalcon_auth_authenticatableinterface_ce)
 	ZEND_PARSE_PARAMETERS_END();
 #endif
 
@@ -923,7 +923,7 @@ PHP_METHOD(Phalcon_Auth_Guard_Session, setAdapter)
 #if PHP_VERSION_ID >= 80000
 	bool is_null_true = 1;
 	ZEND_PARSE_PARAMETERS_START(1, 1)
-		Z_PARAM_OBJECT_OF_CLASS(adapter, zephir_get_internal_ce(SL("phalcon\\auth\\adapter\\adapterinterface")))
+		Z_PARAM_OBJECT_OF_CLASS(adapter, phalcon_auth_adapter_adapterinterface_ce)
 	ZEND_PARSE_PARAMETERS_END();
 #endif
 
@@ -1221,7 +1221,7 @@ PHP_METHOD(Phalcon_Auth_Guard_Session, setUser)
 #if PHP_VERSION_ID >= 80000
 	bool is_null_true = 1;
 	ZEND_PARSE_PARAMETERS_START(1, 1)
-		Z_PARAM_OBJECT_OF_CLASS(user, zephir_get_internal_ce(SL("phalcon\\auth\\authenticatableinterface")))
+		Z_PARAM_OBJECT_OF_CLASS(user, phalcon_auth_authenticatableinterface_ce)
 	ZEND_PARSE_PARAMETERS_END();
 #endif
 
