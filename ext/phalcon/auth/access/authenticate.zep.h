@@ -3,13 +3,13 @@ extern zend_class_entry *phalcon_auth_access_authenticate_ce;
 
 ZEPHIR_INIT_CLASS(Phalcon_Auth_Access_Authenticate);
 
-PHP_METHOD(Phalcon_Auth_Access_Authenticate, __construct);
+PHP_METHOD(Phalcon_Auth_Access_Authenticate, beforeDispatchLoop);
 PHP_METHOD(Phalcon_Auth_Access_Authenticate, beforeExecuteRoute);
 PHP_METHOD(Phalcon_Auth_Access_Authenticate, call);
 PHP_METHOD(Phalcon_Auth_Access_Authenticate, authenticate);
 zend_object *zephir_init_properties_Phalcon_Auth_Access_Authenticate(zend_class_entry *class_type);
 
-ZEND_BEGIN_ARG_INFO_EX(arginfo_phalcon_auth_access_authenticate___construct, 0, 0, 0)
+ZEND_BEGIN_ARG_INFO_EX(arginfo_phalcon_auth_access_authenticate_beforedispatchloop, 0, 0, 0)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_phalcon_auth_access_authenticate_beforeexecuteroute, 0, 3, IS_VOID, 0)
@@ -31,9 +31,9 @@ ZEND_END_ARG_INFO()
 
 ZEPHIR_INIT_FUNCS(phalcon_auth_access_authenticate_method_entry) {
 #if PHP_VERSION_ID >= 80000
-	PHP_ME(Phalcon_Auth_Access_Authenticate, __construct, arginfo_phalcon_auth_access_authenticate___construct, ZEND_ACC_PUBLIC|ZEND_ACC_CTOR)
+	PHP_ME(Phalcon_Auth_Access_Authenticate, beforeDispatchLoop, arginfo_phalcon_auth_access_authenticate_beforedispatchloop, ZEND_ACC_PUBLIC)
 #else
-	PHP_ME(Phalcon_Auth_Access_Authenticate, __construct, NULL, ZEND_ACC_PUBLIC|ZEND_ACC_CTOR)
+	PHP_ME(Phalcon_Auth_Access_Authenticate, beforeDispatchLoop, NULL, ZEND_ACC_PUBLIC)
 #endif
 	PHP_ME(Phalcon_Auth_Access_Authenticate, beforeExecuteRoute, arginfo_phalcon_auth_access_authenticate_beforeexecuteroute, ZEND_ACC_PUBLIC)
 	PHP_ME(Phalcon_Auth_Access_Authenticate, call, arginfo_phalcon_auth_access_authenticate_call, ZEND_ACC_PUBLIC)

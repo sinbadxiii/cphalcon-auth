@@ -282,7 +282,7 @@ PHP_METHOD(Phalcon_Auth_Adapter_Model, createRememberToken)
 #if PHP_VERSION_ID >= 80000
 	bool is_null_true = 1;
 	ZEND_PARSE_PARAMETERS_START(1, 1)
-		Z_PARAM_OBJECT_OF_CLASS(user, phalcon_auth_rememberinginterface_ce)
+		Z_PARAM_OBJECT_OF_CLASS(user, zephir_get_internal_ce(SL("phalcon\\auth\\rememberinginterface")))
 	ZEND_PARSE_PARAMETERS_END();
 #endif
 
@@ -312,7 +312,7 @@ PHP_METHOD(Phalcon_Auth_Adapter_Model, validateCredentials)
 #if PHP_VERSION_ID >= 80000
 	bool is_null_true = 1;
 	ZEND_PARSE_PARAMETERS_START(2, 2)
-		Z_PARAM_OBJECT_OF_CLASS(user, phalcon_auth_authenticatableinterface_ce)
+		Z_PARAM_OBJECT_OF_CLASS(user, zephir_get_internal_ce(SL("phalcon\\auth\\authenticatableinterface")))
 		Z_PARAM_ARRAY(credentials)
 	ZEND_PARSE_PARAMETERS_END();
 #endif

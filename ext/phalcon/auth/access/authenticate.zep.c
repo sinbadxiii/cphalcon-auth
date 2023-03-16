@@ -35,7 +35,7 @@ ZEPHIR_INIT_CLASS(Phalcon_Auth_Access_Authenticate)
 	return SUCCESS;
 }
 
-PHP_METHOD(Phalcon_Auth_Access_Authenticate, __construct)
+PHP_METHOD(Phalcon_Auth_Access_Authenticate, beforeDispatchLoop)
 {
 	zend_class_entry *_1$$3;
 	zval _0, container$$3, authManager$$3, _2$$3, _3$$3, _4$$3;

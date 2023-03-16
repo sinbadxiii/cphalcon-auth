@@ -16,7 +16,7 @@ class Authenticate extends Injectable implements AuthenticatesRequestInterface, 
     protected authManager;
     protected actionName;
 
-    public function __construct()
+    public function beforeDispatchLoop()
     {
         if !empty(this->accessList) {
 
