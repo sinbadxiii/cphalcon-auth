@@ -7,9 +7,9 @@ abstract class AbstractAccess extends Injectable implements AccessInterface
     protected exceptActions = [];
     protected onlyActions   = [];
 
-    public function setExceptActions() -> void
+    public function setExceptActions(array exceptActions = []) -> void
     {
-        let this->exceptActions = func_get_args();
+        let this->exceptActions = exceptActions;
     }
 
     public function getExceptActions() -> array

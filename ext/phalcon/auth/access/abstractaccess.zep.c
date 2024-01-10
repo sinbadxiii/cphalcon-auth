@@ -12,11 +12,11 @@
 #include <Zend/zend_interfaces.h>
 
 #include "kernel/main.h"
-#include "kernel/memory.h"
-#include "kernel/main.h"
 #include "kernel/object.h"
-#include "kernel/fcall.h"
+#include "kernel/memory.h"
 #include "kernel/operators.h"
+#include "kernel/main.h"
+#include "kernel/fcall.h"
 #include "kernel/array.h"
 
 
@@ -34,18 +34,32 @@ ZEPHIR_INIT_CLASS(Phalcon_Auth_Access_AbstractAccess)
 
 PHP_METHOD(Phalcon_Auth_Access_AbstractAccess, setExceptActions)
 {
-	zval _0;
 	zephir_method_globals *ZEPHIR_METHOD_GLOBALS_PTR = NULL;
+	zval *exceptActions_param = NULL;
+	zval exceptActions;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&_0);
+	ZVAL_UNDEF(&exceptActions);
+#if PHP_VERSION_ID >= 80000
+	bool is_null_true = 1;
+	ZEND_PARSE_PARAMETERS_START(0, 1)
+		Z_PARAM_OPTIONAL
+		Z_PARAM_ARRAY(exceptActions)
+	ZEND_PARSE_PARAMETERS_END();
+#endif
 
 
 	ZEPHIR_MM_GROW();
+	zephir_fetch_params(1, 0, 1, &exceptActions_param);
+	if (!exceptActions_param) {
+		ZEPHIR_INIT_VAR(&exceptActions);
+		array_init(&exceptActions);
+	} else {
+		zephir_get_arrval(&exceptActions, exceptActions_param);
+	}
 
-	ZEPHIR_INIT_VAR(&_0);
-	zephir_get_args(&_0);
-	zephir_update_property_zval(this_ptr, ZEND_STRL("exceptActions"), &_0);
+
+	zephir_update_property_zval(this_ptr, ZEND_STRL("exceptActions"), &exceptActions);
 	ZEPHIR_MM_RESTORE();
 }
 
