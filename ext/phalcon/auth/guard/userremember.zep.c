@@ -37,18 +37,12 @@ PHP_METHOD(Phalcon_Auth_Guard_UserRemember, __construct)
 	ZVAL_UNDEF(&_0);
 	ZVAL_UNDEF(&_1);
 	ZVAL_UNDEF(&_2);
-#if PHP_VERSION_ID >= 80000
-	bool is_null_true = 1;
 	ZEND_PARSE_PARAMETERS_START(1, 1)
 		Z_PARAM_ZVAL(data)
 	ZEND_PARSE_PARAMETERS_END();
-#endif
-
-
-	ZEPHIR_MM_GROW();
+	ZEPHIR_METHOD_GLOBALS_PTR = pecalloc(1, sizeof(zephir_method_globals), 0);
+	zephir_memory_grow_stack(ZEPHIR_METHOD_GLOBALS_PTR, __func__);
 	zephir_fetch_params(1, 1, 0, &data);
-
-
 	ZEPHIR_INIT_VAR(&_0);
 	ZVAL_LONG(&_1, 512);
 	ZVAL_LONG(&_2, 4194304);
@@ -65,12 +59,11 @@ PHP_METHOD(Phalcon_Auth_Guard_UserRemember, id)
 
 	ZVAL_UNDEF(&_0);
 	ZVAL_UNDEF(&_1);
-
-
-	ZEPHIR_MM_GROW();
+	ZEPHIR_METHOD_GLOBALS_PTR = pecalloc(1, sizeof(zephir_method_globals), 0);
+	zephir_memory_grow_stack(ZEPHIR_METHOD_GLOBALS_PTR, __func__);
 
 	zephir_read_property(&_0, this_ptr, ZEND_STRL("data"), PH_NOISY_CC | PH_READONLY);
-	ZEPHIR_OBS_VAR(&_1);
+	zephir_memory_observe(&_1);
 	zephir_read_property(&_1, &_0, ZEND_STRL("id"), PH_NOISY_CC);
 	RETURN_CCTOR(&_1);
 }
@@ -83,12 +76,11 @@ PHP_METHOD(Phalcon_Auth_Guard_UserRemember, token)
 
 	ZVAL_UNDEF(&_0);
 	ZVAL_UNDEF(&_1);
-
-
-	ZEPHIR_MM_GROW();
+	ZEPHIR_METHOD_GLOBALS_PTR = pecalloc(1, sizeof(zephir_method_globals), 0);
+	zephir_memory_grow_stack(ZEPHIR_METHOD_GLOBALS_PTR, __func__);
 
 	zephir_read_property(&_0, this_ptr, ZEND_STRL("data"), PH_NOISY_CC | PH_READONLY);
-	ZEPHIR_OBS_VAR(&_1);
+	zephir_memory_observe(&_1);
 	zephir_read_property(&_1, &_0, ZEND_STRL("token"), PH_NOISY_CC);
 	RETURN_CCTOR(&_1);
 }
@@ -101,12 +93,11 @@ PHP_METHOD(Phalcon_Auth_Guard_UserRemember, userAgent)
 
 	ZVAL_UNDEF(&_0);
 	ZVAL_UNDEF(&_1);
-
-
-	ZEPHIR_MM_GROW();
+	ZEPHIR_METHOD_GLOBALS_PTR = pecalloc(1, sizeof(zephir_method_globals), 0);
+	zephir_memory_grow_stack(ZEPHIR_METHOD_GLOBALS_PTR, __func__);
 
 	zephir_read_property(&_0, this_ptr, ZEND_STRL("data"), PH_NOISY_CC | PH_READONLY);
-	ZEPHIR_OBS_VAR(&_1);
+	zephir_memory_observe(&_1);
 	zephir_read_property(&_1, &_0, ZEND_STRL("user_agent"), PH_NOISY_CC);
 	RETURN_CCTOR(&_1);
 }

@@ -4,11 +4,7 @@ extern zend_class_entry *phalcon_auth_guard_guardstatefulinterface_ce;
 ZEPHIR_INIT_CLASS(Phalcon_Auth_Guard_GuardStatefulInterface);
 
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_phalcon_auth_guard_guardstatefulinterface_attempt, 0, 0, _IS_BOOL, 0)
-#if PHP_VERSION_ID >= 80000
-	ZEND_ARG_TYPE_INFO_WITH_DEFAULT_VALUE(0, credentials, IS_ARRAY, 0, "[]")
-#else
-	ZEND_ARG_ARRAY_INFO(0, credentials, 0)
-#endif
+ZEND_ARG_TYPE_INFO_WITH_DEFAULT_VALUE(0, credentials, IS_ARRAY, 0, "[]")
 	ZEND_ARG_TYPE_INFO(0, remember, _IS_BOOL, 0)
 ZEND_END_ARG_INFO()
 
@@ -24,11 +20,7 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_phalcon_auth_guard_guardstatefulinterface_loginby
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_phalcon_auth_guard_guardstatefulinterface_once, 0, 0, 0)
-#if PHP_VERSION_ID >= 80000
-	ZEND_ARG_TYPE_INFO_WITH_DEFAULT_VALUE(0, credentials, IS_ARRAY, 0, "[]")
-#else
-	ZEND_ARG_ARRAY_INFO(0, credentials, 0)
-#endif
+ZEND_ARG_TYPE_INFO_WITH_DEFAULT_VALUE(0, credentials, IS_ARRAY, 0, "[]")
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_phalcon_auth_guard_guardstatefulinterface_viaremember, 0, 0, _IS_BOOL, 0)

@@ -51,23 +51,18 @@ PHP_METHOD(Phalcon_Auth_Manager, guard)
 	ZVAL_UNDEF(&_4);
 	ZVAL_UNDEF(&_1$$4);
 	ZVAL_UNDEF(&_2$$4);
-#if PHP_VERSION_ID >= 80000
 	bool is_null_true = 1;
 	ZEND_PARSE_PARAMETERS_START(0, 1)
 		Z_PARAM_OPTIONAL
 		Z_PARAM_ZVAL_OR_NULL(name)
 	ZEND_PARSE_PARAMETERS_END();
-#endif
-
-
-	ZEPHIR_MM_GROW();
+	ZEPHIR_METHOD_GLOBALS_PTR = pecalloc(1, sizeof(zephir_method_globals), 0);
+	zephir_memory_grow_stack(ZEPHIR_METHOD_GLOBALS_PTR, __func__);
 	zephir_fetch_params(1, 0, 1, &name);
 	if (!name) {
 		name = &name_sub;
 		name = &__$null;
 	}
-
-
 	if (Z_TYPE_P(name) == IS_NULL) {
 		RETURN_MM_MEMBER(getThis(), "defaultGuard");
 	}
@@ -90,9 +85,6 @@ PHP_METHOD(Phalcon_Auth_Manager, guard)
 
 PHP_METHOD(Phalcon_Auth_Manager, getDefaultGuard)
 {
-	zval *this_ptr = getThis();
-
-
 
 	RETURN_MEMBER(getThis(), "defaultGuard");
 }
@@ -103,17 +95,10 @@ PHP_METHOD(Phalcon_Auth_Manager, setDefaultGuard)
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&guard_sub);
-#if PHP_VERSION_ID >= 80000
-	bool is_null_true = 1;
 	ZEND_PARSE_PARAMETERS_START(1, 1)
-		Z_PARAM_OBJECT_OF_CLASS(guard, zephir_get_internal_ce(SL("phalcon\\auth\\guard\\guardinterface")))
+		Z_PARAM_OBJECT_OF_CLASS(guard, phalcon_auth_guard_guardinterface_ce)
 	ZEND_PARSE_PARAMETERS_END();
-#endif
-
-
 	zephir_fetch_params_without_memory_grow(1, 0, &guard);
-
-
 	zephir_update_property_zval(this_ptr, ZEND_STRL("defaultGuard"), guard);
 	RETURN_THISW();
 }
@@ -128,27 +113,20 @@ PHP_METHOD(Phalcon_Auth_Manager, addGuard)
 
 	ZVAL_UNDEF(&nameGuard);
 	ZVAL_UNDEF(&guard_sub);
-#if PHP_VERSION_ID >= 80000
-	bool is_null_true = 1;
 	ZEND_PARSE_PARAMETERS_START(2, 3)
 		Z_PARAM_STR(nameGuard)
-		Z_PARAM_OBJECT_OF_CLASS(guard, zephir_get_internal_ce(SL("phalcon\\auth\\guard\\guardinterface")))
+		Z_PARAM_OBJECT_OF_CLASS(guard, phalcon_auth_guard_guardinterface_ce)
 		Z_PARAM_OPTIONAL
 		Z_PARAM_BOOL(isDefault)
 	ZEND_PARSE_PARAMETERS_END();
-#endif
-
-
-	ZEPHIR_MM_GROW();
+	ZEPHIR_METHOD_GLOBALS_PTR = pecalloc(1, sizeof(zephir_method_globals), 0);
+	zephir_memory_grow_stack(ZEPHIR_METHOD_GLOBALS_PTR, __func__);
 	zephir_fetch_params(1, 2, 1, &nameGuard_param, &guard, &isDefault_param);
 	zephir_get_strval(&nameGuard, nameGuard_param);
 	if (!isDefault_param) {
 		isDefault = 0;
 	} else {
-		isDefault = zephir_get_boolval(isDefault_param);
-	}
-
-
+		}
 	zephir_update_property_array(this_ptr, SL("guards"), &nameGuard, guard);
 	if (isDefault == 1) {
 		zephir_update_property_zval(this_ptr, ZEND_STRL("defaultGuard"), guard);
@@ -158,9 +136,6 @@ PHP_METHOD(Phalcon_Auth_Manager, addGuard)
 
 PHP_METHOD(Phalcon_Auth_Manager, getAccess)
 {
-	zval *this_ptr = getThis();
-
-
 
 	RETURN_MEMBER(getThis(), "activeAccess");
 }
@@ -171,17 +146,10 @@ PHP_METHOD(Phalcon_Auth_Manager, setAccess)
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&access_sub);
-#if PHP_VERSION_ID >= 80000
-	bool is_null_true = 1;
 	ZEND_PARSE_PARAMETERS_START(1, 1)
-		Z_PARAM_OBJECT_OF_CLASS(access, zephir_get_internal_ce(SL("phalcon\\auth\\access\\accessinterface")))
+		Z_PARAM_OBJECT_OF_CLASS(access, phalcon_auth_access_accessinterface_ce)
 	ZEND_PARSE_PARAMETERS_END();
-#endif
-
-
 	zephir_fetch_params_without_memory_grow(1, 0, &access);
-
-
 	zephir_update_property_zval(this_ptr, ZEND_STRL("activeAccess"), access);
 	RETURN_THISW();
 }
@@ -194,19 +162,13 @@ PHP_METHOD(Phalcon_Auth_Manager, setAccessList)
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&accessList);
-#if PHP_VERSION_ID >= 80000
-	bool is_null_true = 1;
 	ZEND_PARSE_PARAMETERS_START(1, 1)
 		Z_PARAM_ARRAY(accessList)
 	ZEND_PARSE_PARAMETERS_END();
-#endif
-
-
-	ZEPHIR_MM_GROW();
+	ZEPHIR_METHOD_GLOBALS_PTR = pecalloc(1, sizeof(zephir_method_globals), 0);
+	zephir_memory_grow_stack(ZEPHIR_METHOD_GLOBALS_PTR, __func__);
 	zephir_fetch_params(1, 1, 0, &accessList_param);
 	zephir_get_arrval(&accessList, accessList_param);
-
-
 	zephir_update_property_zval(this_ptr, ZEND_STRL("accessList"), &accessList);
 	RETURN_THIS();
 }
@@ -219,19 +181,13 @@ PHP_METHOD(Phalcon_Auth_Manager, addAccessList)
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&accessList);
-#if PHP_VERSION_ID >= 80000
-	bool is_null_true = 1;
 	ZEND_PARSE_PARAMETERS_START(1, 1)
 		Z_PARAM_ARRAY(accessList)
 	ZEND_PARSE_PARAMETERS_END();
-#endif
-
-
-	ZEPHIR_MM_GROW();
+	ZEPHIR_METHOD_GLOBALS_PTR = pecalloc(1, sizeof(zephir_method_globals), 0);
+	zephir_memory_grow_stack(ZEPHIR_METHOD_GLOBALS_PTR, __func__);
 	zephir_fetch_params(1, 1, 0, &accessList_param);
 	zephir_get_arrval(&accessList, accessList_param);
-
-
 	zephir_update_property_zval(this_ptr, ZEND_STRL("accessList"), &accessList);
 	RETURN_THIS();
 }
@@ -257,19 +213,13 @@ PHP_METHOD(Phalcon_Auth_Manager, access)
 	ZVAL_UNDEF(&_4$$3);
 	ZVAL_UNDEF(&_5$$3);
 	ZVAL_UNDEF(&_6$$3);
-#if PHP_VERSION_ID >= 80000
-	bool is_null_true = 1;
 	ZEND_PARSE_PARAMETERS_START(1, 1)
 		Z_PARAM_STR(accessName)
 	ZEND_PARSE_PARAMETERS_END();
-#endif
-
-
-	ZEPHIR_MM_GROW();
+	ZEPHIR_METHOD_GLOBALS_PTR = pecalloc(1, sizeof(zephir_method_globals), 0);
+	zephir_memory_grow_stack(ZEPHIR_METHOD_GLOBALS_PTR, __func__);
 	zephir_fetch_params(1, 1, 0, &accessName_param);
 	zephir_get_strval(&accessName, accessName_param);
-
-
 	zephir_read_property(&_0, this_ptr, ZEND_STRL("accessList"), PH_NOISY_CC | PH_READONLY);
 	_1 = !(zephir_array_isset(&_0, &accessName));
 	if (!(_1)) {
@@ -291,7 +241,7 @@ PHP_METHOD(Phalcon_Auth_Manager, access)
 		return;
 	}
 	zephir_read_property(&_7, this_ptr, ZEND_STRL("accessList"), PH_NOISY_CC | PH_READONLY);
-	ZEPHIR_OBS_VAR(&access);
+	zephir_memory_observe(&access);
 	zephir_array_fetch(&access, &_7, &accessName, PH_NOISY, "phalcon/Auth/Manager.zep", 84);
 	ZEPHIR_INIT_VAR(&_8);
 	zephir_fetch_safe_class(&_9, &access);
@@ -318,9 +268,8 @@ PHP_METHOD(Phalcon_Auth_Manager, except)
 
 	ZVAL_UNDEF(&_0);
 	ZVAL_UNDEF(&_1);
-
-
-	ZEPHIR_MM_GROW();
+	ZEPHIR_METHOD_GLOBALS_PTR = pecalloc(1, sizeof(zephir_method_globals), 0);
+	zephir_memory_grow_stack(ZEPHIR_METHOD_GLOBALS_PTR, __func__);
 
 	zephir_read_property(&_0, this_ptr, ZEND_STRL("activeAccess"), PH_NOISY_CC | PH_READONLY);
 	ZEPHIR_INIT_VAR(&_1);
@@ -339,9 +288,8 @@ PHP_METHOD(Phalcon_Auth_Manager, only)
 
 	ZVAL_UNDEF(&_0);
 	ZVAL_UNDEF(&_1);
-
-
-	ZEPHIR_MM_GROW();
+	ZEPHIR_METHOD_GLOBALS_PTR = pecalloc(1, sizeof(zephir_method_globals), 0);
+	zephir_memory_grow_stack(ZEPHIR_METHOD_GLOBALS_PTR, __func__);
 
 	zephir_read_property(&_0, this_ptr, ZEND_STRL("activeAccess"), PH_NOISY_CC | PH_READONLY);
 	ZEPHIR_INIT_VAR(&_1);
@@ -363,19 +311,13 @@ PHP_METHOD(Phalcon_Auth_Manager, __call)
 	ZVAL_UNDEF(&params_sub);
 	ZVAL_UNDEF(&_1);
 	ZVAL_UNDEF(&_0);
-#if PHP_VERSION_ID >= 80000
-	bool is_null_true = 1;
 	ZEND_PARSE_PARAMETERS_START(2, 2)
 		Z_PARAM_ZVAL(method)
 		Z_PARAM_ZVAL(params)
 	ZEND_PARSE_PARAMETERS_END();
-#endif
-
-
-	ZEPHIR_MM_GROW();
+	ZEPHIR_METHOD_GLOBALS_PTR = pecalloc(1, sizeof(zephir_method_globals), 0);
+	zephir_memory_grow_stack(ZEPHIR_METHOD_GLOBALS_PTR, __func__);
 	zephir_fetch_params(1, 2, 0, &method, &params);
-
-
 	ZEPHIR_INIT_VAR(&_0);
 	zephir_create_array(&_0, 2, 0);
 	ZEPHIR_CALL_METHOD(&_1, this_ptr, "guard", NULL, 0);
@@ -397,7 +339,8 @@ zend_object *zephir_init_properties_Phalcon_Auth_Manager(zend_class_entry *class
 	ZVAL_UNDEF(&_3$$4);
 	
 
-		ZEPHIR_MM_GROW();
+		ZEPHIR_METHOD_GLOBALS_PTR = pecalloc(1, sizeof(zephir_method_globals), 0);
+		zephir_memory_grow_stack(ZEPHIR_METHOD_GLOBALS_PTR, __func__);
 	
 	{
 		zval local_this_ptr, *this_ptr = &local_this_ptr;

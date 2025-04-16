@@ -11,11 +11,7 @@ PHP_METHOD(Phalcon_Auth_Adapter_AbstractAdapter, setConfig);
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_phalcon_auth_adapter_abstractadapter___construct, 0, 0, 1)
 	ZEND_ARG_OBJ_INFO(0, hasher, Phalcon\\Encryption\\Security, 0)
-#if PHP_VERSION_ID >= 80000
-	ZEND_ARG_TYPE_INFO_WITH_DEFAULT_VALUE(0, config, IS_ARRAY, 0, "[]")
-#else
-	ZEND_ARG_ARRAY_INFO(0, config, 0)
-#endif
+ZEND_ARG_TYPE_INFO_WITH_DEFAULT_VALUE(0, config, IS_ARRAY, 0, "[]")
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_phalcon_auth_adapter_abstractadapter_getmodel, 0, 0, IS_STRING, 0)

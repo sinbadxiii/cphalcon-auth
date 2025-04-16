@@ -45,16 +45,8 @@ ZEPHIR_INIT_FUNCS(phalcon_auth_adapter_memory_method_entry) {
 	PHP_ME(Phalcon_Auth_Adapter_Memory, retrieveById, arginfo_phalcon_auth_adapter_memory_retrievebyid, ZEND_ACC_PUBLIC)
 	PHP_ME(Phalcon_Auth_Adapter_Memory, validateCredentials, arginfo_phalcon_auth_adapter_memory_validatecredentials, ZEND_ACC_PUBLIC)
 	PHP_ME(Phalcon_Auth_Adapter_Memory, first, arginfo_phalcon_auth_adapter_memory_first, ZEND_ACC_PUBLIC)
-#if PHP_VERSION_ID >= 80000
-	PHP_ME(Phalcon_Auth_Adapter_Memory, getProviderStorage, arginfo_phalcon_auth_adapter_memory_getproviderstorage, ZEND_ACC_PROTECTED)
-#else
-	PHP_ME(Phalcon_Auth_Adapter_Memory, getProviderStorage, NULL, ZEND_ACC_PROTECTED)
-#endif
-#if PHP_VERSION_ID >= 80000
-	PHP_ME(Phalcon_Auth_Adapter_Memory, getData, arginfo_phalcon_auth_adapter_memory_getdata, ZEND_ACC_PUBLIC)
-#else
-	PHP_ME(Phalcon_Auth_Adapter_Memory, getData, NULL, ZEND_ACC_PUBLIC)
-#endif
+PHP_ME(Phalcon_Auth_Adapter_Memory, getProviderStorage, arginfo_phalcon_auth_adapter_memory_getproviderstorage, ZEND_ACC_PROTECTED)
+PHP_ME(Phalcon_Auth_Adapter_Memory, getData, arginfo_phalcon_auth_adapter_memory_getdata, ZEND_ACC_PUBLIC)
 	PHP_ME(Phalcon_Auth_Adapter_Memory, setData, arginfo_phalcon_auth_adapter_memory_setdata, ZEND_ACC_PUBLIC)
 	PHP_FE_END
 };

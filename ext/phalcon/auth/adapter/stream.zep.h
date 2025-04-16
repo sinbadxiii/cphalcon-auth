@@ -30,11 +30,7 @@ ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_phalcon_auth_adapter_stream_setf
 ZEND_END_ARG_INFO()
 
 ZEPHIR_INIT_FUNCS(phalcon_auth_adapter_stream_method_entry) {
-#if PHP_VERSION_ID >= 80000
-	PHP_ME(Phalcon_Auth_Adapter_Stream, getData, arginfo_phalcon_auth_adapter_stream_getdata, ZEND_ACC_PUBLIC)
-#else
-	PHP_ME(Phalcon_Auth_Adapter_Stream, getData, NULL, ZEND_ACC_PUBLIC)
-#endif
+PHP_ME(Phalcon_Auth_Adapter_Stream, getData, arginfo_phalcon_auth_adapter_stream_getdata, ZEND_ACC_PUBLIC)
 	PHP_ME(Phalcon_Auth_Adapter_Stream, read, arginfo_phalcon_auth_adapter_stream_read, ZEND_ACC_PUBLIC)
 	PHP_ME(Phalcon_Auth_Adapter_Stream, validate, arginfo_phalcon_auth_adapter_stream_validate, ZEND_ACC_PRIVATE)
 	PHP_ME(Phalcon_Auth_Adapter_Stream, getFileSource, arginfo_phalcon_auth_adapter_stream_getfilesource, ZEND_ACC_PUBLIC)

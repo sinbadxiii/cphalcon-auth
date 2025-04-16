@@ -10,11 +10,7 @@ PHP_METHOD(Phalcon_Auth_Adapter_Model, retrieveByToken);
 PHP_METHOD(Phalcon_Auth_Adapter_Model, createRememberToken);
 PHP_METHOD(Phalcon_Auth_Adapter_Model, validateCredentials);
 
-#if PHP_VERSION_ID >= 80000
 ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_phalcon_auth_adapter_model_getproviderstorage, 0, 0, IS_MIXED, 0)
-#else
-ZEND_BEGIN_ARG_INFO_EX(arginfo_phalcon_auth_adapter_model_getproviderstorage, 0, 0, 0)
-#endif
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_WITH_RETURN_OBJ_INFO_EX(arginfo_phalcon_auth_adapter_model_retrievebycredentials, 0, 1, Phalcon\\Auth\\AuthenticatableInterface, 1)

@@ -30,17 +30,9 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_phalcon_auth_access_authenticate_zephir_init_prop
 ZEND_END_ARG_INFO()
 
 ZEPHIR_INIT_FUNCS(phalcon_auth_access_authenticate_method_entry) {
-#if PHP_VERSION_ID >= 80000
-	PHP_ME(Phalcon_Auth_Access_Authenticate, beforeDispatchLoop, arginfo_phalcon_auth_access_authenticate_beforedispatchloop, ZEND_ACC_PUBLIC)
-#else
-	PHP_ME(Phalcon_Auth_Access_Authenticate, beforeDispatchLoop, NULL, ZEND_ACC_PUBLIC)
-#endif
+PHP_ME(Phalcon_Auth_Access_Authenticate, beforeDispatchLoop, arginfo_phalcon_auth_access_authenticate_beforedispatchloop, ZEND_ACC_PUBLIC)
 	PHP_ME(Phalcon_Auth_Access_Authenticate, beforeExecuteRoute, arginfo_phalcon_auth_access_authenticate_beforeexecuteroute, ZEND_ACC_PUBLIC)
 	PHP_ME(Phalcon_Auth_Access_Authenticate, call, arginfo_phalcon_auth_access_authenticate_call, ZEND_ACC_PUBLIC)
-#if PHP_VERSION_ID >= 80000
-	PHP_ME(Phalcon_Auth_Access_Authenticate, authenticate, arginfo_phalcon_auth_access_authenticate_authenticate, ZEND_ACC_PROTECTED)
-#else
-	PHP_ME(Phalcon_Auth_Access_Authenticate, authenticate, NULL, ZEND_ACC_PROTECTED)
-#endif
+PHP_ME(Phalcon_Auth_Access_Authenticate, authenticate, arginfo_phalcon_auth_access_authenticate_authenticate, ZEND_ACC_PROTECTED)
 	PHP_FE_END
 };

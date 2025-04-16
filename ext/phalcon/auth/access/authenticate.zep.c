@@ -49,11 +49,10 @@ PHP_METHOD(Phalcon_Auth_Access_Authenticate, beforeDispatchLoop)
 	ZVAL_UNDEF(&_2$$3);
 	ZVAL_UNDEF(&_3$$3);
 	ZVAL_UNDEF(&_4$$3);
+	ZEPHIR_METHOD_GLOBALS_PTR = pecalloc(1, sizeof(zephir_method_globals), 0);
+	zephir_memory_grow_stack(ZEPHIR_METHOD_GLOBALS_PTR, __func__);
 
-
-	ZEPHIR_MM_GROW();
-
-	ZEPHIR_OBS_VAR(&_0);
+	zephir_memory_observe(&_0);
 	zephir_read_property(&_0, this_ptr, ZEND_STRL("accessList"), PH_NOISY_CC);
 	if (!(ZEPHIR_IS_EMPTY(&_0))) {
 		_1$$3 = zephir_fetch_class_str_ex(SL("Phalcon\\Di\\Di"), ZEND_FETCH_CLASS_AUTO);
@@ -94,20 +93,14 @@ PHP_METHOD(Phalcon_Auth_Access_Authenticate, beforeExecuteRoute)
 	ZVAL_UNDEF(&_0$$3);
 	ZVAL_UNDEF(&handler$$4);
 	ZVAL_UNDEF(&_3$$4);
-#if PHP_VERSION_ID >= 80000
-	bool is_null_true = 1;
 	ZEND_PARSE_PARAMETERS_START(3, 3)
 		Z_PARAM_OBJECT_OF_CLASS(event, zephir_get_internal_ce(SL("phalcon\\events\\event")))
 		Z_PARAM_ZVAL(app)
 		Z_PARAM_ZVAL(exception)
 	ZEND_PARSE_PARAMETERS_END();
-#endif
-
-
-	ZEPHIR_MM_GROW();
+	ZEPHIR_METHOD_GLOBALS_PTR = pecalloc(1, sizeof(zephir_method_globals), 0);
+	zephir_memory_grow_stack(ZEPHIR_METHOD_GLOBALS_PTR, __func__);
 	zephir_fetch_params(1, 3, 0, &event, &app, &exception);
-
-
 	if (zephir_is_instance_of(app, SL("Phalcon\\Mvc\\Dispatcher"))) {
 		ZEPHIR_CALL_METHOD(&_0$$3, app, "getactionname", NULL, 0);
 		zephir_check_call_status();
@@ -139,20 +132,12 @@ PHP_METHOD(Phalcon_Auth_Access_Authenticate, beforeExecuteRoute)
 PHP_METHOD(Phalcon_Auth_Access_Authenticate, call)
 {
 	zval *app, app_sub;
-	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&app_sub);
-#if PHP_VERSION_ID >= 80000
-	bool is_null_true = 1;
 	ZEND_PARSE_PARAMETERS_START(1, 1)
 		Z_PARAM_OBJECT_OF_CLASS(app, zephir_get_internal_ce(SL("phalcon\\mvc\\micro")))
 	ZEND_PARSE_PARAMETERS_END();
-#endif
-
-
 	zephir_fetch_params_without_memory_grow(1, 0, &app);
-
-
 	RETURN_BOOL(1);
 }
 
@@ -167,9 +152,8 @@ PHP_METHOD(Phalcon_Auth_Access_Authenticate, authenticate)
 	ZVAL_UNDEF(&_0);
 	ZVAL_UNDEF(&_1$$3);
 	ZVAL_UNDEF(&_2$$3);
-
-
-	ZEPHIR_MM_GROW();
+	ZEPHIR_METHOD_GLOBALS_PTR = pecalloc(1, sizeof(zephir_method_globals), 0);
+	zephir_memory_grow_stack(ZEPHIR_METHOD_GLOBALS_PTR, __func__);
 
 	zephir_read_property(&_0, this_ptr, ZEND_STRL("authManager"), PH_NOISY_CC | PH_READONLY);
 	ZEPHIR_CALL_METHOD(&access, &_0, "getaccess", NULL, 0);
@@ -196,7 +180,8 @@ zend_object *zephir_init_properties_Phalcon_Auth_Access_Authenticate(zend_class_
 	ZVAL_UNDEF(&_1$$3);
 	
 
-		ZEPHIR_MM_GROW();
+		ZEPHIR_METHOD_GLOBALS_PTR = pecalloc(1, sizeof(zephir_method_globals), 0);
+		zephir_memory_grow_stack(ZEPHIR_METHOD_GLOBALS_PTR, __func__);
 	
 	{
 		zval local_this_ptr, *this_ptr = &local_this_ptr;

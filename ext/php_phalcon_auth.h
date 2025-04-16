@@ -11,10 +11,10 @@
 #include "kernel/globals.h"
 
 #define PHP_PHALCON_AUTH_NAME        "Phalcon Auth"
-#define PHP_PHALCON_AUTH_VERSION     "1.0.0"
+#define PHP_PHALCON_AUTH_VERSION     "2.0.0"
 #define PHP_PHALCON_AUTH_EXTNAME     "phalcon_auth"
 #define PHP_PHALCON_AUTH_AUTHOR      "Sergey Mukhin"
-#define PHP_PHALCON_AUTH_ZEPVERSION  "0.17.0-9f99da6"
+#define PHP_PHALCON_AUTH_ZEPVERSION  "0.18.0-$Id$"
 #define PHP_PHALCON_AUTH_DESCRIPTION "Phalcon Auth - Guard-Based Authentication"
 
 
